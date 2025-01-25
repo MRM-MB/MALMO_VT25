@@ -1,0 +1,14 @@
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\obj\Debug\net8.0\Assignment1Part2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\obj\Debug\net8.0\Assignment1Part2.AssemblyInfoInputs.cache
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\obj\Debug\net8.0\Assignment1Part2.AssemblyInfo.cs
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\obj\Debug\net8.0\Assignment1Part2.csproj.CoreCompileInputs.cache
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\bin\Debug\net8.0\Assignment1Part2.exe
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\bin\Debug\net8.0\Assignment1Part2.deps.json
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\bin\Debug\net8.0\Assignment1Part2.runtimeconfig.json
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\bin\Debug\net8.0\Assignment1Part2.dll
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\bin\Debug\net8.0\Assignment1Part2.pdb
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\obj\Debug\net8.0\Assignment1Part2.dll
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\obj\Debug\net8.0\refint\Assignment1Part2.dll
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\obj\Debug\net8.0\Assignment1Part2.pdb
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\obj\Debug\net8.0\Assignment1Part2.genruntimeconfig.cache
+C:\Users\manis\Desktop\MALMO\Assignment1\Assignment1Part2\obj\Debug\net8.0\ref\Assignment1Part2.dll
