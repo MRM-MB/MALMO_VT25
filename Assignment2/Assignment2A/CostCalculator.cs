@@ -7,48 +7,73 @@ class Calculator
 
     // Price per unit
     private float price;
+
+    // Discount to provide
     private float discount;
 
-    // Varibles used in the Programm method for the calculations
+    // Variables for Calculations
     private float OriginalTotal;
-    private float DiscountApplied;
     private float FinalTotal;
 
-    // Starting the programm
+    // Take y/n or yes/no as input
+    private string answer;
+
     public void Start()
     {
-        Programm();
-    }
-
-    // Make the calculations
-    public void Calculations()
-    {
-        Console.WriteLine("Original Total Cost: ");
-        Console.WriteLine("Discount Applied: ");
-        Console.WriteLine("Final Total Cost: ");
-    }
-
-    public void Programm()
-    {
-        // STEP 1
-        Console.WriteLine("STEP 1: CALCULATE TOTAL COST APPLYING DISCOUNT");
-        Console.WriteLine("Enter the original price per unit: ");
-
-        if(float.TryParse(Console.ReadLine(), out float price) && price >= 0)
+        while (true)
         {
-            Console.WriteLine("Enter the quantity of the product: ");
-            if(int.TryParse(Console.ReadLine(), out int number) && number >= 0)
+            // Validate Price input
+            while (true)
             {
-                Calculations();
+                Console.Write("Enter the original price per unit: ");
+                if (float.TryParse(Console.ReadLine(), out price) && price > 0)
+                    break; // Valid input, exit loop
+                else
+                    Console.WriteLine("Invalid input. Please enter a number greater than 0.");
+            }
+
+            // Validate Quantity of the product
+            while (true)
+            {
+                Console.Write("Enter the quantity of the product: ");
+                if (int.TryParse(Console.ReadLine(), out number) && number > 0)
+                    break; // Valid input, exit loop
+                else
+                    Console.WriteLine("Invalid input. Please enter a number greater than 0.");
+            }
+
+            // STEP 1 - Discount Structure
+            if (number >= 100)
+                discount = 50;
+            else if (number >= 50)
+                discount = 40;
+            else if (number >= 20)
+                discount = 30;
+            else if (number >= 10)
+                discount = 20;
+            else
+                discount = 0; // No discount if less than 10 units
+
+            // STEP 1 - Calculation of Total Cost
+            OriginalTotal = price * number;
+            Console.WriteLine($"\nOriginal Total Cost: {OriginalTotal:F2} kr");
+
+            Console.WriteLine($"Discount Applied: {discount:F2} %");
+
+            FinalTotal = OriginalTotal * (1 - discount / 100);
+            Console.WriteLine($"Final Total Cost: {FinalTotal:F2} kr");
+
+            // STEP 2 - Ask the user if they want to make another calculation
+            Console.Write("\nContinue? (yes/no or y/n): ");
+            answer = Console.ReadLine().Trim().ToLower();
+
+            if (string.IsNullOrEmpty(answer) || !(answer == "y" || answer == "yes"))
+            {
+                Console.WriteLine("\nThank you for using this calculator! :)");
+                break;
             }
             else
-            {
-                Console.WriteLine("Invalid input. Please enter a positive number.");
-            }
-        }
-        else
-        {
-            Console.WriteLine("Invalid input. Please enter a positive number.");
+                Console.WriteLine("\n--- Another Calculation ---");
         }
     }
 }

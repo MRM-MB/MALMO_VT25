@@ -1,6 +1,9 @@
 ﻿namespace Assignment2A;
-class Assignment2A{
-    STAThreadAttribute Calculator = new()
-
-    start.calculator;
+class Program
+{
+    static void Main (string[] args)
+    {
+        Calculator calc = new();
+        calc.Start();
+    }
 }
