@@ -1,9 +1,13 @@
 ﻿namespace Assignment2B;
-class Program
+internal class Program
 {
-    static void Main (string[] args)
+    static void Main(string[] args)
     {
-        GuessNumber num = new();
-        num.Start();
+        // Set title in console window
+        Console.Title = "Guess the Number";
+
+        // Instantiate and start game object
+        GuessTheNumber game = new ();
+        game.Start();
     }
 }
