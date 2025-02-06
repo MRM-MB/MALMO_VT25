@@ -1,0 +1,15 @@
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\obj\Debug\net8.0\Assignment2D.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\obj\Debug\net8.0\Assignment2D.AssemblyInfoInputs.cache
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\obj\Debug\net8.0\Assignment2D.AssemblyInfo.cs
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\obj\Debug\net8.0\Assignment2D.csproj.CoreCompileInputs.cache
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\obj\Debug\net8.0\Assignment2D.sourcelink.json
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\bin\Debug\net8.0\Assignment2D.exe
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\bin\Debug\net8.0\Assignment2D.deps.json
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\bin\Debug\net8.0\Assignment2D.runtimeconfig.json
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\bin\Debug\net8.0\Assignment2D.dll
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\bin\Debug\net8.0\Assignment2D.pdb
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\obj\Debug\net8.0\Assignment2D.dll
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\obj\Debug\net8.0\refint\Assignment2D.dll
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\obj\Debug\net8.0\Assignment2D.pdb
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\obj\Debug\net8.0\Assignment2D.genruntimeconfig.cache
+C:\Users\manis\Desktop\MALMO\Assignment2\Assignment2D\obj\Debug\net8.0\ref\Assignment2D.dll

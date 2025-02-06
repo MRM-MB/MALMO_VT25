@@ -3,7 +3,7 @@ class Program
 {
     static void Main (string[] args)
     {
-        Scheduler work = new();
-        work.Start();
+        Scheduler scheduler = new();
+        scheduler.Start();
     }
 }
