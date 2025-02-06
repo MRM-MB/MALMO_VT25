@@ -12,11 +12,11 @@ class Calculator
     private float discount;
 
     // Variables for Calculations
-    private float OriginalTotal;
-    private float FinalTotal;
+    private float originalTotal;
+    private float finalTotal;
 
     // Take y/n or yes/no as input
-    private string answer;
+    private string? answer;
 
     public void Start()
     {
@@ -55,17 +55,17 @@ class Calculator
                 discount = 0; // No discount if less than 10 units
 
             // STEP 1 - Calculation of Total Cost
-            OriginalTotal = price * number;
-            Console.WriteLine($"\nOriginal Total Cost: {OriginalTotal:F2} kr");
+            originalTotal = price * number;
+            Console.WriteLine($"\nOriginal Total Cost: {originalTotal:F2} kr");
 
             Console.WriteLine($"Discount Applied: {discount:F2} %");
 
-            FinalTotal = OriginalTotal * (1 - discount / 100);
-            Console.WriteLine($"Final Total Cost: {FinalTotal:F2} kr");
+            finalTotal = originalTotal * (1 - discount / 100);
+            Console.WriteLine($"Final Total Cost: {finalTotal:F2} kr");
 
             // STEP 2 - Ask the user if they want to make another calculation
             Console.Write("\nContinue? (yes/no or y/n): ");
-            answer = Console.ReadLine().Trim().ToLower();
+            answer = Console.ReadLine()?.Trim().ToLower();
 
             if (string.IsNullOrEmpty(answer) || !(answer == "y" || answer == "yes"))
             {
