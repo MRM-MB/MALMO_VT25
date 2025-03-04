@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\manis\\OneDrive\\Desktop\\MALMO\\Assignment2\\Assignment2A\\Assignment2A.csproj",
+      "projectUniqueName": "C:\\Users\\manis\\Desktop\\MALMO\\Assignment2\\Assignment2A\\Assignment2A.csproj",
       "projectName": "Assignment2A",
-      "projectPath": "C:\\Users\\manis\\OneDrive\\Desktop\\MALMO\\Assignment2\\Assignment2A\\Assignment2A.csproj",
+      "projectPath": "C:\\Users\\manis\\Desktop\\MALMO\\Assignment2\\Assignment2A\\Assignment2A.csproj",
       "packagesPath": "C:\\Users\\manis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\manis\\OneDrive\\Desktop\\MALMO\\Assignment2\\Assignment2A\\obj\\",
+      "outputPath": "C:\\Users\\manis\\Desktop\\MALMO\\Assignment2\\Assignment2A\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\manis\\AppData\\Roaming\\NuGet\\NuGet.Config"

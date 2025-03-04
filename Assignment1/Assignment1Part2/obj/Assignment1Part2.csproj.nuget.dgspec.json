@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\manis\\OneDrive\\Desktop\\MALMO\\Assignment1\\Assignment1Part2\\Assignment1Part2.csproj": {}
+    "C:\\Users\\manis\\Desktop\\MALMO\\Assignment1\\Assignment1Part2\\Assignment1Part2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\manis\\OneDrive\\Desktop\\MALMO\\Assignment1\\Assignment1Part2\\Assignment1Part2.csproj": {
+    "C:\\Users\\manis\\Desktop\\MALMO\\Assignment1\\Assignment1Part2\\Assignment1Part2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\manis\\OneDrive\\Desktop\\MALMO\\Assignment1\\Assignment1Part2\\Assignment1Part2.csproj",
+        "projectUniqueName": "C:\\Users\\manis\\Desktop\\MALMO\\Assignment1\\Assignment1Part2\\Assignment1Part2.csproj",
         "projectName": "Assignment1Part2",
-        "projectPath": "C:\\Users\\manis\\OneDrive\\Desktop\\MALMO\\Assignment1\\Assignment1Part2\\Assignment1Part2.csproj",
+        "projectPath": "C:\\Users\\manis\\Desktop\\MALMO\\Assignment1\\Assignment1Part2\\Assignment1Part2.csproj",
         "packagesPath": "C:\\Users\\manis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\manis\\OneDrive\\Desktop\\MALMO\\Assignment1\\Assignment1Part2\\obj\\",
+        "outputPath": "C:\\Users\\manis\\Desktop\\MALMO\\Assignment1\\Assignment1Part2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\manis\\AppData\\Roaming\\NuGet\\NuGet.Config"
