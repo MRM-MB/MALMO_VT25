@@ -62,19 +62,49 @@ public partial class Form1 : Form
 
     private void DisplayResults(string name, decimal amount, int glasses, bool isMetric)
     {
-        string unitText = isMetric ? "ml" : "fl oz";
-
+        string unitText = isMetric ? "milliliters (ml)" : "ounces (oz)";
+        string perGlassText = isMetric ? "240 ml" : "8.1 oz";
+        
         txtResults.Clear();
+        
+        // Single line header
+        txtResults.SelectionBackColor = Color.White;
+        txtResults.SelectionColor = Color.RoyalBlue;
+        txtResults.SelectionFont = new Font("Arial", 16, FontStyle.Bold);
+        txtResults.AppendText($"\n Water Report for {name} \n");
+        txtResults.AppendText("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n");
+
+        // Box for main result - enhanced visibility
+        txtResults.SelectionFont = new Font("Arial", 15, FontStyle.Bold);
+        txtResults.SelectionColor = Color.Black;  // Changed to black
+        txtResults.AppendText($" 📊 Daily Recommended Intake \n\n");
+        txtResults.SelectionBackColor = Color.MintCream;
+        txtResults.SelectionFont = new Font("Arial", 13, FontStyle.Bold);  // Slightly bigger
+        txtResults.SelectionColor = Color.ForestGreen;  // Keep green for the amount
+        txtResults.AppendText($" {amount:F1} {unitText} \n\n");
+
+        // Glasses count first, then visualization
+        txtResults.SelectionBackColor = Color.AliceBlue;
+        txtResults.SelectionFont = new Font("Arial", 13, FontStyle.Bold);
         txtResults.SelectionColor = Color.DarkBlue;
-        txtResults.AppendText($"Hello {name}!\n\n");
-        txtResults.SelectionColor = Color.Green;
-        txtResults.AppendText($"Your recommended daily water intake is:\n");
-        txtResults.SelectionColor = Color.Red;
-        txtResults.AppendText($"{amount:F1} {unitText}\n");
-        txtResults.SelectionColor = Color.Green;
-        txtResults.AppendText($"This equals approximately:\n");
-        txtResults.SelectionColor = Color.Red;
-        txtResults.AppendText($"{glasses} glasses of water");
+        txtResults.AppendText($" {glasses} glasses of water ({perGlassText} each) \n\n");
+        
+        // Show glass emojis after the count
+        txtResults.SelectionColor = Color.RoyalBlue;
+        string glassEmoji = "";
+        for (int i = 0; i < glasses; i++)
+            glassEmoji += "🥤";
+        txtResults.AppendText($" {glassEmoji}\n\n\n");
+
+        // Quick tip with subtle background
+        txtResults.SelectionBackColor = Color.Ivory;
+        txtResults.SelectionFont = new Font("Arial", 10, FontStyle.Italic);
+        txtResults.SelectionColor = Color.DarkSlateGray;
+        txtResults.AppendText(" 💡 Tip: Space out your water intake evenly throughout the day ");
+
+        // Reset formatting
+        txtResults.SelectionBackColor = Color.White;
+        txtResults.SelectionColor = Color.Black;
     }
 
     private bool ValidateInputs()
