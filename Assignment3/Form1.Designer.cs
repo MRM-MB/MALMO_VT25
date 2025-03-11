@@ -15,6 +15,7 @@ partial class Form1
 
     private void InitializeComponent()
     {
+        // Initialize components
         grpMain = new GroupBox();
         grpPersonal = new GroupBox();
         grpGender = new GroupBox();
@@ -63,11 +64,11 @@ partial class Form1
 
         lblHeight.Text = "Height (cm)";
         lblHeight.Location = new Point(20, 60);
-        lblHeight.AutoSize = true;  // Let the label size itself
-        txtHeight.Location = new Point(120, 57);  // Moved right from 120 to 140
+        lblHeight.AutoSize = true;
+        txtHeight.Location = new Point(120, 57);
         txtHeight.Size = new Size(95, 20);
 
-        txtHeightInches.Location = new Point(220, 57);  // Moved right to follow first textbox
+        txtHeightInches.Location = new Point(220, 57);
         txtHeightInches.Size = new Size(95, 20);
         txtHeightInches.Visible = false;
 
@@ -87,7 +88,7 @@ partial class Form1
         rdoFemale.Checked = true;
 
         rdoMale.Text = "Male";
-        rdoMale.Location = new Point(150, 30);  // Increased from 130 to 150
+        rdoMale.Location = new Point(150, 30);
         rdoMale.Width = 80;
 
         // Units group
@@ -101,7 +102,7 @@ partial class Form1
         rdoMetric.Checked = true;
 
         rdoImperial.Text = "Imperial (ft, lbs)";
-        rdoImperial.Location = new Point(150, 30);  // Increased from 130 to 150
+        rdoImperial.Location = new Point(150, 30);
         rdoImperial.Width = 150;
 
         // Other data group
@@ -148,6 +149,7 @@ partial class Form1
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
     }
 
+    // Declare UI components
     private GroupBox grpMain;
     private GroupBox grpPersonal;
     private GroupBox grpGender;

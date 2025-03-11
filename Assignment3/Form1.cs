@@ -9,12 +9,14 @@ public partial class Form1 : Form
         SetupEventHandlers();
     }
 
+    // Initialize activity levels in the combo box
     private void InitializeActivityLevels()
     {
-        cboActivityLevel.Items.AddRange(new string[] { "Low", "Medium", "High" });
+        cboActivityLevel.Items.AddRange(["Low", "Medium", "High"]);
         cboActivityLevel.SelectedIndex = 0;
     }
 
+    // Setup event handlers for controls
     private void SetupEventHandlers()
     {
         btnCalculate.Click += BtnCalculate_Click;
@@ -22,6 +24,7 @@ public partial class Form1 : Form
         rdoImperial.CheckedChanged += UnitSystem_CheckedChanged;
     }
 
+    // Handle unit system change
     private void UnitSystem_CheckedChanged(object? sender, EventArgs e)
     {
         lblHeight.Text = rdoMetric.Checked ? "Height (cm)" : "Height (ft and in)";
@@ -29,15 +32,14 @@ public partial class Form1 : Form
         if (rdoMetric.Checked)
         {
             txtHeightInches.Visible = false;
-            // Removed the size change to maintain consistent width
         }
         else
         {
             txtHeightInches.Visible = true;
-            // Removed the size change to maintain consistent width
         }
     }
 
+    // Handle calculate button click
     private void BtnCalculate_Click(object? sender, EventArgs e)
     {
         if (!ValidateInputs()) return;
@@ -60,6 +62,7 @@ public partial class Form1 : Form
         DisplayResults(person.Name, amount, glasses, person.UnitSystem == UnitSystem.Metric);
     }
 
+    // Display results in the text box
     private void DisplayResults(string name, decimal amount, int glasses, bool isMetric)
     {
         string unitText = isMetric ? "milliliters (ml)" : "ounces (oz)";
@@ -76,11 +79,11 @@ public partial class Form1 : Form
 
         // Box for main result - enhanced visibility
         txtResults.SelectionFont = new Font("Arial", 15, FontStyle.Bold);
-        txtResults.SelectionColor = Color.Black;  // Changed to black
+        txtResults.SelectionColor = Color.Black;
         txtResults.AppendText($" 📊 Daily Recommended Intake \n\n");
         txtResults.SelectionBackColor = Color.MintCream;
-        txtResults.SelectionFont = new Font("Arial", 13, FontStyle.Bold);  // Slightly bigger
-        txtResults.SelectionColor = Color.ForestGreen;  // Keep green for the amount
+        txtResults.SelectionFont = new Font("Arial", 13, FontStyle.Bold);
+        txtResults.SelectionColor = Color.ForestGreen;
         txtResults.AppendText($" {amount:F1} {unitText} \n\n");
 
         // Glasses count first, then visualization
@@ -107,6 +110,7 @@ public partial class Form1 : Form
         txtResults.SelectionColor = Color.Black;
     }
 
+    // Validate user inputs
     private bool ValidateInputs()
     {
         if (string.IsNullOrWhiteSpace(txtName.Text))
@@ -138,7 +142,7 @@ public partial class Form1 : Form
             MessageBox.Show("Please enter a valid height in inches.", "Validation Error");
             return false;
         }
-
+        
         return true;
     }
 }

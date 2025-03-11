@@ -1,14 +1,12 @@
+// Finished by Manish Raj Moriche on 11th March 2025
+
 namespace Assignment3;
 
-public class WaterIntakeCalculator
+public class WaterIntakeCalculator(Person person)
 {
-    private readonly Person person;
+    private readonly Person person = person;
 
-    public WaterIntakeCalculator(Person person)
-    {
-        this.person = person;
-    }
-
+    // Calculate daily water intake
     public (decimal amount, int glasses) Calculate()
     {
         decimal baseIntake = GetBaseIntake();
@@ -25,14 +23,17 @@ public class WaterIntakeCalculator
         return (adjustedIntake, glasses);
     }
 
+    // Base intake based on weight
     private decimal GetBaseIntake()
     {
         return person.GetWeightInKg() * 33m; // 33ml per kg
     }
 
+    // Multiplier based on gender
     private decimal GetGenderMultiplier() =>
         person.Gender == Gender.Male ? 1.1m : 0.9m;
 
+    // Multiplier based on age
     private decimal GetAgeMultiplier()
     {
         int age = person.GetAge();
@@ -41,6 +42,7 @@ public class WaterIntakeCalculator
         return 1.0m;
     }
 
+    // Multiplier based on height
     private decimal GetHeightMultiplier()
     {
         decimal heightCm = person.GetHeightInCm();
@@ -49,6 +51,7 @@ public class WaterIntakeCalculator
         return 1.0m;
     }
 
+    // Multiplier based on activity level
     private decimal GetActivityMultiplier() =>
         person.ActivityLevel switch
         {
