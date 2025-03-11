@@ -6,6 +6,7 @@ public partial class Form1 : Form
     {
         InitializeComponent();
         InitializeActivityLevels();
+        InitializeRetirementAges();
         SetupEventHandlers();
     }
 
@@ -16,12 +17,22 @@ public partial class Form1 : Form
         cboActivityLevel.SelectedIndex = 0;
     }
 
+    private void InitializeRetirementAges()
+    {
+        for (int age = 62; age <= 70; age++)
+        {
+            cboRetirementAge.Items.Add(age);
+        }
+        cboRetirementAge.SelectedIndex = 0;
+    }
+
     // Setup event handlers for controls
     private void SetupEventHandlers()
     {
         btnCalculate.Click += BtnCalculate_Click;
         rdoMetric.CheckedChanged += UnitSystem_CheckedChanged;
         rdoImperial.CheckedChanged += UnitSystem_CheckedChanged;
+        btnCalculateRetirement.Click += BtnCalculateRetirement_Click;
     }
 
     // Handle unit system change
@@ -60,6 +71,51 @@ public partial class Form1 : Form
         var (amount, glasses) = calculator.Calculate();
 
         DisplayResults(person.Name, amount, glasses, person.UnitSystem == UnitSystem.Metric);
+    }
+
+    private void BtnCalculateRetirement_Click(object? sender, EventArgs e)
+    {
+        if (!ValidateRetirementInputs()) return;
+
+        var person = new Person
+        {
+            Name = txtName.Text,
+            BirthYear = int.Parse(txtBirthYear.Text),
+        };
+
+        if (cboRetirementAge.SelectedItem == null)
+        {
+            MessageBox.Show("Please select a retirement age.", "Validation Error");
+            return;
+        }
+
+        int retirementAge = (int)cboRetirementAge.SelectedItem;
+        int periodInYears = retirementAge - person.GetAge();
+        int numberOfPayments = periodInYears * 12;
+
+        var calculator = new RetirementSavingsCalculator(
+            decimal.Parse(txtCurrentSavings.Text),
+            decimal.Parse(txtMonthlySaving.Text),
+            decimal.Parse(txtAnnualInterest.Text),
+            numberOfPayments
+        );
+
+        decimal totalInterest, totalFees;
+        decimal futureValue = calculator.CalculateFutureValue(out totalInterest, out totalFees);
+        decimal totalInvestment = decimal.Parse(txtCurrentSavings.Text) + (decimal.Parse(txtMonthlySaving.Text) * numberOfPayments);
+        decimal growthPercentage = (totalInterest / futureValue) * 100;
+
+        DisplayRetirementResults(periodInYears, futureValue, totalInvestment, totalInterest, totalFees, growthPercentage);
+    }
+
+    private void DisplayRetirementResults(int yearsToRetirement, decimal futureValue, decimal totalInvestment, decimal totalInterest, decimal totalFees, decimal growthPercentage)
+    {
+        lblYearsToRetirementValue.Text = $"{yearsToRetirement}";
+        lblTotalFutureAmountValue.Text = $"{futureValue:C}";
+        lblTotalInvestmentValue.Text = $"{totalInvestment:C}";
+        lblTotalInterestValue.Text = $"{totalInterest:C}";
+        lblGrowthPercentageValue.Text = $"{growthPercentage:F2}%";
+        // Add a label for total fees if needed
     }
 
     // Display results in the text box
@@ -143,6 +199,29 @@ public partial class Form1 : Form
             return false;
         }
         
+        return true;
+    }
+
+    private bool ValidateRetirementInputs()
+    {
+        if (!decimal.TryParse(txtCurrentSavings.Text, out _))
+        {
+            MessageBox.Show("Please enter a valid initial investment.", "Validation Error");
+            return false;
+        }
+
+        if (!decimal.TryParse(txtMonthlySaving.Text, out _))
+        {
+            MessageBox.Show("Please enter a valid monthly contribution.", "Validation Error");
+            return false;
+        }
+
+        if (!decimal.TryParse(txtAnnualInterest.Text, out _))
+        {
+            MessageBox.Show("Please enter a valid annual interest rate.", "Validation Error");
+            return false;
+        }
+
         return true;
     }
 }
