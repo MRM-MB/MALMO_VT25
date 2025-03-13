@@ -8,9 +8,23 @@ static class Program
     [STAThread]
     static void Main()
     {
-        // To customize application configuration such as set high DPI settings or default font,
-        // see https://aka.ms/applicationconfiguration.
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        
+        // Add high DPI support
+        if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+        {
+            try
+            {
+                Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            }
+            catch
+            {
+                // Fallback for older .NET versions
+            }
+        }
+        
         ApplicationConfiguration.Initialize();
         Application.Run(new Form1());
-    }    
+    }
 }

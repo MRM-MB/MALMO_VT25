@@ -15,6 +15,16 @@ partial class Form1
 
     private void InitializeComponent()
     {
+        // Set DPI awareness mode
+        this.AutoScaleDimensions = new SizeF(96F, 96F);
+        this.AutoScaleMode = AutoScaleMode.Dpi;
+
+        // Enable DPI awareness for better scaling
+        if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+        {
+            SetProcessDPIAware();
+        }
+
         // Initialize components
         grpMain = new GroupBox();
         grpPersonal = new GroupBox();
@@ -242,7 +252,11 @@ partial class Form1
 
         this.components = new System.ComponentModel.Container();
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
     }
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern bool SetProcessDPIAware();
 
     // Declare UI components
     private GroupBox grpMain;
