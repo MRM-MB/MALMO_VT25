@@ -79,13 +79,10 @@ partial class Form1
         lblTotalInterestValue = new Label();
         lblGrowthPercentageValue = new Label();
 
-        // Form settings - Make form fixed size
+        // Form settings
         this.Text = "Super Mega Calculator by Manish";
         this.Size = new Size(800, 900);
         this.StartPosition = FormStartPosition.CenterScreen;
-        this.FormBorderStyle = FormBorderStyle.FixedSingle; // Prevent resizing
-        this.MaximizeBox = false; // Disable maximize button
-        this.MinimizeBox = true;  // Allow minimize
 
         // Main group box
         grpMain.Text = "Daily Water Intake";
