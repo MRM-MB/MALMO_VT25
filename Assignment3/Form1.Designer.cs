@@ -79,167 +79,168 @@ partial class Form1
         lblTotalInterestValue = new Label();
         lblGrowthPercentageValue = new Label();
 
-        // Form settings - increase size for better spacing
+        // Form settings - Make form fixed size
         this.Text = "Super Mega Calculator by Manish";
-        this.Size = new Size(900, 1000);
+        this.Size = new Size(800, 900);
         this.StartPosition = FormStartPosition.CenterScreen;
+        this.FormBorderStyle = FormBorderStyle.FixedSingle; // Prevent resizing
+        this.MaximizeBox = false; // Disable maximize button
+        this.MinimizeBox = true;  // Allow minimize
 
-        // Main group box - increase size
+        // Main group box
         grpMain.Text = "Daily Water Intake";
-        grpMain.Size = new Size(860, 940);
-        grpMain.Location = new Point(20, 20);
+        grpMain.Size = new Size(760, 840);
+        grpMain.Location = new Point(10, 10);
 
-        // Personal info group - adjust spacing
+        // Personal info group
         grpPersonal.Text = "Personal Information";
-        grpPersonal.Size = new Size(400, 180);
-        grpPersonal.Location = new Point(30, 40);
+        grpPersonal.Size = new Size(350, 150);
+        grpPersonal.Location = new Point(20, 30);
 
-        // Labels and textboxes - increase vertical spacing
+        // Labels and textboxes
         lblName.Text = "Name";
-        lblName.Location = new Point(30, 40);
-        txtName.Location = new Point(160, 37);
-        txtName.Size = new Size(195, 25);
+        lblName.Location = new Point(20, 30);
+        txtName.Location = new Point(120, 27);
+        txtName.Size = new Size(195, 20);
 
         lblHeight.Text = "Height (cm)";
-        lblHeight.Location = new Point(30, 80);
+        lblHeight.Location = new Point(20, 60);
         lblHeight.AutoSize = true;
-        txtHeight.Location = new Point(160, 77);
-        txtHeight.Size = new Size(95, 25);
+        txtHeight.Location = new Point(120, 57);
+        txtHeight.Size = new Size(95, 20);
 
-        txtHeightInches.Location = new Point(260, 77);
-        txtHeightInches.Size = new Size(95, 25);
+        txtHeightInches.Location = new Point(220, 57);
+        txtHeightInches.Size = new Size(95, 20);
         txtHeightInches.Visible = false;
 
         lblWeight.Text = "Weight (kg)";
-        lblWeight.Location = new Point(30, 120);
-        txtWeight.Location = new Point(160, 117);
-        txtWeight.Size = new Size(95, 25);
+        lblWeight.Location = new Point(20, 90);
+        txtWeight.Location = new Point(120, 87);
+        txtWeight.Size = new Size(95, 20);
 
-        // Gender group - adjust position
+        // Gender group
         grpGender.Text = "Gender";
-        grpGender.Size = new Size(400, 80);
-        grpGender.Location = new Point(30, 240);
+        grpGender.Size = new Size(350, 70);
+        grpGender.Location = new Point(20, 190);
 
         rdoFemale.Text = "Female";
-        rdoFemale.Location = new Point(40, 35);
-        rdoFemale.Width = 100;
+        rdoFemale.Location = new Point(30, 30);
+        rdoFemale.Width = 80;
         rdoFemale.Checked = true;
 
         rdoMale.Text = "Male";
-        rdoMale.Location = new Point(200, 35);
-        rdoMale.Width = 100;
+        rdoMale.Location = new Point(150, 30);
+        rdoMale.Width = 80;
 
-        // Units group - adjust position
+        // Units group
         grpUnits.Text = "Units";
-        grpUnits.Size = new Size(400, 80);
-        grpUnits.Location = new Point(30, 340);
+        grpUnits.Size = new Size(350, 70);
+        grpUnits.Location = new Point(20, 270);
 
         rdoMetric.Text = "Metric (kg, cm)";
-        rdoMetric.Location = new Point(40, 35);
-        rdoMetric.Width = 130;
+        rdoMetric.Location = new Point(30, 30);
+        rdoMetric.Width = 110;
         rdoMetric.Checked = true;
 
         rdoImperial.Text = "Imperial (ft, lbs)";
-        rdoImperial.Location = new Point(200, 35);
+        rdoImperial.Location = new Point(150, 30);
         rdoImperial.Width = 150;
 
-        // Other data group - adjust position and size
+        // Other data group
         grpOther.Text = "Other Data";
-        grpOther.Size = new Size(400, 120);
-        grpOther.Location = new Point(30, 440);
+        grpOther.Size = new Size(350, 100);
+        grpOther.Location = new Point(20, 350);
 
         lblActivityLevel.Text = "Activity Level";
-        lblActivityLevel.Location = new Point(30, 40);
-        cboActivityLevel.Location = new Point(160, 37);
-        cboActivityLevel.Size = new Size(200, 25);
+        lblActivityLevel.Location = new Point(20, 30);
+        cboActivityLevel.Location = new Point(120, 27);
+        cboActivityLevel.Size = new Size(200, 20);
         cboActivityLevel.DropDownStyle = ComboBoxStyle.DropDownList;
 
         lblBirthYear.Text = "Birth Year";
-        lblBirthYear.Location = new Point(30, 80);
-        txtBirthYear.Location = new Point(160, 77);
-        txtBirthYear.Size = new Size(100, 25);
+        lblBirthYear.Location = new Point(20, 60);
+        txtBirthYear.Location = new Point(120, 57);
+        txtBirthYear.Size = new Size(80, 20);
 
-        // Calculate button - adjust position
+        // Calculate button
         btnCalculate.Text = "Calculate";
-        btnCalculate.Location = new Point(30, 580);
-        btnCalculate.Size = new Size(400, 40);
+        btnCalculate.Location = new Point(20, 460);
+        btnCalculate.Size = new Size(350, 40);
 
-        // Results group - adjust position and size
+        // Results group
         grpResults.Text = "Water Intake Calculator";
-        grpResults.Size = new Size(400, 580);
-        grpResults.Location = new Point(450, 40);
+        grpResults.Size = new Size(350, 470);
+        grpResults.Location = new Point(390, 30);
 
-        txtResults.Size = new Size(380, 540);
-        txtResults.Location = new Point(10, 25);
+        txtResults.Size = new Size(330, 430);
+        txtResults.Location = new Point(10, 20);
         txtResults.ReadOnly = true;
         txtResults.Font = new Font("Arial", 12);
 
-        // Retirement group box - adjust position
+        // Retirement group box
         grpRetirement.Text = "Retirement Savings Calculator";
-        grpRetirement.Size = new Size(400, 280);
-        grpRetirement.Location = new Point(30, 640);
+        grpRetirement.Size = new Size(350, 250);
+        grpRetirement.Location = new Point(20, 510);
 
-        // Retirement controls - adjust spacing
         lblCurrentSavings.Text = "Current Savings";
-        lblCurrentSavings.Location = new Point(30, 40);
-        txtCurrentSavings.Location = new Point(180, 37);
-        txtCurrentSavings.Size = new Size(180, 25);
+        lblCurrentSavings.Location = new Point(20, 30);
+        txtCurrentSavings.Location = new Point(180, 27);
+        txtCurrentSavings.Size = new Size(150, 20);
 
         lblMonthlySaving.Text = "Monthly Saving";
-        lblMonthlySaving.Location = new Point(30, 80);
-        txtMonthlySaving.Location = new Point(180, 77);
-        txtMonthlySaving.Size = new Size(180, 25);
+        lblMonthlySaving.Location = new Point(20, 60);
+        txtMonthlySaving.Location = new Point(180, 57);
+        txtMonthlySaving.Size = new Size(150, 20);
 
         lblAnnualInterest.Text = "Annual Interest (%)";
-        lblAnnualInterest.Location = new Point(30, 120);
-        txtAnnualInterest.Location = new Point(180, 117);
-        txtAnnualInterest.Size = new Size(180, 25);
+        lblAnnualInterest.Location = new Point(20, 90);
+        txtAnnualInterest.Location = new Point(180, 87);
+        txtAnnualInterest.Size = new Size(150, 20);
 
         lblRetirementAge.Text = "Retirement Age";
-        lblRetirementAge.Location = new Point(30, 160);
-        cboRetirementAge.Location = new Point(180, 157);
-        cboRetirementAge.Size = new Size(180, 25);
+        lblRetirementAge.Location = new Point(20, 120);
+        cboRetirementAge.Location = new Point(180, 117);
+        cboRetirementAge.Size = new Size(150, 20);
         cboRetirementAge.DropDownStyle = ComboBoxStyle.DropDownList;
 
         btnCalculateRetirement.Text = "Calculate Retirement Savings";
-        btnCalculateRetirement.Location = new Point(30, 200);
-        btnCalculateRetirement.Size = new Size(350, 40);
+        btnCalculateRetirement.Location = new Point(20, 150);
+        btnCalculateRetirement.Size = new Size(310, 40);
 
-        // Future values group box - adjust position and spacing
+        // Future values group box
         grpFutureValues.Text = "Future Values";
-        grpFutureValues.Size = new Size(400, 280);
-        grpFutureValues.Location = new Point(450, 640);
-
-        // Future values labels - adjust spacing
-        int futureValueLabelX = 30;
-        int futureValueValueX = 200;
-        int baseY = 40;
-        int spacing = 40;
+        grpFutureValues.Size = new Size(350, 250);
+        grpFutureValues.Location = new Point(390, 510);
 
         lblYearsToRetirement.Text = "Years to Retirement";
-        lblYearsToRetirement.Location = new Point(futureValueLabelX, baseY);
-        lblYearsToRetirementValue.Location = new Point(futureValueValueX, baseY);
-        lblYearsToRetirementValue.Size = new Size(180, 25);
+        lblYearsToRetirement.Location = new Point(20, 30);
+        lblYearsToRetirementValue.Location = new Point(200, 30);
+        lblYearsToRetirementValue.Size = new Size(130, 20);
 
         lblTotalFutureAmount.Text = "Total Future Amount";
-        lblTotalFutureAmount.Location = new Point(futureValueLabelX, baseY + spacing);
-        lblTotalFutureAmountValue.Location = new Point(futureValueValueX, baseY + spacing);
-        lblTotalFutureAmountValue.Size = new Size(180, 25);
+        lblTotalFutureAmount.Location = new Point(20, 60);
+        lblTotalFutureAmountValue.Location = new Point(200, 60);
+        lblTotalFutureAmountValue.Size = new Size(130, 20);
 
         lblTotalInvestment.Text = "Total Investment";
-        lblTotalInvestment.Location = new Point(futureValueLabelX, baseY + spacing * 2);
-        lblTotalInvestmentValue.Location = new Point(futureValueValueX, baseY + spacing * 2);
-        lblTotalInvestmentValue.Size = new Size(180, 25);
+        lblTotalInvestment.Location = new Point(20, 90);
+        lblTotalInvestmentValue.Location = new Point(200, 90);
+        lblTotalInvestmentValue.Size = new Size(130, 20);
 
         lblTotalInterest.Text = "Total Interest";
-        lblTotalInterest.Location = new Point(futureValueLabelX, baseY + spacing * 3);
-        lblTotalInterestValue.Location = new Point(futureValueValueX, baseY + spacing * 3);
-        lblTotalInterestValue.Size = new Size(180, 25);
+        lblTotalInterest.Location = new Point(20, 120);
+        lblTotalInterestValue.Location = new Point(200, 120);
+        lblTotalInterestValue.Size = new Size(130, 20);
 
         lblGrowthPercentage.Text = "Growth (%)";
-        lblGrowthPercentage.Location = new Point(futureValueLabelX, baseY + spacing * 4);
-        lblGrowthPercentageValue.Location = new Point(futureValueValueX, baseY + spacing * 4);
-        lblGrowthPercentageValue.Size = new Size(180, 25);
+        lblGrowthPercentage.Location = new Point(20, 150);
+        lblGrowthPercentageValue.Location = new Point(200, 150);
+        lblGrowthPercentageValue.Size = new Size(130, 20);
+
+        txtRetirementResults.Size = new Size(330, 430);
+        txtRetirementResults.Location = new Point(10, 200);
+        txtRetirementResults.ReadOnly = true;
+        txtRetirementResults.Font = new Font("Arial", 12);
 
         // Add controls to form
         grpPersonal.Controls.AddRange(new Control[] { lblName, txtName, lblHeight, txtHeight, txtHeightInches, lblWeight, txtWeight });

@@ -2,21 +2,23 @@ namespace Assignment3;
 
 static class Program
 {
-    /// <summary>
-    ///  The main entry point for the application.
-    /// </summary>
     [STAThread]
     static void Main()
     {
+        // Set DPI awareness before anything else
+        if (Environment.OSVersion.Version.Major >= 6)
+        {
+            SetProcessDPIAware();
+        }
+
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
         
-        // Add high DPI support
         if (Environment.OSVersion.Platform == PlatformID.Win32NT)
         {
             try
             {
-                Application.SetHighDpiMode(HighDpiMode.SystemAware);
+                Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
             }
             catch
             {
@@ -27,4 +29,7 @@ static class Program
         ApplicationConfiguration.Initialize();
         Application.Run(new Form1());
     }
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    private static extern bool SetProcessDPIAware();
 }
