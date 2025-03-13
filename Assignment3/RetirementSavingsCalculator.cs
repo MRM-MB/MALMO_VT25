@@ -20,8 +20,8 @@ public class RetirementSavingsCalculator
     public decimal CalculateFutureValue(out decimal totalInterest, out decimal totalFees)
     {
         decimal balance = initialInvestment + monthlyContribution;
-        decimal monthlyInterestRate = (annualInterestRate / 100) / 12;
-        decimal monthlyFeeRate = (monthlyFees / 100) / 12;
+        decimal monthlyInterestRate = annualInterestRate / 100 / 12;
+        decimal monthlyFeeRate = monthlyFees / 100 / 12;
         totalInterest = 0;
         totalFees = 0;
 

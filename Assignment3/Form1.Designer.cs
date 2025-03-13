@@ -160,7 +160,7 @@ partial class Form1
         txtBirthYear.Size = new Size(80, 20);
 
         // Calculate button
-        btnCalculate.Text = "Calculate";
+        btnCalculate.Text = "Calculate Water Intake";
         btnCalculate.Location = new Point(20, 460);
         btnCalculate.Size = new Size(350, 40);
 
@@ -189,8 +189,11 @@ partial class Form1
         txtMonthlySaving.Location = new Point(180, 57);
         txtMonthlySaving.Size = new Size(150, 20);
 
+        // Widen the Annual Interest label and adjust its layout
         lblAnnualInterest.Text = "Annual Interest (%)";
         lblAnnualInterest.Location = new Point(20, 90);
+        lblAnnualInterest.Size = new Size(150, 20);
+        lblAnnualInterest.AutoSize = true;
         txtAnnualInterest.Location = new Point(180, 87);
         txtAnnualInterest.Size = new Size(150, 20);
 
@@ -209,30 +212,46 @@ partial class Form1
         grpFutureValues.Size = new Size(350, 250);
         grpFutureValues.Location = new Point(390, 510);
 
+        // Adjust label widths and positions
+        int labelLeftX = 20;
+        int valueRightX = 170;
+        int labelWidth = 150;    // Width for labels
+        int valueWidth = 160;    // Width for value labels
+
         lblYearsToRetirement.Text = "Years to Retirement";
-        lblYearsToRetirement.Location = new Point(20, 30);
-        lblYearsToRetirementValue.Location = new Point(200, 30);
-        lblYearsToRetirementValue.Size = new Size(130, 20);
+        lblYearsToRetirement.Location = new Point(labelLeftX, 30);
+        lblYearsToRetirement.Size = new Size(labelWidth, 20);
+        lblYearsToRetirement.AutoSize = true;
+        lblYearsToRetirementValue.Location = new Point(valueRightX, 30);
+        lblYearsToRetirementValue.Size = new Size(valueWidth, 20);
 
         lblTotalFutureAmount.Text = "Total Future Amount";
-        lblTotalFutureAmount.Location = new Point(20, 60);
-        lblTotalFutureAmountValue.Location = new Point(200, 60);
-        lblTotalFutureAmountValue.Size = new Size(130, 20);
+        lblTotalFutureAmount.Location = new Point(labelLeftX, 60);
+        lblTotalFutureAmount.Size = new Size(labelWidth, 20);
+        lblTotalFutureAmount.AutoSize = true;
+        lblTotalFutureAmountValue.Location = new Point(valueRightX, 60);
+        lblTotalFutureAmountValue.Size = new Size(valueWidth, 20);
 
         lblTotalInvestment.Text = "Total Investment";
-        lblTotalInvestment.Location = new Point(20, 90);
-        lblTotalInvestmentValue.Location = new Point(200, 90);
-        lblTotalInvestmentValue.Size = new Size(130, 20);
+        lblTotalInvestment.Location = new Point(labelLeftX, 90);
+        lblTotalInvestment.Size = new Size(labelWidth, 20);
+        lblTotalInvestment.AutoSize = true;
+        lblTotalInvestmentValue.Location = new Point(valueRightX, 90);
+        lblTotalInvestmentValue.Size = new Size(valueWidth, 20);
 
         lblTotalInterest.Text = "Total Interest";
-        lblTotalInterest.Location = new Point(20, 120);
-        lblTotalInterestValue.Location = new Point(200, 120);
-        lblTotalInterestValue.Size = new Size(130, 20);
+        lblTotalInterest.Location = new Point(labelLeftX, 120);
+        lblTotalInterest.Size = new Size(labelWidth, 20);
+        lblTotalInterest.AutoSize = true;
+        lblTotalInterestValue.Location = new Point(valueRightX, 120);
+        lblTotalInterestValue.Size = new Size(valueWidth, 20);
 
         lblGrowthPercentage.Text = "Growth (%)";
-        lblGrowthPercentage.Location = new Point(20, 150);
-        lblGrowthPercentageValue.Location = new Point(200, 150);
-        lblGrowthPercentageValue.Size = new Size(130, 20);
+        lblGrowthPercentage.Location = new Point(labelLeftX, 150);
+        lblGrowthPercentage.Size = new Size(labelWidth, 20);
+        lblGrowthPercentage.AutoSize = true;
+        lblGrowthPercentageValue.Location = new Point(valueRightX, 150);
+        lblGrowthPercentageValue.Size = new Size(valueWidth, 20);
 
         txtRetirementResults.Size = new Size(330, 430);
         txtRetirementResults.Location = new Point(10, 200);
