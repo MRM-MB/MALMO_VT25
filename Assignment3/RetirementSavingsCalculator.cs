@@ -1,5 +1,15 @@
 namespace Assignment3;
 
+/// <summary>
+/// Calculates retirement savings based on monthly contributions and compound interest.
+/// Algorithm:
+/// 1. Initial balance = initial deposit + monthly saving
+/// 2. For each month:
+///    - Calculate interest: monthly interest rate × balance
+///    - Calculate fees: monthly fee rate × balance
+///    - Update balance: add interest, subtract fees, add monthly contribution
+///    - Track total interest and fees
+/// </summary>
 public class RetirementSavingsCalculator
 {
     private decimal initialInvestment;
@@ -35,5 +45,25 @@ public class RetirementSavingsCalculator
         }
 
         return balance;
+    }
+
+    /// <summary>
+    /// Calculates the growth rate as a percentage of total interest relative to final balance
+    /// </summary>
+    /// <returns>Growth rate as a percentage</returns>
+    public decimal CalculateGrowthRate()
+    {
+        decimal totalInterest, totalFees;
+        decimal finalBalance = CalculateFutureValue(out totalInterest, out totalFees);
+        return (totalInterest / finalBalance) * 100;
+    }
+
+    /// <summary>
+    /// Calculates the total amount paid in contributions
+    /// </summary>
+    /// <returns>Sum of initial investment and all monthly contributions</returns>
+    public decimal CalculateTotalAmountPaid()
+    {
+        return initialInvestment + (numberOfPayments * monthlyContribution);
     }
 }
