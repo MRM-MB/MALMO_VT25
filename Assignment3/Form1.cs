@@ -8,6 +8,8 @@ public partial class Form1 : Form
         InitializeActivityLevels();
         InitializeRetirementAges();
         SetupEventHandlers();
+        this.AutoScaleMode = AutoScaleMode.Dpi;
+        this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
     }
 
     // Initialize activity levels in the combo box
