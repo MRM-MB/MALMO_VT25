@@ -41,6 +41,7 @@ public partial class Form1 : Form
     private void UnitSystem_CheckedChanged(object? sender, EventArgs e)
     {
         lblHeight.Text = rdoMetric.Checked ? "Height (cm)" : "Height (ft and in)";
+        lblWeight.Text = rdoMetric.Checked ? "Weight (kg)" : "Weight (lbs)";
         
         if (rdoMetric.Checked)
         {
