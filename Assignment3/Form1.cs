@@ -113,9 +113,9 @@ public partial class Form1 : Form
     private void DisplayRetirementResults(int yearsToRetirement, decimal futureValue, decimal totalInvestment, decimal totalInterest, decimal totalFees, decimal growthPercentage)
     {
         lblYearsToRetirementValue.Text = $"{yearsToRetirement}";
-        lblTotalFutureAmountValue.Text = $"{futureValue:N2}"; // Removed currency symbol
-        lblTotalInvestmentValue.Text = $"{totalInvestment:N2}"; // Removed currency symbol
-        lblTotalInterestValue.Text = $"{totalInterest:N2}"; // Removed currency symbol
+        lblTotalFutureAmountValue.Text = $"{futureValue:N2}";
+        lblTotalInvestmentValue.Text = $"{totalInvestment:N2}";
+        lblTotalInterestValue.Text = $"{totalInterest:N2}";
         lblGrowthPercentageValue.Text = $"{growthPercentage:F2}%";
     }
 
