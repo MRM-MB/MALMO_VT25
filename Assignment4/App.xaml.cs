@@ -1,35 +1,13 @@
-﻿using System;
+﻿using System.Configuration;
+using System.Data;
 using System.Windows;
-using Assignment4.Models;
 
-namespace Assignment4
+namespace Assignment4;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
 {
-    public partial class App : Application
-    {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-
-            // Quick test for Recipe class
-            try
-            {
-                Recipe testRecipe = new Recipe(50)
-                {
-                    Name = "Pancakes",
-                    Category = FoodCategory.MainCourse,
-                    Description = "A simple pancake recipe."
-                };
-
-                testRecipe.AddIngredient("Flour");
-                testRecipe.AddIngredient("Milk");
-                testRecipe.AddIngredient("Eggs");
-
-                MessageBox.Show($"Recipe: {testRecipe.Name}\nCategory: {testRecipe.Category}\nDescription: {testRecipe.Description}\nIngredients: {string.Join(", ", testRecipe.Ingredients)}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}");
-            }
-        }
-    }
 }
+
