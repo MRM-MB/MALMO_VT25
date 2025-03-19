@@ -1,0 +1,8 @@
+<Window x:Class="CookbookApp.Views.RecipeDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Recipe Details" Height="300" Width="400">
+    <Grid>
+        <!-- UI elements for adding/editing recipe details -->
+    </Grid>
+</Window>

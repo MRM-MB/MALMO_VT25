@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace Assignment4;
+namespace CookbookApp;
 
 /// <summary>
 /// Interaction logic for App.xaml
