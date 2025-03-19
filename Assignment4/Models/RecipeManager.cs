@@ -13,6 +13,11 @@ public class RecipeManager
 
     public bool AddRecipe(Recipe recipe)
     {
+        if (recipe == null)
+        {
+            throw new ArgumentNullException(nameof(recipe));
+        }
+
         if (numOfRecipes < recipes.Length)
         {
             recipes[numOfRecipes] = recipe;

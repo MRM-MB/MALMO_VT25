@@ -10,20 +10,21 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CookbookApp.Models;
 
-namespace CookbookApp.Views;
-
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window
+namespace CookbookApp.Views
 {
-    private RecipeManager recipeManager;
-
-    public MainWindow()
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
-        recipeManager = new RecipeManager(200); // Max 200 recipes
-    }
+        private RecipeManager recipeManager;
 
-    // Event handlers and other methods for managing recipes
+        public MainWindow()
+        {
+            InitializeComponent();
+            recipeManager = new RecipeManager(200); // Max 200 recipes
+        }
+
+        // Event handlers and other methods for managing recipes
+    }
 }
