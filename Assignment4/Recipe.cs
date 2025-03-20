@@ -9,7 +9,7 @@ namespace Assignment4
     {
         private FoodCategory category;
         private string description;
-        private string[] ingredients;
+        private string?[] ingredients;
         private string name;
         private int maxNumIngredients;
 
@@ -20,7 +20,10 @@ namespace Assignment4
         public Recipe(int maxNumIngredients)
         {
             this.maxNumIngredients = maxNumIngredients;
-            DefaultValues();
+            ingredients = new string?[maxNumIngredients];
+            description = string.Empty;
+            name = string.Empty;
+            category = FoodCategory.Other;
         }
 
         /// <summary>
@@ -44,7 +47,7 @@ namespace Assignment4
         /// <summary>
         /// Gets or sets the array of ingredients for the recipe.
         /// </summary>
-        public string[] Ingredients
+        public string?[] Ingredients
         {
             get { return ingredients; }
             set { ingredients = value; }
@@ -133,7 +136,7 @@ namespace Assignment4
         {
             category = FoodCategory.Other;
             description = "";
-            ingredients = new string[maxNumIngredients];
+            ingredients = new string?[maxNumIngredients];
             name = "";
         }
 
@@ -191,9 +194,9 @@ namespace Assignment4
         {
             if (CheckIndex(index))
             {
-                return ingredients[index];
+                return ingredients[index] ?? string.Empty; // Ensure no null is returned
             }
-            return null;
+            return string.Empty; // Return empty string instead of null
         }
 
         /// <summary>
@@ -206,7 +209,7 @@ namespace Assignment4
             const int categoryPad = 48;
             const int ingredientCountPad = 60;
 
-            string nameColumn = Name.PadRight(namePad);
+            string nameColumn = (Name ?? string.Empty).PadRight(namePad); // Handle possible null
             string categoryColumn = Category.ToString().PadLeft(categoryPad);
             string ingredientCountColumn = CurrentNumberOfIngredients().ToString().PadLeft(ingredientCountPad);
 

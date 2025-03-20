@@ -84,10 +84,17 @@ namespace Assignment4
             if (listRecipes.SelectedItem != null)
             {
                 int index = listRecipes.SelectedIndex;
-                currRecipe = recipeManager.GetRecipeAt(index);
-
-                recipeName.Text = currRecipe.Name;
-                categoryComboBox.SelectedItem = currRecipe.Category;
+                var recipe = recipeManager.GetRecipeAt(index);
+                if (recipe != null) // Add null check
+                {
+                    currRecipe = recipe;
+                    recipeName.Text = currRecipe.Name;
+                    categoryComboBox.SelectedItem = currRecipe.Category;
+                }
+                else
+                {
+                    MessageBox.Show("Selected recipe is invalid.");
+                }
             }
             else
             {
@@ -163,12 +170,18 @@ namespace Assignment4
             int selectedIndex = listRecipes.SelectedIndex;
             if (selectedIndex != -1)
             {
-                Recipe selectedRecipe = recipeManager.GetRecipeAt(selectedIndex);
+                var selectedRecipe = recipeManager.GetRecipeAt(selectedIndex);
+                if (selectedRecipe != null) // Add null check
+                {
+                    string ingredients = selectedRecipe.GetIngredientsString();
+                    string instructions = selectedRecipe.Description;
 
-                string ingredients = selectedRecipe.GetIngredientsString();
-                string instructions = selectedRecipe.Description;
-
-                MessageBox.Show($"INGREDIENTS:\n {ingredients}\n\n {instructions}", "Cooking Instructions:");
+                    MessageBox.Show($"INGREDIENTS:\n {ingredients}\n\n {instructions}", "Cooking Instructions:");
+                }
+                else
+                {
+                    MessageBox.Show("Selected recipe is invalid.", "Error");
+                }
             }
             else
             {

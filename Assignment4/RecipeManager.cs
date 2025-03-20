@@ -7,7 +7,7 @@ namespace Assignment4
     /// </summary>
     internal class RecipeManager
     {
-        private Recipe[] recipeList;
+        private Recipe?[] recipeList; // Allow nullable Recipe objects
         private int numOfElems = 0;
 
         /// <summary>
@@ -16,7 +16,7 @@ namespace Assignment4
         /// <param name="maxNumRecipes">The maximum number of recipes the manager can hold.</param>
         public RecipeManager(int maxNumRecipes)
         {
-            recipeList = new Recipe[maxNumRecipes];
+            recipeList = new Recipe?[maxNumRecipes]; // Adjust array initialization
         }
 
         /// <summary>
@@ -103,13 +103,13 @@ namespace Assignment4
         /// </summary>
         /// <param name="index">The index of the recipe to retrieve.</param>
         /// <returns>The recipe at the specified index or null if the index is invalid.</returns>
-        public Recipe GetRecipeAt(int index)
+        public Recipe? GetRecipeAt(int index) // Already marked as nullable
         {
             if (CheckIndex(index))
             {
                 return recipeList[index];
             }
-            return null;
+            return null; // Explicitly return null for invalid index
         }
 
         /// <summary>
@@ -168,9 +168,9 @@ namespace Assignment4
         {
             for (int i = index; i < recipeList.Length - 1; i++)
             {
-                recipeList[i] = recipeList[i + 1]; //move 1 step to left
+                recipeList[i] = recipeList[i + 1];
             }
-            recipeList[recipeList.Length - 1] = null; //empty last place
+            recipeList[recipeList.Length - 1] = null; // No change needed, null is valid for nullable Recipe
         }
     }
 }
