@@ -43,7 +43,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox HorizontalAlignment="Right" Height="490" Header="Instructions" Margin="0,44,10,0" VerticalAlignment="Top" Width="400">
+        <GroupBox HorizontalAlignment="Right" Height="490" Header="Cooking Instructions" Margin="0,44,10,0" VerticalAlignment="Top" Width="400">
             <TextBox x:Name="instructionTxt" VerticalAlignment="Top" Height="445" TextWrapping="Wrap" Margin="10" AcceptsReturn="True"/>
         </GroupBox>
 
