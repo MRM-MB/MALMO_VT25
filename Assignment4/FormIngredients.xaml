@@ -4,25 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment4"
-        mc:Ignorable="d" Height="500" Width="900" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        mc:Ignorable="d" Height="650" Width="900" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <Label Content="Number of ingredients:" HorizontalAlignment="Left" Height="29" Margin="10,10,0,0" VerticalAlignment="Top" Width="180"/>
         <Label x:Name="numOfIng" Content="0" HorizontalAlignment="Left" Height="29" Margin="200,10,0,0" VerticalAlignment="Top" Width="50"/>
 
-        <GroupBox HorizontalAlignment="Left" Height="400" Header="Ingredients" Margin="10,44,0,0" VerticalAlignment="Top" Width="400">
+        <GroupBox HorizontalAlignment="Left" Height="450" Header="Ingredients" Margin="10,44,0,0" VerticalAlignment="Top" Width="400">
             <Grid Margin="10">
-                <Label Content="Name of Ingredient" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="150"/>
-                <TextBox x:Name="ingredientTxt" VerticalAlignment="Top" Height="25" Margin="0,30,0,0" TextWrapping="Wrap"/>
-                <ListBox x:Name="listBox" Height="270" Margin="0,60,0,0" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,340,0,0">
-                    <Button Content="Add" Height="30" Width="100" Margin="5,0" Click="btnAdd_Click_1"/>
+                <!-- Define rows for flexible layout -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/> <!-- Row for the Label -->
+                    <RowDefinition Height="Auto"/> <!-- Row for the TextBox -->
+                    <RowDefinition Height="Auto"/> <!-- Row for the Buttons -->
+                    <RowDefinition Height="*"/> <!-- Row for the ListBox (remaining space) -->
+                </Grid.RowDefinitions>
+
+                <!-- Label for Ingredient Name -->
+                <Label Content="Name of Ingredient" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="150" Grid.Row="0"/>
+                
+                <!-- Ingredient TextBox -->
+                <TextBox x:Name="ingredientTxt" VerticalAlignment="Top" Height="25" Margin="0,10,0,0" TextWrapping="Wrap" Grid.Row="1"/>
+                
+                <!-- Buttons directly below the TextBox -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2">
+                    <Button Content="Add" Height="30" Width="100" Margin="7,0" Click="btnAdd_Click_1"/>
                     <Button Content="Edit" Height="30" Width="100" Margin="5,0" Click="btnEdit_Click_1"/>
                     <Button Content="Delete" Height="30" Width="100" Margin="5,0" Click="btnDel_Click_1"/>
                 </StackPanel>
+                
+                <!-- ListBox below the Buttons -->
+                <ListBox x:Name="listBox" Height="270" Margin="0,10,0,0" Grid.Row="3"/>
             </Grid>
         </GroupBox>
 
-        <GroupBox HorizontalAlignment="Right" Height="400" Header="Instructions" Margin="0,44,10,0" VerticalAlignment="Top" Width="400">
+        <GroupBox HorizontalAlignment="Right" Height="450" Header="Instructions" Margin="0,44,10,0" VerticalAlignment="Top" Width="400">
             <TextBox x:Name="instructionTxt" VerticalAlignment="Top" Height="350" TextWrapping="Wrap" Margin="10" AcceptsReturn="True"/>
         </GroupBox>
 
