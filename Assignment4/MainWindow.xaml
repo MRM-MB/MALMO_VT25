@@ -11,7 +11,7 @@
         <Label Content="Recipe name" RenderTransformOrigin="0.066,-4.673" Height="30" Margin="29,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBox x:Name="recipeName" HorizontalAlignment="Left" Height="25" Margin="145,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="243"/>
         <Label Content="Category" HorizontalAlignment="Left" Height="30" Margin="29,70,0,0" VerticalAlignment="Top" Width="95"/>
-        <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" Height="25" Margin="93,74,0,0" VerticalAlignment="Top" Width="145"/>
+        <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" Height="25" Margin="145,74,0,0" VerticalAlignment="Top" Width="243"/>
         <Button x:Name="addIngerBtn" Content="Add Ingredients" HorizontalAlignment="Left" Height="25" Margin="29,104,0,0" VerticalAlignment="Top" Width="359" Click="addIngerBtn_Click"/>
         <Border HorizontalAlignment="Left" Height="158" Margin="29,134,0,0" VerticalAlignment="Top" Width="359" BorderBrush="Black" BorderThickness="1">
             <TextBox x:Name="textInstructions" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="351"/>
