@@ -1,24 +1,20 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Assignment4
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private const int MaxNumOfElements = 150;
-        private const int MaxNumOfIngredients = 25;
+        private const int MaxNumOfElements = 200;
+        private const int MaxNumOfIngredients = 50;
 
         private RecipeManager recipeManager = new RecipeManager(MaxNumOfElements);
         private Recipe currRecipe = new Recipe(MaxNumOfIngredients);
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MainWindow"/> class.
-        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -28,11 +24,6 @@ namespace Assignment4
             listRecipes.MouseDoubleClick += new MouseButtonEventHandler(listRecipes_MouseDoubleClick);
         }
 
-        /// <summary>
-        /// Handles the click event of the "Add Ingredients" button.
-        /// </summary>
-        /// <param name="sender">The sender object.</param>
-        /// <param name="e">The event arguments.</param>
         private void addIngerBtn_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(recipeName.Text) || categoryComboBox.SelectedIndex == -1)
@@ -44,11 +35,6 @@ namespace Assignment4
             formIngredients.ShowDialog();
         }
 
-        /// <summary>
-        /// Handles the click event of the "Add Recipe" button.
-        /// </summary>
-        /// <param name="sender">The sender object.</param>
-        /// <param name="e">The event arguments.</param>
         private void btnAddRec_Click(object sender, RoutedEventArgs e)
         {
             if (currRecipe.CurrentNumberOfIngredients() == 0)
@@ -58,7 +44,7 @@ namespace Assignment4
             }
 
             currRecipe.Name = recipeName.Text;
-            currRecipe.Category = (FoodCategory)categoryComboBox.SelectedItem;
+            currRecipe.Category = categoryComboBox.SelectedItem.ToString().GetEnumFromDescription<FoodCategory>();
 
             bool addedSuccessfully = recipeManager.Add(currRecipe);
 
@@ -74,22 +60,17 @@ namespace Assignment4
             }
         }
 
-        /// <summary>
-        /// Begins the edit mode for the selected recipe.
-        /// </summary>
-        /// <param name="sender">The sender object.</param>
-        /// <param name="e">The event arguments.</param>
         private void btnEditBegin_Click(object sender, EventArgs e)
         {
             if (listRecipes.SelectedItem != null)
             {
                 int index = listRecipes.SelectedIndex;
                 var recipe = recipeManager.GetRecipeAt(index);
-                if (recipe != null) // Add null check
+                if (recipe != null)
                 {
                     currRecipe = recipe;
                     recipeName.Text = currRecipe.Name;
-                    categoryComboBox.SelectedItem = currRecipe.Category;
+                    categoryComboBox.SelectedItem = currRecipe.Category.GetDescription();
                 }
                 else
                 {
@@ -102,11 +83,6 @@ namespace Assignment4
             }
         }
 
-        /// <summary>
-        /// Finishes the edit mode for the selected recipe.
-        /// </summary>
-        /// <param name="sender">The sender object.</param>
-        /// <param name="e">The event arguments.</param>
         private void btnEditFinish_Click(object sender, EventArgs e)
         {
             if (listRecipes.SelectedItem != null)
@@ -114,7 +90,7 @@ namespace Assignment4
                 int index = listRecipes.SelectedIndex;
 
                 currRecipe.Name = recipeName.Text;
-                currRecipe.Category = (FoodCategory)categoryComboBox.SelectedItem;
+                currRecipe.Category = categoryComboBox.SelectedItem.ToString().GetEnumFromDescription<FoodCategory>();
 
                 recipeManager.ChangeElement(index, currRecipe);
 
@@ -123,11 +99,6 @@ namespace Assignment4
             }
         }
 
-        /// <summary>
-        /// Handles the click event of the "Delete" button.
-        /// </summary>
-        /// <param name="sender">The sender object.</param>
-        /// <param name="e">The event arguments.</param>
         private void btnDel_Click(object sender, EventArgs e)
         {
             if (listRecipes.SelectedItem != null)
@@ -142,36 +113,23 @@ namespace Assignment4
             }
         }
 
-        /// <summary>
-        /// Handles the click event of the "Clear" button.
-        /// </summary>
-        /// <param name="sender">The sender object.</param>
-        /// <param name="e">The event arguments.</param>
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearForm();
         }
 
-        /// <summary>
-        /// Handles the mouse double click event on the list of recipes.
-        /// </summary>
-        /// <param name="sender">The sender object.</param>
-        /// <param name="e">The event arguments.</param>
         private void listRecipes_MouseDoubleClick(object sender, EventArgs e)
         {
             ViewSelectedRecipeDetails();
         }
 
-        /// <summary>
-        /// Displays the details of the selected recipe.
-        /// </summary>
         private void ViewSelectedRecipeDetails()
         {
             int selectedIndex = listRecipes.SelectedIndex;
             if (selectedIndex != -1)
             {
                 var selectedRecipe = recipeManager.GetRecipeAt(selectedIndex);
-                if (selectedRecipe != null) // Add null check
+                if (selectedRecipe != null)
                 {
                     string ingredients = selectedRecipe.GetIngredientsString();
                     string instructions = selectedRecipe.Description;
@@ -189,9 +147,6 @@ namespace Assignment4
             }
         }
 
-        /// <summary>
-        /// Updates the GUI with the list of recipes.
-        /// </summary>
         private void UpdateGUI()
         {
             listRecipes.Items.Clear();
@@ -202,9 +157,6 @@ namespace Assignment4
             }
         }
 
-        /// <summary>
-        /// Clears the input form.
-        /// </summary>
         private void ClearForm()
         {
             recipeName.Clear();
@@ -212,14 +164,11 @@ namespace Assignment4
             listRecipes.SelectedIndex = -1;
         }
 
-        /// <summary>
-        /// Loads the list of food categories into the ComboBox.
-        /// </summary>
         private void LoadCategoryList()
         {
             foreach (FoodCategory category in Enum.GetValues(typeof(FoodCategory)))
             {
-                categoryComboBox.Items.Add(category);
+                categoryComboBox.Items.Add(category.GetDescription());
             }
         }
     }

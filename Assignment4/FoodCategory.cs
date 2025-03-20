@@ -1,69 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Assignment4
 {
-    /// <summary>
-    /// Represents the categories of food for recipes.
-    /// </summary>
     public enum FoodCategory
     {
-        /// <summary>
-        /// Meats category.
-        /// </summary>
-        Meats,
+        [Description("Meat 🥩")]
+        Meat,
 
-        /// <summary>
-        /// Pasta category.
-        /// </summary>
+        [Description("Pasta 🍝")]
         Pasta,
 
-        /// <summary>
-        /// Pizza category.
-        /// </summary>
+        [Description("Pizza 🍕")]
         Pizza,
 
-        /// <summary>
-        /// Fish category.
-        /// </summary>
+        [Description("Fish 🐟")]
         Fish,
 
-        /// <summary>
-        /// Seafood category.
-        /// </summary>
+        [Description("Seafood 🦞")]
         Seafood,
 
-        /// <summary>
-        /// Soups category.
-        /// </summary>
+        [Description("Soups 🍜")]
         Soups,
 
-        /// <summary>
-        /// Stew category.
-        /// </summary>
+        [Description("Stew 🍲")]
         Stew,
 
-        /// <summary>
-        /// Vegan category.
-        /// </summary>
+        [Description("Vegan 🥗")]
         Vegan,
 
-        /// <summary>
-        /// Vegetarian category.
-        /// </summary>
+        [Description("Vegetarian 🥦")]
         Vegetarian,
 
-        /// <summary>
-        /// Vegetarian with Dairy and Egg category.
-        /// </summary>
-        Vegeterian_Dairy_Egg,
+        [Description("Salads 🥬")]
+        Salads,
 
-        /// <summary>
-        /// Other category.
-        /// </summary>
+        [Description("Snacks 🍿")]
+        Snacks,
+
+        [Description("Desserts 🍰")]
+        Desserts,
+
+        [Description("Beverages 🥤")]
+        Beverages,
+
+        [Description("Other 🍽️")]
         Other
     }
 }

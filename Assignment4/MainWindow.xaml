@@ -14,17 +14,17 @@
 
         <!-- Recipe Name Label and TextBox -->
         <Label Content="Recipe name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="29,30,0,0" />
-        <TextBox x:Name="recipeName" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="145,34,0,0" Width="243" TextWrapping="Wrap" />
+        <TextBox x:Name="recipeName" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="25" Margin="145,34,0,0" Width="243" TextWrapping="Wrap" />
 
         <!-- Category Label and ComboBox -->
-        <Label Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="20,70,0,0" Width="95"/>
+        <Label Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="29,70,0,0" Width="95"/>
         <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="145,74,0,0" Width="243"/>
 
         <!-- Add Ingredients Button -->
-        <Button x:Name="addIngerBtn" Content="Add Ingredients" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="29,104,0,0" Width="359" Click="addIngerBtn_Click"/>
+        <Button x:Name="addIngerBtn" Content="Add Ingredients and Instructions" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="29,118,0,0" Width="359" Click="addIngerBtn_Click"/>
 
         <!-- Add Recipe Button -->
-        <Button x:Name="AddRecipeBtn" Content="Add Recipe" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="29,282,0,0" Width="359" Click="btnAddRec_Click"/>
+        <Button x:Name="AddRecipeBtn" Content="Add Recipe" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="29,282,0,0" Width="359" Click="btnAddRec_Click"/>
 
         <!-- Header for Recipe List -->
         <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Margin="412,12,0,0" Width="82"/>

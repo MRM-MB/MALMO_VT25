@@ -21,7 +21,7 @@
                 <Label Content="Name of Ingredient" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="150" Grid.Row="0"/>
                 
                 <!-- Ingredient TextBox -->
-                <TextBox x:Name="ingredientTxt" VerticalAlignment="Top" Height="25" Margin="0,10,0,0" TextWrapping="Wrap" Grid.Row="1"/>
+                <TextBox x:Name="ingredientTxt" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="25" Margin="0,10,0,0" TextWrapping="Wrap" Grid.Row="1"/>
                 
                 <!-- Buttons directly below the TextBox -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2">
