@@ -60,14 +60,6 @@ namespace Assignment4
             currRecipe.Name = recipeName.Text;
             currRecipe.Category = (FoodCategory)categoryComboBox.SelectedItem;
 
-            if (string.IsNullOrEmpty(textInstructions.Text))
-            {
-                MessageBox.Show("Please add instructions to the recipe.");
-                return;
-            }
-
-            currRecipe.Description = textInstructions.Text;
-
             bool addedSuccessfully = recipeManager.Add(currRecipe);
 
             if (addedSuccessfully)
@@ -96,7 +88,6 @@ namespace Assignment4
 
                 recipeName.Text = currRecipe.Name;
                 categoryComboBox.SelectedItem = currRecipe.Category;
-                textInstructions.Text = currRecipe.Description;
             }
             else
             {
@@ -117,7 +108,6 @@ namespace Assignment4
 
                 currRecipe.Name = recipeName.Text;
                 currRecipe.Category = (FoodCategory)categoryComboBox.SelectedItem;
-                currRecipe.Description = textInstructions.Text;
 
                 recipeManager.ChangeElement(index, currRecipe);
 
@@ -205,7 +195,6 @@ namespace Assignment4
         private void ClearForm()
         {
             recipeName.Clear();
-            textInstructions.Text = "";
             categoryComboBox.SelectedIndex = -1;
             listRecipes.SelectedIndex = -1;
         }

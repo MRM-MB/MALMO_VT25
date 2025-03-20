@@ -19,6 +19,7 @@ namespace Assignment4
         {
             InitializeComponent();
             currRecipe = recipe;
+            this.Title = $"{currRecipe.Name} - Ingredients and Instructions"; // Set dynamic title
             UpdateIngredientList();
         }
 
@@ -70,6 +71,7 @@ namespace Assignment4
                 }
             }
             numOfIng.Content = currRecipe.CurrentNumberOfIngredients().ToString();
+            instructionTxt.Text = currRecipe.Description; // Load instructions into the textbox
         }
 
         /// <summary>
@@ -113,6 +115,7 @@ namespace Assignment4
         /// </summary>
         private void btnOk_Click_1(object sender, EventArgs e)
         {
+            currRecipe.Description = instructionTxt.Text.Trim(); // Save instructions to the recipe
             UpdateIngredientList();
             this.Close();
         }

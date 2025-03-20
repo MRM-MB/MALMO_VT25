@@ -4,22 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment4"
-        mc:Ignorable="d" Height="450" Width="497" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Label Content="Number of ingredients:" HorizontalAlignment="Left" Height="29" Margin="22,10,0,0" VerticalAlignment="Top" Width="153"/>
-        <Label x:Name="numOfIng" Content="0" HorizontalAlignment="Left" Height="29" Margin="200,10,0,0" VerticalAlignment="Top" Width="153"/>
+        mc:Ignorable="d" Height="500" Width="900" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Label Content="Number of ingredients:" HorizontalAlignment="Left" Height="29" Margin="10,10,0,0" VerticalAlignment="Top" Width="180"/>
+        <Label x:Name="numOfIng" Content="0" HorizontalAlignment="Left" Height="29" Margin="200,10,0,0" VerticalAlignment="Top" Width="50"/>
 
-        <GroupBox HorizontalAlignment="Center" Height="314" Header="Ingredient" Margin="0,44,0,0" VerticalAlignment="Top" Width="454">
-            <Grid>
-                <TextBox x:Name="ingredientTxt" VerticalAlignment="Top" Height="25" TextWrapping="Wrap" Margin="10,10,10,50" />
-                <Button Content="Add" Height="25" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Click="btnAdd_Click_1"/>
-                <Button Content="Edit" Height="25" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,120,10" Click="btnEdit_Click_1"/>
-                <Button Content="Delete" Height="25" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,230,10" Click="btnDel_Click_1"/>
-                <ListBox x:Name="listBox" Height="211" Margin="10,10,10,10" />
+        <GroupBox HorizontalAlignment="Left" Height="400" Header="Ingredients" Margin="10,44,0,0" VerticalAlignment="Top" Width="400">
+            <Grid Margin="10">
+                <Label Content="Name of Ingredient" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="150"/>
+                <TextBox x:Name="ingredientTxt" VerticalAlignment="Top" Height="25" Margin="0,30,0,0" TextWrapping="Wrap"/>
+                <ListBox x:Name="listBox" Height="270" Margin="0,60,0,0" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,340,0,0">
+                    <Button Content="Add" Height="30" Width="100" Margin="5,0" Click="btnAdd_Click_1"/>
+                    <Button Content="Edit" Height="30" Width="100" Margin="5,0" Click="btnEdit_Click_1"/>
+                    <Button Content="Delete" Height="30" Width="100" Margin="5,0" Click="btnDel_Click_1"/>
+                </StackPanel>
             </Grid>
         </GroupBox>
 
-        <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="273,0,0,10" Width="75" Click="btnCancel_Click_1"/>
-        <Button Content="OK" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,90,10" Width="75" Click="btnOk_Click_1"/>
+        <GroupBox HorizontalAlignment="Right" Height="400" Header="Instructions" Margin="0,44,10,0" VerticalAlignment="Top" Width="400">
+            <TextBox x:Name="instructionTxt" VerticalAlignment="Top" Height="350" TextWrapping="Wrap" Margin="10" AcceptsReturn="True"/>
+        </GroupBox>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
+            <Button Content="Cancel" Width="100" Height="30" Margin="10,0" Click="btnCancel_Click_1"/>
+            <Button Content="OK" Width="100" Height="30" Margin="10,0" Click="btnOk_Click_1"/>
+        </StackPanel>
     </Grid>
 </Window>
