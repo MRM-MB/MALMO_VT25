@@ -5,8 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment4"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="380" Width="928" ResizeMode="CanMinimize">
+    <Grid Margin="0,0,0,17" HorizontalAlignment="Center" Width="928">
+        <GroupBox HorizontalAlignment="Left" Height="322" Header="Add New Recipe" Margin="21,0,0,0" VerticalAlignment="Center" Width="380"></GroupBox>
+        <Label Content="Name of recipe" RenderTransformOrigin="0.066,-4.673" Height="30" Margin="29,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="recipeName" HorizontalAlignment="Left" Height="25" Margin="145,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="243"/>
+        <Label Content="Category" HorizontalAlignment="Left" Height="30" Margin="29,70,0,0" VerticalAlignment="Top" Width="95"/>
+        <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" Height="25" Margin="93,74,0,0" VerticalAlignment="Top" Width="145"/>
+        <Button x:Name="addIngerBtn" Content="Add Ingredients" HorizontalAlignment="Left" Height="25" Margin="266,74,0,0" VerticalAlignment="Top" Width="122" Click="addIngerBtn_Click"/>
+        <Border HorizontalAlignment="Left" Height="158" Margin="29,104,0,0" VerticalAlignment="Top" Width="359" BorderBrush="Black" BorderThickness="1">
+            <TextBox x:Name="textInstructions" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="351"/>
+        </Border>
+        <Button x:Name="AddRecipeBtn" Content="Add Recipe" HorizontalAlignment="Left" Height="25" Margin="29,282,0,0" VerticalAlignment="Top" Width="359" Click="btnAddRec_Click"/>
+        <Label Content="Name" HorizontalAlignment="Left" Height="29" Margin="412,12,0,0" VerticalAlignment="Top" Width="82"/>
+        <Label Content="Category" HorizontalAlignment="Left" Height="30" Margin="647,13,0,0" VerticalAlignment="Top" Width="82"/>
+        <Label Content="No. of ingredients" HorizontalAlignment="Left" Height="29" Margin="797,13,0,0" VerticalAlignment="Top" Width="112"/>
+        <ListBox x:Name="listRecipes" HorizontalAlignment="Left" Height="216" Margin="412,46,0,0" VerticalAlignment="Top" Width="497" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <Button Content="Edit-Begin" HorizontalAlignment="Center" Height="25" Margin="0,269,0,0" VerticalAlignment="Top" Width="102" Click="btnEditBegin_Click"/>
+        <Button Content="Edit-Finish" HorizontalAlignment="Left" Height="25" Margin="688,269,0,0" VerticalAlignment="Top" Width="102" Click="btnEditFinish_Click"/>
+        <Button Content="Delet" HorizontalAlignment="Left" Height="25" Margin="807,269,0,0" VerticalAlignment="Top" Width="102" Click="btnDel_Click"/>
+        <Button Content="Clear Selection" HorizontalAlignment="Left" Height="25" Margin="536,269,0,0" VerticalAlignment="Top" Width="102" Click="btnClear_Click"/>
+
 
     </Grid>
 </Window>

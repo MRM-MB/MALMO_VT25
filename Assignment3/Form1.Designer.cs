@@ -15,17 +15,8 @@ partial class Form1
 
     private void InitializeComponent()
     {
-        // Set DPI awareness mode
-        this.AutoScaleDimensions = new SizeF(96F, 96F);
-        this.AutoScaleMode = AutoScaleMode.Dpi;
-
-        // Enable DPI awareness for better scaling
-        if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-        {
-            SetProcessDPIAware();
-        }
-
         // Initialize components
+        grpMain = new GroupBox();
         grpPersonal = new GroupBox();
         grpGender = new GroupBox();
         grpUnits = new GroupBox();
@@ -77,23 +68,21 @@ partial class Form1
         lblTotalInvestmentValue = new Label();
         lblTotalInterestValue = new Label();
         lblGrowthPercentageValue = new Label();
-        grpWaterIntakeCalculator = new GroupBox();
-        grpRetirementSavingsCalculator = new GroupBox();
 
         // Form settings
         this.Text = "Super Mega Calculator by Manish";
-        this.Size = new Size(820, 900);
+        this.Size = new Size(800, 900);
         this.StartPosition = FormStartPosition.CenterScreen;
 
-        // Water Intake Calculator group box
-        grpWaterIntakeCalculator.Text = "Water Intake Calculator";
-        grpWaterIntakeCalculator.Size = new Size(760, 500);
-        grpWaterIntakeCalculator.Location = new Point(20, 20);
+        // Main group box
+        grpMain.Text = "Daily Water Intake";
+        grpMain.Size = new Size(760, 840);
+        grpMain.Location = new Point(10, 10);
 
         // Personal info group
         grpPersonal.Text = "Personal Information";
         grpPersonal.Size = new Size(350, 150);
-        grpPersonal.Location = new Point(10, 20);
+        grpPersonal.Location = new Point(20, 30);
 
         // Labels and textboxes
         lblName.Text = "Name";
@@ -119,7 +108,7 @@ partial class Form1
         // Gender group
         grpGender.Text = "Gender";
         grpGender.Size = new Size(350, 70);
-        grpGender.Location = new Point(10, 180);
+        grpGender.Location = new Point(20, 190);
 
         rdoFemale.Text = "Female";
         rdoFemale.Location = new Point(30, 30);
@@ -133,7 +122,7 @@ partial class Form1
         // Units group
         grpUnits.Text = "Units";
         grpUnits.Size = new Size(350, 70);
-        grpUnits.Location = new Point(10, 260);
+        grpUnits.Location = new Point(20, 270);
 
         rdoMetric.Text = "Metric (kg, cm)";
         rdoMetric.Location = new Point(30, 30);
@@ -147,7 +136,7 @@ partial class Form1
         // Other data group
         grpOther.Text = "Other Data";
         grpOther.Size = new Size(350, 100);
-        grpOther.Location = new Point(10, 340);
+        grpOther.Location = new Point(20, 350);
 
         lblActivityLevel.Text = "Activity Level";
         lblActivityLevel.Location = new Point(20, 30);
@@ -161,14 +150,14 @@ partial class Form1
         txtBirthYear.Size = new Size(80, 20);
 
         // Calculate button
-        btnCalculate.Text = "Calculate Water Intake";
-        btnCalculate.Location = new Point(10, 450);
+        btnCalculate.Text = "Calculate";
+        btnCalculate.Location = new Point(20, 460);
         btnCalculate.Size = new Size(350, 40);
 
         // Results group
-        grpResults.Text = "Water Intake Results";
+        grpResults.Text = "Water Intake Calculator";
         grpResults.Size = new Size(350, 470);
-        grpResults.Location = new Point(380, 20);
+        grpResults.Location = new Point(390, 30);
 
         txtResults.Size = new Size(330, 430);
         txtResults.Location = new Point(10, 20);
@@ -176,9 +165,9 @@ partial class Form1
         txtResults.Font = new Font("Arial", 12);
 
         // Retirement group box
-        grpRetirement.Text = "Retirement Data";
+        grpRetirement.Text = "Retirement Savings Calculator";
         grpRetirement.Size = new Size(350, 250);
-        grpRetirement.Location = new Point(10, 20);
+        grpRetirement.Location = new Point(20, 510);
 
         lblCurrentSavings.Text = "Current Savings";
         lblCurrentSavings.Location = new Point(20, 30);
@@ -190,11 +179,8 @@ partial class Form1
         txtMonthlySaving.Location = new Point(180, 57);
         txtMonthlySaving.Size = new Size(150, 20);
 
-        // Widen the Annual Interest label and adjust its layout
         lblAnnualInterest.Text = "Annual Interest (%)";
         lblAnnualInterest.Location = new Point(20, 90);
-        lblAnnualInterest.Size = new Size(150, 20);
-        lblAnnualInterest.AutoSize = true;
         txtAnnualInterest.Location = new Point(180, 87);
         txtAnnualInterest.Size = new Size(150, 20);
 
@@ -205,71 +191,43 @@ partial class Form1
         cboRetirementAge.DropDownStyle = ComboBoxStyle.DropDownList;
 
         btnCalculateRetirement.Text = "Calculate Retirement Savings";
-        btnCalculateRetirement.Location = new Point(20, 180);
+        btnCalculateRetirement.Location = new Point(20, 150);
         btnCalculateRetirement.Size = new Size(310, 40);
 
         // Future values group box
         grpFutureValues.Text = "Future Values";
         grpFutureValues.Size = new Size(350, 250);
-        grpFutureValues.Location = new Point(380, 20);
-
-        // Adjust label widths and positions
-        int labelLeftX = 20;
-        int valueRightX = 170;
-        int labelWidth = 150;    // Width for labels
-        int valueWidth = 160;    // Width for value labels
+        grpFutureValues.Location = new Point(390, 510);
 
         lblYearsToRetirement.Text = "Years to Retirement";
-        lblYearsToRetirement.Location = new Point(labelLeftX, 30);
-        lblYearsToRetirement.Size = new Size(labelWidth, 20);
-        lblYearsToRetirement.AutoSize = true;
-        lblYearsToRetirementValue.Location = new Point(valueRightX, 30);
-        lblYearsToRetirementValue.Size = new Size(valueWidth, 20);
+        lblYearsToRetirement.Location = new Point(20, 30);
+        lblYearsToRetirementValue.Location = new Point(200, 30);
+        lblYearsToRetirementValue.Size = new Size(130, 20);
 
         lblTotalFutureAmount.Text = "Total Future Amount";
-        lblTotalFutureAmount.Location = new Point(labelLeftX, 60);
-        lblTotalFutureAmount.Size = new Size(labelWidth, 20);
-        lblTotalFutureAmount.AutoSize = true;
-        lblTotalFutureAmountValue.Location = new Point(valueRightX, 60);
-        lblTotalFutureAmountValue.Size = new Size(valueWidth, 20);
+        lblTotalFutureAmount.Location = new Point(20, 60);
+        lblTotalFutureAmountValue.Location = new Point(200, 60);
+        lblTotalFutureAmountValue.Size = new Size(130, 20);
 
         lblTotalInvestment.Text = "Total Investment";
-        lblTotalInvestment.Location = new Point(labelLeftX, 90);
-        lblTotalInvestment.Size = new Size(labelWidth, 20);
-        lblTotalInvestment.AutoSize = true;
-        lblTotalInvestmentValue.Location = new Point(valueRightX, 90);
-        lblTotalInvestmentValue.Size = new Size(valueWidth, 20);
+        lblTotalInvestment.Location = new Point(20, 90);
+        lblTotalInvestmentValue.Location = new Point(200, 90);
+        lblTotalInvestmentValue.Size = new Size(130, 20);
 
         lblTotalInterest.Text = "Total Interest";
-        lblTotalInterest.Location = new Point(labelLeftX, 120);
-        lblTotalInterest.Size = new Size(labelWidth, 20);
-        lblTotalInterest.AutoSize = true;
-        lblTotalInterestValue.Location = new Point(valueRightX, 120);
-        lblTotalInterestValue.Size = new Size(valueWidth, 20);
+        lblTotalInterest.Location = new Point(20, 120);
+        lblTotalInterestValue.Location = new Point(200, 120);
+        lblTotalInterestValue.Size = new Size(130, 20);
 
         lblGrowthPercentage.Text = "Growth (%)";
-        lblGrowthPercentage.Location = new Point(labelLeftX, 150);
-        lblGrowthPercentage.Size = new Size(labelWidth, 20);
-        lblGrowthPercentage.AutoSize = true;
-        lblGrowthPercentageValue.Location = new Point(valueRightX, 150);
-        lblGrowthPercentageValue.Size = new Size(valueWidth, 20);
+        lblGrowthPercentage.Location = new Point(20, 150);
+        lblGrowthPercentageValue.Location = new Point(200, 150);
+        lblGrowthPercentageValue.Size = new Size(130, 20);
 
         txtRetirementResults.Size = new Size(330, 430);
         txtRetirementResults.Location = new Point(10, 200);
         txtRetirementResults.ReadOnly = true;
         txtRetirementResults.Font = new Font("Arial", 12);
-
-        // Retirement Savings Calculator group box
-        grpRetirementSavingsCalculator.Text = "Retirement Savings Calculator";
-        grpRetirementSavingsCalculator.Size = new Size(760, 287);
-        grpRetirementSavingsCalculator.Location = new Point(20, 540);
-
-        // Adjust locations of existing group boxes to fit inside the new group box
-        grpRetirement.Location = new Point(10, 20);
-        grpFutureValues.Location = new Point(380, 20);
-
-        // Add existing group boxes to the new group box
-        grpRetirementSavingsCalculator.Controls.AddRange(new Control[] { grpRetirement, grpFutureValues });
 
         // Add controls to form
         grpPersonal.Controls.AddRange(new Control[] { lblName, txtName, lblHeight, txtHeight, txtHeightInches, lblWeight, txtWeight });
@@ -279,18 +237,15 @@ partial class Form1
         grpResults.Controls.Add(txtResults);
         grpRetirement.Controls.AddRange(new Control[] { lblCurrentSavings, txtCurrentSavings, lblMonthlySaving, txtMonthlySaving, lblAnnualInterest, txtAnnualInterest, lblRetirementAge, cboRetirementAge, btnCalculateRetirement });
         grpFutureValues.Controls.AddRange(new Control[] { lblYearsToRetirement, lblYearsToRetirementValue, lblTotalFutureAmount, lblTotalFutureAmountValue, lblTotalInvestment, lblTotalInvestmentValue, lblTotalInterest, lblTotalInterestValue, lblGrowthPercentage, lblGrowthPercentageValue });
-        grpWaterIntakeCalculator.Controls.AddRange(new Control[] { grpPersonal, grpGender, grpUnits, grpOther, grpResults, btnCalculate });
-        this.Controls.AddRange(new Control[] { grpWaterIntakeCalculator, grpRetirementSavingsCalculator });
+        grpMain.Controls.AddRange(new Control[] { grpPersonal, grpGender, grpUnits, grpOther, btnCalculate, grpResults, grpRetirement, grpFutureValues });
+        this.Controls.Add(grpMain);
 
         this.components = new System.ComponentModel.Container();
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
     }
 
-    [System.Runtime.InteropServices.DllImport("user32.dll")]
-    private static extern bool SetProcessDPIAware();
-
     // Declare UI components
+    private GroupBox grpMain;
     private GroupBox grpPersonal;
     private GroupBox grpGender;
     private GroupBox grpUnits;
@@ -298,8 +253,6 @@ partial class Form1
     private GroupBox grpResults;
     private GroupBox grpRetirement;
     private GroupBox grpFutureValues;
-    private GroupBox grpWaterIntakeCalculator;
-    private GroupBox grpRetirementSavingsCalculator;
     private Label lblName;
     private Label lblHeight;
     private Label lblWeight;
