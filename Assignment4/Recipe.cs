@@ -204,29 +204,29 @@ namespace Assignment4
         /// </summary>
         /// <returns>A formatted string containing the recipe details.</returns>
         public static string TruncateWithEllipsis(string text, int width)
-{
-    if (string.IsNullOrEmpty(text))
-        return new string(' ', width); // Ensure alignment by filling with spaces
+        {
+            if (string.IsNullOrEmpty(text))
+                return new string(' ', width); // Ensure alignment by filling with spaces
 
-    if (text.Length > width)
-        return text.Substring(0, width - 3) + "..."; // Truncate and add ellipsis
-    else
-        return text.PadRight(width); // Pad with spaces if shorter than width
-}
+            if (text.Length > width)
+                return text.Substring(0, width - 3) + "..."; // Truncate and add ellipsis
+            else
+                return text.PadRight(width); // Pad with spaces if shorter than width
+        }
 
-public override string ToString()
-{
-    const int nameWidth = 21;    // Fixed width for the name column
-    const int categoryWidth = 15; // Fixed width for the category column
-    const int ingredientWidth = 8; // Fixed width for the number column
+        public override string ToString()
+        {
+            const int nameWidth = 21;    // Fixed width for the name column
+            const int categoryWidth = 15; // Fixed width for the category column
+            const int ingredientWidth = 8; // Fixed width for the number column
 
-    // Ensure consistent alignment with truncation and padding
-    string nameColumn = TruncateWithEllipsis(Name ?? string.Empty, nameWidth).PadRight(nameWidth);
-    string categoryColumn = TruncateWithEllipsis(Category.ToString(), categoryWidth).PadRight(categoryWidth);
-    string ingredientCountColumn = CurrentNumberOfIngredients().ToString().PadLeft(ingredientWidth);
+            // Ensure consistent alignment with truncation and padding
+            string nameColumn = TruncateWithEllipsis(Name ?? string.Empty, nameWidth).PadRight(nameWidth);
+            string categoryColumn = TruncateWithEllipsis(Category.ToString(), categoryWidth).PadRight(categoryWidth);
+            string ingredientCountColumn = CurrentNumberOfIngredients().ToString().PadLeft(ingredientWidth);
 
-    // Concatenate columns with fixed widths
-    return $"{nameColumn}{categoryColumn}{ingredientCountColumn}";
-}
+            // Concatenate columns with fixed widths
+            return $"{nameColumn}{categoryColumn}{ingredientCountColumn}";
+        }
     }
 }

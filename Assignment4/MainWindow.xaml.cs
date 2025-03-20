@@ -22,6 +22,7 @@ namespace Assignment4
 
             categoryComboBox.SelectedIndex = 0;
             listRecipes.MouseDoubleClick += new MouseButtonEventHandler(listRecipes_MouseDoubleClick);
+            listRecipes.SelectionChanged += new SelectionChangedEventHandler(listRecipes_SelectionChanged);
         }
 
         private void addIngerBtn_Click(object sender, RoutedEventArgs e)
@@ -123,6 +124,11 @@ namespace Assignment4
             ViewSelectedRecipeDetails();
         }
 
+        private void listRecipes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ViewSelectedRecipeDetails();
+        }
+
         private void ViewSelectedRecipeDetails()
         {
             int selectedIndex = listRecipes.SelectedIndex;
@@ -134,16 +140,16 @@ namespace Assignment4
                     string ingredients = selectedRecipe.GetIngredientsString();
                     string instructions = selectedRecipe.Description;
 
-                    MessageBox.Show($"INGREDIENTS:\n {ingredients}\n\n {instructions}", "Cooking Instructions:");
+                    cookingDetailsText.Text = $"INGREDIENTS:\n\n{ingredients}\n\nCOOKING INSTRUCTIONS:\n\n{instructions}";
                 }
                 else
                 {
-                    MessageBox.Show("Selected recipe is invalid.", "Error");
+                    cookingDetailsText.Text = "Selected recipe is invalid.";
                 }
             }
             else
             {
-                MessageBox.Show("Please select a recipe to view its details.", "Selection Required");
+                cookingDetailsText.Text = string.Empty;
             }
         }
 
@@ -162,6 +168,7 @@ namespace Assignment4
             recipeName.Clear();
             categoryComboBox.SelectedIndex = -1;
             listRecipes.SelectedIndex = -1;
+            cookingDetailsText.Clear();
         }
 
         private void LoadCategoryList()

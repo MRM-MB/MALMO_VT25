@@ -37,5 +37,15 @@
                 <Button Content="Clear Input" Width="102" Margin="35,0,0,0" Click="btnClear_Click"/>
             </StackPanel>
         </Grid>
+
+        <!-- Cooking Details GroupBox -->
+        <GroupBox Header="Cooking Details" HorizontalAlignment="Right" Margin="420,0,21,0" Width="480" Height="600" VerticalAlignment="Top">
+            <TextBox x:Name="cookingDetailsText" 
+                     TextWrapping="Wrap" 
+                     IsReadOnly="True" 
+                     VerticalScrollBarVisibility="Auto"
+                     Margin="10"
+                     FontFamily="Consolas"/>
+        </GroupBox>
     </Grid>
 </Window>
