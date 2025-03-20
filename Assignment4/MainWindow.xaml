@@ -29,7 +29,7 @@
             <Label Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="150,0,0,0" Width="82"/>
             <Label Content="No. of ingredients" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="278,0,0,0" Width="112"/>
             
-            <ListBox x:Name="listRecipes" HorizontalAlignment="Left" VerticalAlignment="Top" Height="216" Margin="0,35,0,0" Width="380" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+            <ListBox x:Name="listRecipes" FontFamily="Courier New" HorizontalAlignment="Left" VerticalAlignment="Top" Height="216" Margin="0,35,0,0" Width="380" d:ItemsSource="{d:SampleData ItemCount=5}"/>
             
             <StackPanel Orientation="Horizontal" Margin="0,260,0,0" HorizontalAlignment="Left">
                 <Button Content="Change" Width="102" Click="btnEditBegin_Click"/>
