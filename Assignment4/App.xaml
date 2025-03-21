@@ -6,4 +6,7 @@
     <Application.Resources>
          
     </Application.Resources>
+    <Application.MainWindow>
+        <local:MainWindow Icon="/assets/icon.png"/>
+    </Application.MainWindow>
 </Application>

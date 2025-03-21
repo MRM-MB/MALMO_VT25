@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment4"
         mc:Ignorable="d"
-        Title="Apu Cookbook by Manish" Height="700" Width="928" ResizeMode="CanMinimize">
+        Title="Apu Cookbook by Manish" Height="700" Width="928" ResizeMode="CanMinimize"
+        Icon="/assets/icon.png">
     <Grid Margin="0,0,0,17" HorizontalAlignment="Center" Width="928">
         
         <!-- GroupBox for Add New Recipe -->
