@@ -187,15 +187,20 @@ namespace Assignment4
                     string instructions = selectedRecipe.Description;
 
                     cookingDetailsText.Text = $"INGREDIENTS:\n\n{ingredients}\n\nCOOKING INSTRUCTIONS:\n\n{instructions}";
+                    
+                    // Display the category image for the selected recipe in the right panel
+                    DisplayCategoryImage(selectedRecipe.Category.GetDescription(), true);
                 }
                 else
                 {
                     cookingDetailsText.Text = "Selected recipe is invalid.";
+                    recipeCategoryImage.Visibility = Visibility.Hidden;
                 }
             }
             else
             {
                 cookingDetailsText.Text = string.Empty;
+                recipeCategoryImage.Visibility = Visibility.Hidden;
             }
         }
 
@@ -232,57 +237,60 @@ namespace Assignment4
             if (categoryComboBox.SelectedItem != null)
             {
                 string selectedCategory = categoryComboBox.SelectedItem.ToString() ?? string.Empty;
-                
-                // Default to hiding the image
-                categoryImage.Visibility = Visibility.Hidden;
-                
-                if (string.IsNullOrEmpty(selectedCategory))
-                {
-                    return;
-                }
-                
-                try
-                {
-                    // Extract the category name without emoji for the image filename
-                    string[] parts = selectedCategory.Split(' ');
-                    if (parts.Length == 0)
-                    {
-                        return;
-                    }
-                    
-                    string categoryName = parts[0];
-                    
-                    // Direct path to the assets folder in the project directory
-                    string projectDirectory = @"c:\Users\manis\Desktop\MALMO\Assignment4";
-                    string assetsPath = Path.Combine(projectDirectory, "assets");
-                    string imagePath = Path.Combine(assetsPath, $"{categoryName}.png");
-                    
-                    // Check if file exists
-                    if (File.Exists(imagePath))
-                    {
-                        BitmapImage bitmapImage = new BitmapImage();
-                        bitmapImage.BeginInit();
-                        bitmapImage.UriSource = new Uri(imagePath);
-                        bitmapImage.EndInit();
-                        
-                        categoryImage.Source = bitmapImage;
-                        categoryImage.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        // Hide image if the file doesn't exist
-                        categoryImage.Visibility = Visibility.Hidden;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error loading image: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    categoryImage.Visibility = Visibility.Hidden;
-                }
+                DisplayCategoryImage(selectedCategory, false);
             }
             else
             {
                 categoryImage.Visibility = Visibility.Hidden;
+            }
+        }
+
+        // Updated method to handle both image controls
+        private void DisplayCategoryImage(string selectedCategory, bool isRecipeDetail)
+        {
+            // Reference to the image control
+            Image imageControl = isRecipeDetail ? recipeCategoryImage : categoryImage;
+            
+            // Default to hiding the image
+            imageControl.Visibility = Visibility.Hidden;
+            
+            if (string.IsNullOrEmpty(selectedCategory))
+            {
+                return;
+            }
+            
+            try
+            {
+                // Extract the category name without emoji for the image filename
+                string[] parts = selectedCategory.Split(' ');
+                if (parts.Length == 0)
+                {
+                    return;
+                }
+                
+                string categoryName = parts[0];
+                
+                // Direct path to the assets folder in the project directory
+                string projectDirectory = @"c:\Users\manis\Desktop\MALMO\Assignment4";
+                string assetsPath = Path.Combine(projectDirectory, "assets");
+                string imagePath = Path.Combine(assetsPath, $"{categoryName}.png");
+                
+                // Check if file exists
+                if (File.Exists(imagePath))
+                {
+                    BitmapImage bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    bitmapImage.UriSource = new Uri(imagePath);
+                    bitmapImage.EndInit();
+                    
+                    imageControl.Source = bitmapImage;
+                    imageControl.Visibility = Visibility.Visible;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading image: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                imageControl.Visibility = Visibility.Hidden;
             }
         }
 

@@ -45,12 +45,69 @@
 
         <!-- Cooking Details GroupBox -->
         <GroupBox Header="Cooking Details" HorizontalAlignment="Right" Margin="420,0,21,0" Width="480" Height="600" VerticalAlignment="Top">
-            <TextBox x:Name="cookingDetailsText" 
-                     TextWrapping="Wrap" 
-                     IsReadOnly="True" 
-                     VerticalScrollBarVisibility="Auto"
-                     Margin="10"
-                     FontFamily="Consolas"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <TextBox x:Name="cookingDetailsText" 
+                         TextWrapping="Wrap" 
+                         IsReadOnly="True" 
+                         VerticalScrollBarVisibility="Auto"
+                         Margin="10,10,10,10"
+                         FontFamily="Consolas"
+                         Grid.Row="0"/>
+                
+                <!-- Separator between text and image -->
+                <Separator Grid.Row="1" Margin="10,0,10,5" />
+                
+                <!-- Category image display -->
+                <Border Grid.Row="1" 
+                        Background="#F5F5F5" 
+                        BorderBrush="#CCCCCC" 
+                        BorderThickness="1" 
+                        CornerRadius="5"
+                        Margin="10,10,10,10" 
+                        Padding="10"
+                        Width="Auto"
+                        Height="200"
+                        HorizontalAlignment="Center">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <!-- Title for the category image -->
+                        <TextBlock Text="Category:" 
+                                   FontWeight="Bold" 
+                                   HorizontalAlignment="Center" 
+                                   Margin="0,0,0,5"
+                                   Grid.Row="0"/>
+                        
+                        <!-- Category image with effect -->
+                        <Border Grid.Row="1" 
+                                BorderBrush="#E0E0E0" 
+                                BorderThickness="1" 
+                                CornerRadius="3"
+                                Background="White"
+                                Padding="5">
+                            <Image x:Name="recipeCategoryImage" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   Width="150" 
+                                   Height="150" 
+                                   Visibility="Hidden" 
+                                   Stretch="Uniform">
+                                <Image.Effect>
+                                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.3"/>
+                                </Image.Effect>
+                            </Image>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
         </GroupBox>
     </Grid>
 </Window>
