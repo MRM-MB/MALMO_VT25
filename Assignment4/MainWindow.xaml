@@ -6,45 +6,106 @@
         xmlns:local="clr-namespace:Assignment4"
         mc:Ignorable="d"
         Title="Apu Cookbook by Manish" Height="700" Width="928" ResizeMode="CanMinimize"
-        Icon="/assets/icon.png">
+        Icon="/assets/icon.png" Background="#F5F7FA">
+    <Window.Resources>
+        <!-- Button Style -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#4A7BA7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#3A6797"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#5A8BB7"/>
+                    <Setter Property="BorderBrush" Value="#4A7BA7"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!-- GroupBox Style -->
+        <Style TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="#C0C8D0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Foreground" Value="#2D5A80"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        
+        <!-- TextBox Style -->
+        <Style TargetType="TextBox">
+            <Setter Property="BorderBrush" Value="#C0C8D0"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="Padding" Value="3"/>
+        </Style>
+        
+        <!-- ComboBox Style -->
+        <Style TargetType="ComboBox">
+            <Setter Property="BorderBrush" Value="#C0C8D0"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+        </Style>
+        
+        <!-- ListBox Style -->
+        <Style TargetType="ListBox">
+            <Setter Property="BorderBrush" Value="#C0C8D0"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid Margin="0,0,0,17" HorizontalAlignment="Center" Width="928">
         
         <!-- GroupBox for Add New Recipe -->
         <GroupBox HorizontalAlignment="Left" Height="322" Header="Add New Recipe" Margin="21,0,0,0" VerticalAlignment="Top" Width="380">
+            <GroupBox.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#F8FAFC" Offset="0"/>
+                    <GradientStop Color="#EEF2F7" Offset="1"/>
+                </LinearGradientBrush>
+            </GroupBox.Background>
             <Grid>
-                <Label Content="Recipe name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="8,10,0,0"/>
-                <TextBox x:Name="recipeName" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="120,14,0,0" Width="243" TextWrapping="Wrap"/>
+                <Label Content="Recipe name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="8,10,0,0" Foreground="#2D5A80"/>
+                <TextBox x:Name="recipeName" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="120,14,0,0" Width="228" TextWrapping="Wrap"/>
 
-                <Label Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="8,50,0,0" Width="95"/>
-                <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="120,54,0,0" Width="243" SelectionChanged="categoryComboBox_SelectionChanged"/>
+                <Label Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="8,50,0,0" Width="95" Foreground="#2D5A80"/>
+                <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="120,54,0,0" Width="228" SelectionChanged="categoryComboBox_SelectionChanged"/>
 
                 <!-- Category image positioned to be behind the button -->
                 <Image x:Name="categoryImage" HorizontalAlignment="Center" VerticalAlignment="Top" Height="180" Width="180" Margin="0,110,0,0" Visibility="Hidden" Stretch="Uniform"/>
                 
                 <!-- Button now appears after the image in XAML (will render on top) -->
-                <Button x:Name="addIngerBtn" Content="Add Ingredients and Instructions" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="8,95,0,0" Width="359" Click="addIngerBtn_Click"/>
+                <Button x:Name="addIngerBtn" Content="Add Ingredients and Instructions" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="8,95,0,0" Width="340" Click="addIngerBtn_Click"/>
                 
-                <Button x:Name="AddRecipeBtn" Content="Add Recipe" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Margin="8,0,0,10" Width="359" Click="btnAddRec_Click"/>
+                <Button x:Name="AddRecipeBtn" Content="Add Recipe" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Margin="8,0,0,0" Width="340" Click="btnAddRec_Click"/>
             </Grid>
         </GroupBox>
 
         <!-- Recipe ListBox and Associated Controls Below the GroupBox -->
         <Grid Margin="21,340,0,0">
-            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="82"/>
-            <Label Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="150,0,0,0" Width="82"/>
-            <Label Content="No. of ingredients" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="278,0,0,0" Width="112"/>
+            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="82" Foreground="#2D5A80" FontWeight="SemiBold"/>
+            <Label Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="150,0,0,0" Width="82" Foreground="#2D5A80" FontWeight="SemiBold"/>
+            <Label Content="No. of ingredients" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="278,0,0,0" Width="112" Foreground="#2D5A80" FontWeight="SemiBold"/>
             
-            <ListBox x:Name="listRecipes" FontFamily="Courier New" HorizontalAlignment="Left" VerticalAlignment="Top" Height="216" Margin="0,35,0,0" Width="380" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+            <ListBox x:Name="listRecipes" FontFamily="Courier New" HorizontalAlignment="Left" VerticalAlignment="Top" Height="216" Margin="0,35,0,0" Width="380" d:ItemsSource="{d:SampleData ItemCount=5}" BorderThickness="1">
+                <ListBox.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2" Color="#A0A0A0"/>
+                </ListBox.Effect>
+            </ListBox>
             
             <StackPanel Orientation="Horizontal" Margin="0,260,0,0" HorizontalAlignment="Left">
                 <Button Content="Change" Width="102" Click="btnEditBegin_Click"/>
-                <Button Content="Delete" Width="102" Margin="38,0,0,0" Click="btnDel_Click"/>
-                <Button Content="Clear Input" Width="102" Margin="35,0,0,0" Click="btnClear_Click"/>
+                <Button Content="Delete" Width="102" Margin="38,0,0,0" Click="btnDel_Click" Background="#D55E5E" BorderBrush="#B54E4E"/>
+                <Button Content="Clear Input" Width="102" Margin="35,0,0,0" Click="btnClear_Click" Background="#6B8E23" BorderBrush="#556B2F"/>
             </StackPanel>
         </Grid>
 
         <!-- Cooking Details GroupBox -->
         <GroupBox Header="Cooking Details" HorizontalAlignment="Right" Margin="420,0,21,0" Width="480" Height="600" VerticalAlignment="Top">
+            <GroupBox.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#F8FAFC" Offset="0"/>
+                    <GradientStop Color="#EEF2F7" Offset="1"/>
+                </LinearGradientBrush>
+            </GroupBox.Background>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -57,15 +118,21 @@
                          VerticalScrollBarVisibility="Auto"
                          Margin="10,10,10,10"
                          FontFamily="Consolas"
-                         Grid.Row="0"/>
+                         Grid.Row="0"
+                         Background="#FCFCFC"
+                         BorderThickness="1">
+                    <TextBox.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2" Color="#A0A0A0"/>
+                    </TextBox.Effect>
+                </TextBox>
                 
                 <!-- Separator between text and image -->
-                <Separator Grid.Row="1" Margin="10,0,10,5" />
+                <Separator Grid.Row="1" Margin="10,0,10,5" Background="#A0B0C0"/>
                 
                 <!-- Category image display -->
                 <Border Grid.Row="1" 
-                        Background="#F5F5F5" 
-                        BorderBrush="#CCCCCC" 
+                        Background="#F0F5FA" 
+                        BorderBrush="#BACAD6" 
                         BorderThickness="1" 
                         CornerRadius="5"
                         Margin="10,10,10,10" 
@@ -73,6 +140,9 @@
                         Width="Auto"
                         Height="200"
                         HorizontalAlignment="Center">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="6" ShadowDepth="2" Opacity="0.2" Color="#A0A0A0"/>
+                    </Border.Effect>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -84,11 +154,12 @@
                                    FontWeight="Bold" 
                                    HorizontalAlignment="Center" 
                                    Margin="0,0,0,5"
-                                   Grid.Row="0"/>
+                                   Grid.Row="0"
+                                   Foreground="#2D5A80"/>
                         
                         <!-- Category image with effect -->
                         <Border Grid.Row="1" 
-                                BorderBrush="#E0E0E0" 
+                                BorderBrush="#D0D8E0" 
                                 BorderThickness="1" 
                                 CornerRadius="3"
                                 Background="White"

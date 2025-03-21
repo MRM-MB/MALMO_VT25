@@ -4,9 +4,60 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment4"
-        mc:Ignorable="d" Height="650" Width="900" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        mc:Ignorable="d" Height="650" Width="900" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
+        Icon="/assets/icon.png" Background="#F5F7FA">
+    <Window.Resources>
+        <!-- Button Style -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#4A7BA7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#3A6797"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#5A8BB7"/>
+                    <Setter Property="BorderBrush" Value="#4A7BA7"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!-- GroupBox Style -->
+        <Style TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="#C0C8D0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Foreground" Value="#2D5A80"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        
+        <!-- TextBox Style -->
+        <Style TargetType="TextBox">
+            <Setter Property="BorderBrush" Value="#C0C8D0"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="Padding" Value="3"/>
+        </Style>
+        
+        <!-- ListBox Style -->
+        <Style TargetType="ListBox">
+            <Setter Property="BorderBrush" Value="#C0C8D0"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+        </Style>
+        
+        <!-- Label Style -->
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#2D5A80"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid Margin="10">
         <GroupBox HorizontalAlignment="Left" Height="490" Header="Ingredients" Margin="10,44,0,0" VerticalAlignment="Top" Width="400">
+            <GroupBox.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#F8FAFC" Offset="0"/>
+                    <GradientStop Color="#EEF2F7" Offset="1"/>
+                </LinearGradientBrush>
+            </GroupBox.Background>
             <Grid Margin="10">
                 <!-- Define rows for flexible layout -->
                 <Grid.RowDefinitions>
@@ -18,38 +69,59 @@
                 </Grid.RowDefinitions>
 
                 <!-- Label for Ingredient Name -->
-                <Label Content="Name of Ingredient" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="150" Grid.Row="0"/>
+                <Label Content="Name of Ingredient" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="150" Grid.Row="0" FontWeight="SemiBold"/>
                 
                 <!-- Ingredient TextBox -->
-                <TextBox x:Name="ingredientTxt" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="25" Margin="0,10,0,0" TextWrapping="Wrap" Grid.Row="1"/>
+                <TextBox x:Name="ingredientTxt" VerticalAlignment="Top" VerticalContentAlignment="Center" Height="25" Margin="0,10,0,0" TextWrapping="Wrap" Grid.Row="1">
+                    <TextBox.Effect>
+                        <DropShadowEffect BlurRadius="3" ShadowDepth="1" Opacity="0.2" Color="#A0A0A0"/>
+                    </TextBox.Effect>
+                </TextBox>
                 
                 <!-- Buttons directly below the TextBox -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="2">
-                    <Button Content="Add" Height="30" Width="100" Margin="7,0" Click="btnAdd_Click_1"/>
+                    <Button Content="Add" Height="30" Width="100" Margin="7,0" Click="btnAdd_Click_1" Background="#4CAF50" BorderBrush="#3A8C3A"/>
                     <Button Content="Edit" Height="30" Width="100" Margin="5,0" Click="btnEdit_Click_1"/>
-                    <Button Content="Delete" Height="30" Width="100" Margin="5,0" Click="btnDel_Click_1"/>
+                    <Button Content="Delete" Height="30" Width="100" Margin="5,0" Click="btnDel_Click_1" Background="#D55E5E" BorderBrush="#B54E4E"/>
                 </StackPanel>
                 
                 <!-- ListBox below the Buttons -->
-                <ListBox x:Name="listBox" Margin="0,10,0,0" Grid.Row="3"/>
+                <ListBox x:Name="listBox" Margin="0,10,0,0" Grid.Row="3">
+                    <ListBox.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2" Color="#A0A0A0"/>
+                    </ListBox.Effect>
+                </ListBox>
                 
                 <!-- Highlighted "Number of ingredients" section -->
-                <Border BorderBrush="Blue" BorderThickness="2" CornerRadius="5" Padding="5" Margin="0,10,0,0" Grid.Row="4">
+                <Border BorderBrush="#4A7BA7" BorderThickness="2" CornerRadius="5" Padding="5" Margin="0,10,0,0" Grid.Row="4" Background="#E6EEF5">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="4" ShadowDepth="1" Opacity="0.2" Color="#A0A0A0"/>
+                    </Border.Effect>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Label Content="Number of ingredients:" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180"/>
-                        <Label x:Name="numOfIng" Content="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50"/>
+                        <Label Content="Number of ingredients:" HorizontalAlignment="Left" VerticalAlignment="Center" Width="180" FontWeight="SemiBold"/>
+                        <Label x:Name="numOfIng" Content="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" FontWeight="Bold" Foreground="#2D5A80"/>
                     </StackPanel>
                 </Border>
             </Grid>
         </GroupBox>
 
         <GroupBox HorizontalAlignment="Right" Height="490" Header="Cooking Instructions" Margin="0,44,10,0" VerticalAlignment="Top" Width="400">
-            <TextBox x:Name="instructionTxt" VerticalAlignment="Top" Height="445" TextWrapping="Wrap" Margin="10" AcceptsReturn="True"/>
+            <GroupBox.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#F8FAFC" Offset="0"/>
+                    <GradientStop Color="#EEF2F7" Offset="1"/>
+                </LinearGradientBrush>
+            </GroupBox.Background>
+            <TextBox x:Name="instructionTxt" VerticalAlignment="Top" Height="445" TextWrapping="Wrap" Margin="10" AcceptsReturn="True">
+                <TextBox.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2" Color="#A0A0A0"/>
+                </TextBox.Effect>
+            </TextBox>
         </GroupBox>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
-            <Button Content="Cancel" Width="100" Height="30" Margin="10,0" Click="btnCancel_Click_1"/>
-            <Button Content="OK" Width="100" Height="30" Margin="10,0" Click="btnOk_Click_1"/>
+            <Button Content="Cancel" Width="100" Height="30" Margin="10,0" Click="btnCancel_Click_1" Background="#D55E5E" BorderBrush="#B54E4E"/>
+            <Button Content="OK" Width="100" Height="30" Margin="10,0" Click="btnOk_Click_1" Background="#4CAF50" BorderBrush="#3A8C3A"/>
         </StackPanel>
     </Grid>
 </Window>
