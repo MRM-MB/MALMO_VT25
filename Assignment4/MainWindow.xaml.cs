@@ -183,7 +183,8 @@ namespace Assignment4
                 var selectedRecipe = recipeManager.GetRecipeAt(selectedIndex);
                 if (selectedRecipe != null)
                 {
-                    string ingredients = selectedRecipe.GetIngredientsString();
+                    // Format ingredients with numeration
+                    string ingredients = FormatIngredientsWithNumbers(selectedRecipe);
                     string instructions = selectedRecipe.Description;
 
                     cookingDetailsText.Text = $"INGREDIENTS:\n\n{ingredients}\n\nCOOKING INSTRUCTIONS:\n\n{instructions}";
@@ -202,6 +203,20 @@ namespace Assignment4
                 cookingDetailsText.Text = string.Empty;
                 recipeCategoryImage.Visibility = Visibility.Hidden;
             }
+        }
+
+        // Helper method to format ingredients with numbers
+        private string FormatIngredientsWithNumbers(Recipe recipe)
+        {
+            string[] ingredients = recipe.GetIngredientsString().Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            string formattedIngredients = string.Empty;
+            
+            for (int i = 0; i < ingredients.Length; i++)
+            {
+                formattedIngredients += $"{i + 1}. {ingredients[i]}\n";
+            }
+            
+            return formattedIngredients;
         }
 
         private void UpdateGUI()

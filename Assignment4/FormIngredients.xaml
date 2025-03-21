@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment4"
-        mc:Ignorable="d" Height="650" Width="900" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
-        Icon="/assets/icon.png">
+        mc:Ignorable="d" Height="650" Width="900" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <GroupBox HorizontalAlignment="Left" Height="490" Header="Ingredients" Margin="10,44,0,0" VerticalAlignment="Top" Width="400">
             <Grid Margin="10">
