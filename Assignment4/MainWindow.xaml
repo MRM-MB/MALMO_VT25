@@ -15,8 +15,12 @@
                 <TextBox x:Name="recipeName" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="120,14,0,0" Width="243" TextWrapping="Wrap"/>
 
                 <Label Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="8,50,0,0" Width="95"/>
-                <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="120,54,0,0" Width="243"/>
+                <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Margin="120,54,0,0" Width="243" SelectionChanged="categoryComboBox_SelectionChanged"/>
 
+                <!-- Category image positioned to be behind the button -->
+                <Image x:Name="categoryImage" HorizontalAlignment="Center" VerticalAlignment="Top" Height="180" Width="180" Margin="0,110,0,0" Visibility="Hidden" Stretch="Uniform"/>
+                
+                <!-- Button now appears after the image in XAML (will render on top) -->
                 <Button x:Name="addIngerBtn" Content="Add Ingredients and Instructions" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="8,95,0,0" Width="359" Click="addIngerBtn_Click"/>
                 
                 <Button x:Name="AddRecipeBtn" Content="Add Recipe" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Margin="8,0,0,10" Width="359" Click="btnAddRec_Click"/>

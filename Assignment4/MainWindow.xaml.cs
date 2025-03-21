@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Assignment4
 {
@@ -14,6 +16,8 @@ namespace Assignment4
 
         private RecipeManager recipeManager = new RecipeManager(MaxNumOfElements);
         private Recipe currRecipe = new Recipe(MaxNumOfIngredients);
+        private bool isEditMode = false;
+        private int editingIndex = -1;
 
         public MainWindow()
         {
@@ -47,9 +51,24 @@ namespace Assignment4
             currRecipe.Name = recipeName.Text;
             currRecipe.Category = categoryComboBox.SelectedItem.ToString().GetEnumFromDescription<FoodCategory>();
 
-            bool addedSuccessfully = recipeManager.Add(currRecipe);
+            bool success = false;
+            
+            if (isEditMode && editingIndex >= 0)
+            {
+                // In edit mode, update the existing recipe
+                recipeManager.ChangeElement(editingIndex, currRecipe);
+                MessageBox.Show("Recipe updated successfully.");
+                isEditMode = false;
+                editingIndex = -1;
+                success = true;
+            }
+            else
+            {
+                // In add mode, add a new recipe
+                success = recipeManager.Add(currRecipe);
+            }
 
-            if (addedSuccessfully)
+            if (success)
             {
                 UpdateGUI();
                 currRecipe = new Recipe(MaxNumOfIngredients);
@@ -57,7 +76,7 @@ namespace Assignment4
             }
             else
             {
-                MessageBox.Show("Failed to add recipe. The recipe book is full or an error occurred.");
+                MessageBox.Show("Failed to update recipe. An error occurred.");
             }
         }
 
@@ -65,13 +84,15 @@ namespace Assignment4
         {
             if (listRecipes.SelectedItem != null)
             {
-                int index = listRecipes.SelectedIndex;
-                var recipe = recipeManager.GetRecipeAt(index);
+                editingIndex = listRecipes.SelectedIndex;
+                var recipe = recipeManager.GetRecipeAt(editingIndex);
                 if (recipe != null)
                 {
                     currRecipe = recipe;
                     recipeName.Text = currRecipe.Name;
                     categoryComboBox.SelectedItem = currRecipe.Category.GetDescription();
+                    isEditMode = true;
+                    MessageBox.Show("Now editing recipe. Click Add Recipe to save changes.");
                 }
                 else
                 {
@@ -97,6 +118,8 @@ namespace Assignment4
 
                 UpdateGUI();
                 ClearForm();
+                isEditMode = false;
+                editingIndex = -1;
             }
         }
 
@@ -117,6 +140,9 @@ namespace Assignment4
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearForm();
+            isEditMode = false;
+            editingIndex = -1;
+            currRecipe = new Recipe(MaxNumOfIngredients);
         }
 
         private void listRecipes_MouseDoubleClick(object sender, EventArgs e)
@@ -169,6 +195,8 @@ namespace Assignment4
             categoryComboBox.SelectedIndex = -1;
             listRecipes.SelectedIndex = -1;
             cookingDetailsText.Clear();
+            isEditMode = false;
+            editingIndex = -1;
         }
 
         private void LoadCategoryList()
@@ -176,6 +204,54 @@ namespace Assignment4
             foreach (FoodCategory category in Enum.GetValues(typeof(FoodCategory)))
             {
                 categoryComboBox.Items.Add(category.GetDescription());
+            }
+        }
+
+        private void categoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (categoryComboBox.SelectedItem != null)
+            {
+                string selectedCategory = categoryComboBox.SelectedItem.ToString();
+                
+                // Default to hiding the image
+                categoryImage.Visibility = Visibility.Hidden;
+                
+                try
+                {
+                    // Extract the category name without emoji for the image filename
+                    string categoryName = selectedCategory.Split(' ')[0];
+                    
+                    // Use direct path to the assets folder in the project directory
+                    string projectDirectory = @"c:\Users\manis\Desktop\MALMO\Assignment4";
+                    string assetsPath = Path.Combine(projectDirectory, "assets");
+                    string imagePath = Path.Combine(assetsPath, $"{categoryName}.png");
+                    
+                    // Check if file exists
+                    if (File.Exists(imagePath))
+                    {
+                        BitmapImage bitmapImage = new BitmapImage();
+                        bitmapImage.BeginInit();
+                        bitmapImage.UriSource = new Uri(imagePath);
+                        bitmapImage.EndInit();
+                        
+                        categoryImage.Source = bitmapImage;
+                        categoryImage.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        // Hide image if the file doesn't exist, no need for message box
+                        categoryImage.Visibility = Visibility.Hidden;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error loading image: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    categoryImage.Visibility = Visibility.Hidden;
+                }
+            }
+            else
+            {
+                categoryImage.Visibility = Visibility.Hidden;
             }
         }
     }
