@@ -170,7 +170,7 @@ namespace Assignment4
             {
                 recipeList[i] = recipeList[i + 1];
             }
-            recipeList[recipeList.Length - 1] = null; // No change needed, null is valid for nullable Recipe
+            recipeList[recipeList.Length - 1] = null; // No change needed, null is valid for nullable Recip
         }
     }
 }

@@ -221,7 +221,7 @@ namespace Assignment4
                     // Extract the category name without emoji for the image filename
                     string categoryName = selectedCategory.Split(' ')[0];
                     
-                    // Use direct path to the assets folder in the project directory
+                    // Direct path to the assets folder in the project directory
                     string projectDirectory = @"c:\Users\manis\Desktop\MALMO\Assignment4";
                     string assetsPath = Path.Combine(projectDirectory, "assets");
                     string imagePath = Path.Combine(assetsPath, $"{categoryName}.png");
@@ -239,7 +239,7 @@ namespace Assignment4
                     }
                     else
                     {
-                        // Hide image if the file doesn't exist, no need for message box
+                        // Hide image if the file doesn't exist
                         categoryImage.Visibility = Visibility.Hidden;
                     }
                 }
