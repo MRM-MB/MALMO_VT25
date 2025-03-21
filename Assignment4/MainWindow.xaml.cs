@@ -49,7 +49,17 @@ namespace Assignment4
             }
 
             currRecipe.Name = recipeName.Text;
-            currRecipe.Category = categoryComboBox.SelectedItem.ToString().GetEnumFromDescription<FoodCategory>();
+            
+            if (categoryComboBox.SelectedItem != null)
+            {
+                string categoryDescription = categoryComboBox.SelectedItem.ToString() ?? string.Empty;
+                currRecipe.Category = categoryDescription.GetEnumFromDescription<FoodCategory>();
+            }
+            else
+            {
+                MessageBox.Show("Please select a category for the recipe.");
+                return;
+            }
 
             bool success = false;
             
@@ -112,7 +122,17 @@ namespace Assignment4
                 int index = listRecipes.SelectedIndex;
 
                 currRecipe.Name = recipeName.Text;
-                currRecipe.Category = categoryComboBox.SelectedItem.ToString().GetEnumFromDescription<FoodCategory>();
+                
+                if (categoryComboBox.SelectedItem != null)
+                {
+                    string categoryDescription = categoryComboBox.SelectedItem.ToString() ?? string.Empty;
+                    currRecipe.Category = categoryDescription.GetEnumFromDescription<FoodCategory>();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a category for the recipe.");
+                    return;
+                }
 
                 recipeManager.ChangeElement(index, currRecipe);
 
@@ -211,15 +231,26 @@ namespace Assignment4
         {
             if (categoryComboBox.SelectedItem != null)
             {
-                string selectedCategory = categoryComboBox.SelectedItem.ToString();
+                string selectedCategory = categoryComboBox.SelectedItem.ToString() ?? string.Empty;
                 
                 // Default to hiding the image
                 categoryImage.Visibility = Visibility.Hidden;
                 
+                if (string.IsNullOrEmpty(selectedCategory))
+                {
+                    return;
+                }
+                
                 try
                 {
                     // Extract the category name without emoji for the image filename
-                    string categoryName = selectedCategory.Split(' ')[0];
+                    string[] parts = selectedCategory.Split(' ');
+                    if (parts.Length == 0)
+                    {
+                        return;
+                    }
+                    
+                    string categoryName = parts[0];
                     
                     // Direct path to the assets folder in the project directory
                     string projectDirectory = @"c:\Users\manis\Desktop\MALMO\Assignment4";
@@ -253,6 +284,14 @@ namespace Assignment4
             {
                 categoryImage.Visibility = Visibility.Hidden;
             }
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            
+            // Ensure all background processes are terminated
+            Application.Current.Shutdown();
         }
     }
 }
