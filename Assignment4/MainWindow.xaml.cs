@@ -4,7 +4,9 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Assignment4
@@ -187,20 +189,20 @@ namespace Assignment4
                     string ingredients = FormatIngredientsWithNumbers(selectedRecipe);
                     string instructions = selectedRecipe.Description;
 
-                    cookingDetailsText.Text = $"INGREDIENTS:\n\n{ingredients}\n\nCOOKING INSTRUCTIONS:\n\n{instructions}";
+                    SetCookingDetailsText($"INGREDIENTS:\n\n{ingredients}\n\nCOOKING INSTRUCTIONS:\n\n{instructions}");
                     
                     // Display the category image for the selected recipe in the right panel
                     DisplayCategoryImage(selectedRecipe.Category.GetDescription(), true);
                 }
                 else
                 {
-                    cookingDetailsText.Text = "Selected recipe is invalid.";
+                    SetCookingDetailsText("Selected recipe is invalid.");
                     recipeCategoryImage.Visibility = Visibility.Hidden;
                 }
             }
             else
             {
-                cookingDetailsText.Text = string.Empty;
+                ClearCookingDetailsText();
                 recipeCategoryImage.Visibility = Visibility.Hidden;
             }
         }
@@ -234,7 +236,7 @@ namespace Assignment4
             recipeName.Clear();
             categoryComboBox.SelectedIndex = -1;
             listRecipes.SelectedIndex = -1;
-            cookingDetailsText.Clear();
+            ClearCookingDetailsText();
             isEditMode = false;
             editingIndex = -1;
         }
@@ -307,6 +309,49 @@ namespace Assignment4
                 MessageBox.Show($"Error loading image: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 imageControl.Visibility = Visibility.Hidden;
             }
+        }
+
+        // Add this method to your class to set text in the RichTextBox
+        private void SetCookingDetailsText(string text)
+        {
+            FlowDocument document = new FlowDocument();
+            Paragraph paragraph = new Paragraph();
+            
+            string[] lines = text.Split('\n');
+            
+            foreach (string line in lines)
+            {
+                if (line.Contains("INGREDIENTS") || line.Contains("COOKING INSTRUCTIONS"))
+                {
+                    // Highlight the headers
+                    Run highlightRun = new Run(line);
+                    highlightRun.Background = new SolidColorBrush(Color.FromRgb(230, 240, 255)); // Light blue background
+                    highlightRun.FontWeight = FontWeights.Bold;
+                    highlightRun.Foreground = new SolidColorBrush(Color.FromRgb(45, 90, 128)); // Match the existing blue color
+                    paragraph.Inlines.Add(highlightRun);
+                }
+                else
+                {
+                    // Normal text
+                    paragraph.Inlines.Add(new Run(line));
+                }
+                
+                // Add line break after each line
+                paragraph.Inlines.Add(new LineBreak());
+            }
+            
+            document.Blocks.Add(paragraph);
+            cookingDetailsText.Document = document;
+        }
+
+        // To clear the RichTextBox, replace:
+        // cookingDetailsText.Clear();
+        // with:
+        private void ClearCookingDetailsText()
+        {
+            FlowDocument document = new FlowDocument();
+            document.Blocks.Add(new Paragraph(new Run("")));
+            cookingDetailsText.Document = document;
         }
 
         protected override void OnClosing(CancelEventArgs e)

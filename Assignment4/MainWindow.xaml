@@ -81,9 +81,20 @@
 
         <!-- Recipe ListBox and Associated Controls Below the GroupBox -->
         <Grid Margin="21,340,0,0">
-            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="82" Foreground="#2D5A80" FontWeight="SemiBold"/>
-            <Label Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="150,0,0,0" Width="82" Foreground="#2D5A80" FontWeight="SemiBold"/>
-            <Label Content="No. of ingredients" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="278,0,0,0" Width="112" Foreground="#2D5A80" FontWeight="SemiBold"/>
+            <Grid>
+                <Label x:Name="nameLabel" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="82" Foreground="#2D5A80" FontWeight="SemiBold"/>
+                <Border Height="1" Background="#4A7BA7" Width="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,24,0,0"/>
+            </Grid>
+            
+            <Grid>
+                <Label x:Name="categoryLabel" Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="150,0,0,0" Width="82" Foreground="#2D5A80" FontWeight="SemiBold"/>
+                <Border Height="1" Background="#4A7BA7" Width="55" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="155,24,0,0"/>
+            </Grid>
+            
+            <Grid>
+                <Label x:Name="ingredientsLabel" Content="No. of ingredients" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="278,0,0,0" Width="112" Foreground="#2D5A80" FontWeight="SemiBold"/>
+                <Border Height="1" Background="#4A7BA7" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="293,24,0,0"/>
+            </Grid>
             
             <ListBox x:Name="listRecipes" FontFamily="Courier New" HorizontalAlignment="Left" VerticalAlignment="Top" Height="216" Margin="0,35,0,0" Width="380" d:ItemsSource="{d:SampleData ItemCount=5}" BorderThickness="1">
                 <ListBox.Effect>
@@ -112,8 +123,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 
-                <TextBox x:Name="cookingDetailsText" 
-                         TextWrapping="Wrap" 
+                <RichTextBox x:Name="cookingDetailsText" 
                          IsReadOnly="True" 
                          VerticalScrollBarVisibility="Auto"
                          Margin="10,10,10,10"
@@ -121,10 +131,15 @@
                          Grid.Row="0"
                          Background="#FCFCFC"
                          BorderThickness="1">
-                    <TextBox.Effect>
+                    <RichTextBox.Effect>
                         <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2" Color="#A0A0A0"/>
-                    </TextBox.Effect>
-                </TextBox>
+                    </RichTextBox.Effect>
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="Select a recipe to view details"/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
                 
                 <!-- Separator between text and image -->
                 <Separator Grid.Row="1" Margin="10,0,10,5" Background="#A0B0C0"/>
