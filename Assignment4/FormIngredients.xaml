@@ -18,6 +18,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#5A8BB7"/>
                     <Setter Property="BorderBrush" Value="#4A7BA7"/>
+                    <Setter Property="Foreground" Value="Black"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
