@@ -1,232 +1,168 @@
 ﻿using System;
 
-namespace Assignment4
+namespace Assignment4;
+
+/// <summary>
+/// Represents a recipe with a category, description, ingredients, and name.
+/// </summary>
+public class Recipe
 {
-    /// <summary>
-    /// Represents a recipe with a category, description, ingredients, and name.
-    /// </summary>
-    public class Recipe
+    private FoodCategory category;
+    private string description;
+    private string?[] ingredients;
+    private string name;
+    private int maxNumIngredients;
+
+    public Recipe(int maxNumIngredients)
     {
-        private FoodCategory category;
-        private string description;
-        private string?[] ingredients;
-        private string name;
-        private int maxNumIngredients;
+        this.maxNumIngredients = maxNumIngredients;
+        ingredients = new string?[maxNumIngredients];
+        description = string.Empty;
+        name = string.Empty;
+        category = FoodCategory.Other;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Recipe"/> class with a maximum number of ingredients.
-        /// </summary>
-        /// <param name="maxNumIngredients">The maximum number of ingredients the recipe can have.</param>
-        public Recipe(int maxNumIngredients)
+    public FoodCategory Category
+    {
+        get { return category; }
+        set { category = value; }
+    }
+
+    public string Description
+    {
+        get { return description; }
+        set { description = value; }
+    }
+
+    public string?[] Ingredients
+    {
+        get { return ingredients; }
+        set { ingredients = value; }
+    }
+
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+
+    public int MaxNumIngredients
+    {
+        get { return maxNumIngredients; }
+    }
+
+    public bool AddIngredient(string input)
+    {
+        int index = FindVacantPosition();
+        if (index != -1)
         {
-            this.maxNumIngredients = maxNumIngredients;
-            ingredients = new string?[maxNumIngredients];
-            description = string.Empty;
-            name = string.Empty;
-            category = FoodCategory.Other;
+            ingredients[index] = input;
+            return true;
         }
+        return false;
+    }
 
-        /// <summary>
-        /// Gets or sets the category of the recipe.
-        /// </summary>
-        public FoodCategory Category
+    public bool ChangeIngredientAt(int index, string value)
+    {
+        if (CheckIndex(index))
         {
-            get { return category; }
-            set { category = value; }
+            ingredients[index] = value;
+            return true;
         }
+        return false;
+    }
 
-        /// <summary>
-        /// Gets or sets the description of the recipe.
-        /// </summary>
-        public string Description
-        {
-            get { return description; }
-            set { description = value; }
-        }
+    private bool CheckIndex(int index)
+    {
+        return index >= 0 && index < ingredients.Length;
+    }
 
-        /// <summary>
-        /// Gets or sets the array of ingredients for the recipe.
-        /// </summary>
-        public string?[] Ingredients
+    public int CurrentNumberOfIngredients()
+    {
+        int count = 0;
+        for (int i = 0; i < ingredients.Length; i++)
         {
-            get { return ingredients; }
-            set { ingredients = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the name of the recipe.
-        /// </summary>
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        /// <summary>
-        /// Gets the maximum number of ingredients allowed for the recipe.
-        /// </summary>
-        public int MaxNumIngredients
-        {
-            get { return maxNumIngredients; }
-        }
-
-        /// <summary>
-        /// Adds an ingredient to the recipe.
-        /// </summary>
-        /// <param name="input">The ingredient to add.</param>
-        /// <returns>True if the ingredient was added successfully, otherwise false.</returns>
-        public bool AddIngredient(string input)
-        {
-            int index = FindVacantPosition();
-            if (index != -1)
+            if (ingredients[i] != null)
             {
-                ingredients[index] = input;
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Changes an ingredient at a specific index.
-        /// </summary>
-        /// <param name="index">The index of the ingredient to change.</param>
-        /// <param name="value">The new value of the ingredient.</param>
-        /// <returns>True if the ingredient was changed successfully, otherwise false.</returns>
-        public bool ChangeIngredientAt(int index, string value)
-        {
-            if (CheckIndex(index))
-            {
-                ingredients[index] = value;
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Checks if an index is valid for the ingredients array.
-        /// </summary>
-        /// <param name="index">The index to check.</param>
-        /// <returns>True if the index is valid, otherwise false.</returns>
-        private bool CheckIndex(int index)
-        {
-            return index >= 0 && index < ingredients.Length;
-        }
-
-        /// <summary>
-        /// Calculates the current number of ingredients in the recipe.
-        /// </summary>
-        /// <returns>The number of ingredients.</returns>
-        public int CurrentNumberOfIngredients()
-        {
-            int count = 0;
-            for (int i = 0; i < ingredients.Length; i++)
-            {
-                if (ingredients[i] != null)
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-
-        /// <summary>
-        /// Resets the recipe to default values.
-        /// </summary>
-        public void DefaultValues()
-        {
-            category = FoodCategory.Other;
-            description = "";
-            ingredients = new string?[maxNumIngredients];
-            name = "";
-        }
-
-        /// <summary>
-        /// Deletes an ingredient at a specific index.
-        /// </summary>
-        /// <param name="index">The index of the ingredient to delete.</param>
-        public void DeletingIngredientAt(int index)
-        {
-            if (CheckIndex(index))
-            {
-                ingredients[index] = null;
+                count++;
             }
         }
+        return count;
+    }
 
-        /// <summary>
-        /// Finds a vacant position in the ingredients array.
-        /// </summary>
-        /// <returns>The index of the vacant position or -1 if no vacant position is found.</returns>
-        private int FindVacantPosition()
+    public void DefaultValues()
+    {
+        category = FoodCategory.Other;
+        description = "";
+        ingredients = new string?[maxNumIngredients];
+        name = "";
+    }
+
+    public void DeletingIngredientAt(int index)
+    {
+        if (CheckIndex(index))
         {
-            for (int i = 0; i < ingredients.Length; i++)
+            ingredients[index] = null;
+        }
+    }
+
+    private int FindVacantPosition()
+    {
+        for (int i = 0; i < ingredients.Length; i++)
+        {
+            if (ingredients[i] == null)
             {
-                if (ingredients[i] == null)
-                {
-                    return i;
-                }
+                return i;
             }
-            return -1;
         }
+        return -1;
+    }
 
-        /// <summary>
-        /// Gets a string representation of the ingredients in the recipe.
-        /// </summary>
-        /// <returns>A string containing the ingredients.</returns>
-        public string GetIngredientsString()
+    public string GetIngredientsString()
+    {
+        string result = "";
+        for (int i = 0; i < ingredients.Length; i++)
         {
-            string result = "";
-            for (int i = 0; i < ingredients.Length; i++)
+            if (ingredients[i] != null)
             {
-                if (ingredients[i] != null)
-                {
-                    result += ingredients[i] + "\n";
-                }
+                result += ingredients[i] + "\n";
             }
-            return result;
         }
+        return result;
+    }
 
-        /// <summary>
-        /// Gets the ingredient at a specific index as a string.
-        /// </summary>
-        /// <param name="index">The index of the ingredient.</param>
-        /// <returns>The ingredient at the specified index or null if the index is invalid.</returns>
-        public string GetIngredientsStringAt(int index)
+    public string GetIngredientsStringAt(int index)
+    {
+        if (CheckIndex(index))
         {
-            if (CheckIndex(index))
-            {
-                return ingredients[index] ?? string.Empty; // Ensure no null is returned
-            }
-            return string.Empty; // Return empty string instead of null
+            return ingredients[index] ?? string.Empty; // Ensure no null is returned
         }
+        return string.Empty; // Return empty string instead of null
+    }
 
-        /// <summary>
-        /// Returns a string representation of the recipe.
-        /// </summary>
-        /// <returns>A formatted string containing the recipe details.</returns>
-        public static string TruncateWithEllipsis(string text, int width)
-        {
-            if (string.IsNullOrEmpty(text))
-                return new string(' ', width); // Ensure alignment by filling with spaces
+    public static string TruncateWithEllipsis(string text, int width)
+    {
+        if (string.IsNullOrEmpty(text))
+            return new string(' ', width); // Ensure alignment by filling with spaces
 
-            if (text.Length > width)
-                return text.Substring(0, width - 3) + "..."; // Truncate and add ellipsis
-            else
-                return text.PadRight(width); // Pad with spaces if shorter than width
-        }
+        if (text.Length > width)
+            return text.Substring(0, width - 3) + "..."; // Truncate and add ellipsis
+        else
+            return text.PadRight(width); // Pad with spaces if shorter than width
+    }
 
-        public override string ToString()
-        {
-            const int nameWidth = 21;    // Fixed width for the name column
-            const int categoryWidth = 15; // Fixed width for the category column
-            const int ingredientWidth = 8; // Fixed width for the number column
+    public override string ToString()
+    {
+        const int nameWidth = 21;    // Fixed width for the name column
+        const int categoryWidth = 15; // Fixed width for the category column
+        const int ingredientWidth = 8; // Fixed width for the number column
 
-            // Ensure consistent alignment with truncation and padding
-            string nameColumn = TruncateWithEllipsis(Name ?? string.Empty, nameWidth).PadRight(nameWidth);
-            string categoryColumn = TruncateWithEllipsis(Category.ToString(), categoryWidth).PadRight(categoryWidth);
-            string ingredientCountColumn = CurrentNumberOfIngredients().ToString().PadLeft(ingredientWidth);
+        // Ensure consistent alignment with truncation and padding
+        string nameColumn = TruncateWithEllipsis(Name ?? string.Empty, nameWidth).PadRight(nameWidth);
+        string categoryColumn = TruncateWithEllipsis(Category.ToString(), categoryWidth).PadRight(categoryWidth);
+        string ingredientCountColumn = CurrentNumberOfIngredients().ToString().PadLeft(ingredientWidth);
 
-            // Concatenate columns with fixed widths
-            return $"{nameColumn}{categoryColumn}{ingredientCountColumn}";
-        }
+        // Concatenate columns with fixed widths
+        return $"{nameColumn}{categoryColumn}{ingredientCountColumn}";
     }
 }

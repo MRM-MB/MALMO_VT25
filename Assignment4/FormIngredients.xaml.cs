@@ -11,10 +11,6 @@ namespace Assignment4
     {
         private Recipe currRecipe;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FormIngredients"/> class.
-        /// </summary>
-        /// <param name="recipe">The recipe to edit.</param>
         public FormIngredients(Recipe recipe)
         {
             InitializeComponent();
@@ -23,18 +19,11 @@ namespace Assignment4
             UpdateIngredientList();
         }
 
-        /// <summary>
-        /// Gets the current recipe being edited.
-        /// </summary>
-        /// <returns>The current recipe.</returns>
         public Recipe GetRecipe()
         {
             return currRecipe;
         }
 
-        /// <summary>
-        /// Handles the click event of the "Add" button.
-        /// </summary>
         private void btnAdd_Click_1(object sender, EventArgs e)
         {
             string ingredient = ingredientTxt.Text.Trim();
@@ -57,9 +46,6 @@ namespace Assignment4
             }
         }
 
-        /// <summary>
-        /// Updates the list of ingredients displayed in the UI.
-        /// </summary>
         private void UpdateIngredientList()
         {
             listBox.Items.Clear();
@@ -74,9 +60,6 @@ namespace Assignment4
             instructionTxt.Text = currRecipe.Description; // Load instructions into the textbox
         }
 
-        /// <summary>
-        /// Handles the click event of the "Edit" button.
-        /// </summary>
         private void btnEdit_Click_1(object sender, EventArgs e)
         {
             int index = listBox.SelectedIndex;
@@ -93,9 +76,6 @@ namespace Assignment4
             }
         }
 
-        /// <summary>
-        /// Handles the click event of the "Delete" button.
-        /// </summary>
         private void btnDel_Click_1(object sender, EventArgs e)
         {
             int index = listBox.SelectedIndex;
@@ -110,9 +90,6 @@ namespace Assignment4
             }
         }
 
-        /// <summary>
-        /// Handles the click event of the "Ok" button.
-        /// </summary>
         private void btnOk_Click_1(object sender, EventArgs e)
         {
             currRecipe.Description = instructionTxt.Text.Trim(); // Save instructions to the recipe
@@ -120,9 +97,6 @@ namespace Assignment4
             this.Close();
         }
 
-        /// <summary>
-        /// Handles the click event of the "Cancel" button.
-        /// </summary>
         private void btnCancel_Click_1(object sender, EventArgs e)
         {
             this.Close();

@@ -1,5 +1,3 @@
-// New EnumExtensions.cs to Handle Enum Descriptions
-
 using System;
 using System.ComponentModel;
 using System.Reflection;
