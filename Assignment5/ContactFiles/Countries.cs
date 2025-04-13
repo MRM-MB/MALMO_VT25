@@ -1,4 +1,4 @@
-﻿//Farid Naisan
+﻿//Code provided by Farid Naisan
 
 using System;
 using System.Collections.Generic;
