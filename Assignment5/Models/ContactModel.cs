@@ -1,6 +1,6 @@
 using System;
 
-namespace Malmoinl5.Models
+namespace Assignment5.Models
 {
     public class Contact
     {

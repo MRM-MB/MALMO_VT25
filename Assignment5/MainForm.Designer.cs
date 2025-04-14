@@ -1,4 +1,4 @@
-﻿namespace Malmoinl5
+﻿namespace Assignment5
 {
     partial class MainForm
     {

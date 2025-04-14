@@ -1,4 +1,4 @@
-namespace Malmoinl5
+namespace Assignment5
 {
     internal static class Program
     {

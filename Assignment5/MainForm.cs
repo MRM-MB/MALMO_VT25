@@ -1,7 +1,7 @@
-using Assignment5; // Add this to reference ContactForm
+using Assignment5;
 using System.Windows.Forms;
 
-namespace Malmoinl5
+namespace Assignment5
 {
     public partial class MainForm : Form
     {
