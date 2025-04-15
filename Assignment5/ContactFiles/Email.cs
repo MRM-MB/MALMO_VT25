@@ -85,7 +85,7 @@ public class Email
 
     /// <summary>
     /// Returns a formatted string containing the email addresses.
-    /// Use a monospaced font (like "Courier New") for proper column alignment when displaying.
+    /// Use a monospaced font for proper column alignment when displaying.
     /// </summary>
     /// <returns>A formatted string representation of the email addresses</returns>
     public override string ToString()
