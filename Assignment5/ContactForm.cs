@@ -17,11 +17,20 @@ namespace Assignment5
             btnContactOK.DialogResult = DialogResult.OK;
             button1.DialogResult = DialogResult.Cancel;
 
+            // Add prompt text as first item
+            cmbBoxCountries.Items.Add("(Click to select your country)");
+
             // Populate countries ComboBox using the Countries enum
             foreach (Countries country in Enum.GetValues(typeof(Countries)))
             {
                 cmbBoxCountries.Items.Add(country.ToString().Replace("_", " "));
             }
+
+            // Select the prompt text by default
+            cmbBoxCountries.SelectedIndex = 0;
+
+            // DropDownList to prevent typing
+            cmbBoxCountries.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         public ContactForm(Customer customer) : this()
@@ -46,7 +55,8 @@ namespace Assignment5
             if (string.IsNullOrWhiteSpace(txtBoxFirstName.Text) ||
                 string.IsNullOrWhiteSpace(txtBoxLastName.Text) ||
                 string.IsNullOrWhiteSpace(txtBoxCity.Text) ||
-                string.IsNullOrWhiteSpace(cmbBoxCountries.Text))
+                cmbBoxCountries.Text == "(Click to select your country)" ||
+                cmbBoxCountries.SelectedIndex == 0)
             {
                 MessageBox.Show("Please fill out all required fields (First Name, Last Name, City, Country).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 this.DialogResult = DialogResult.None; // Prevent form from closing

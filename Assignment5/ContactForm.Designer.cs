@@ -315,6 +315,7 @@
             // cmbBoxCountries
             // 
             cmbBoxCountries.BackColor = Color.FromArgb(240, 248, 255);
+            cmbBoxCountries.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbBoxCountries.FlatStyle = FlatStyle.Flat;
             cmbBoxCountries.FormattingEnabled = true;
             cmbBoxCountries.Location = new Point(161, 159);
