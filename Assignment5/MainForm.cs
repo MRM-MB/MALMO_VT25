@@ -1,6 +1,7 @@
 using Assignment5;
 using System.Windows.Forms;
 
+// Made by Manish Raj Moriche and finished on the 24th of April 2025
 namespace Assignment5
 {
     public partial class MainForm : Form
@@ -15,8 +16,8 @@ namespace Assignment5
 
             // Attach other event handlers with correct nullability
             btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
-            btnEdit.Click += new System.EventHandler(BtnEdit_Click); // Removed explicit parameter types
-            btnDelete.Click += new System.EventHandler(BtnDelete_Click); // Removed explicit parameter types
+            btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
+            btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
 
             UpdateCustomerList(); // Populate the ListBox when the form loads
         }
@@ -75,7 +76,7 @@ namespace Assignment5
             }
         }
 
-        private void BtnEdit_Click(object sender, EventArgs e) // Removed '?' from sender
+        private void BtnEdit_Click(object? sender, EventArgs e)
         {
             if (lstboxDisplay.SelectedItem is Customer selectedCustomer)
             {
@@ -98,7 +99,7 @@ namespace Assignment5
             }
         }
 
-        private void BtnDelete_Click(object sender, EventArgs e) // Removed '?' from sender
+        private void BtnDelete_Click(object? sender, EventArgs e)
         {
             if (lstboxDisplay.SelectedItem is Customer selectedCustomer)
             {

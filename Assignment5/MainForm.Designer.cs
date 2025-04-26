@@ -199,7 +199,7 @@
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(346, 41);
             lblTitle.TabIndex = 0;
-            lblTitle.Text = "Contact Management";
+            lblTitle.Text = "Customer Registry";
             
             // 
             // MainForm
@@ -221,7 +221,7 @@
             Controls.Add(ID);
             Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             Name = "MainForm";
-            Text = "Contact Management System";
+            Text = "Customer Registry By Manish Raj Moriche";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
