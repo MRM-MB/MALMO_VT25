@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Assignment6
@@ -9,6 +10,10 @@ namespace Assignment6
     {
         private TaskManager taskManager;
         private Dictionary<PriorityType, string> priorityDisplayNames;
+        private int lastSortedColumn = -1;
+        private bool ascending = true;
+        private bool hasShownSortMessage = false;  // Track if we've shown the sort message
+        private Label sortInfoLabel; // Add field for the info label
 
         public MainForm()
         {
@@ -19,7 +24,7 @@ namespace Assignment6
         private void InitializeGUI()
         {
             // Set form properties
-            this.Text = "ToDo Reminder by Alexandra";
+            this.Text = "ToDo Reminder by Manish Raj Moriche";
             this.BackColor = Color.FromArgb(245, 245, 250);  // Light blue-gray background
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -33,7 +38,9 @@ namespace Assignment6
             lstTasks.Font = new Font("Segoe UI", 12F, FontStyle.Regular);
             lstTasks.BorderStyle = BorderStyle.FixedSingle;
             lstTasks.ForeColor = Color.FromArgb(40, 40, 40);
-            
+            lstTasks.ColumnClick += lstTasks_ColumnClick; // Add column click handler for sorting
+            lstTasks.HeaderStyle = ColumnHeaderStyle.Clickable; // Make headers clickable
+
             // Style the buttons with modern look
             StyleButton(btnAdd, Color.FromArgb(92, 184, 92));  // Green for add
             StyleButton(btnChange, Color.FromArgb(240, 173, 78));  // Orange for change
@@ -50,6 +57,25 @@ namespace Assignment6
             // Clock styling
             lblClock.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             lblClock.ForeColor = Color.FromArgb(60, 60, 150);
+
+            // Create and add the sort info label with final centered position relative to task list
+            sortInfoLabel = new Label
+            {
+                Text = "✨ Click column headers to sort tasks  •  Click again to reverse sort order  •  Click to dismiss ✕",
+                AutoSize = false,
+                Size = new Size(800, 35),
+                Location = new Point(350, 250),  // Final centered position relative to task list
+                Font = new Font("Segoe UI", 12F),
+                ForeColor = Color.FromArgb(60, 60, 150),
+                BackColor = Color.FromArgb(230, 245, 255), // Lighter blue color
+                TextAlign = ContentAlignment.MiddleCenter,
+                Cursor = Cursors.Hand,
+                Padding = new Padding(5),
+                BorderStyle = BorderStyle.FixedSingle
+            };
+            sortInfoLabel.Click += (s, e) => sortInfoLabel.Hide();
+            Controls.Add(sortInfoLabel);
+            sortInfoLabel.BringToFront();
 
             // Initialize other components
             InitializeComponents();
@@ -297,6 +323,70 @@ namespace Assignment6
             {
                 btnChange_Click(sender, e);
             }
+        }
+
+        private void lstTasks_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // If clicking the same column, reverse sort order
+            if (e.Column == lastSortedColumn)
+            {
+                ascending = !ascending;
+            }
+            else
+            {
+                // New column, sort ascending by default
+                ascending = true;
+                lastSortedColumn = e.Column;
+            }
+
+            var tasks = taskManager.GetTasks().ToList();
+            
+            // Sort based on column
+            switch (e.Column)
+            {
+                case 0: // Date
+                    tasks = ascending ? 
+                        tasks.OrderBy(t => t.TaskDate.Date).ToList() :
+                        tasks.OrderByDescending(t => t.TaskDate.Date).ToList();
+                    break;
+                case 1: // Hour
+                    tasks = ascending ?
+                        tasks.OrderBy(t => t.TaskDate.TimeOfDay).ToList() :
+                        tasks.OrderByDescending(t => t.TaskDate.TimeOfDay).ToList();
+                    break;
+                case 2: // Priority
+                    tasks = ascending ?
+                        tasks.OrderBy(t => t.Priority).ToList() :
+                        tasks.OrderByDescending(t => t.Priority).ToList();
+                    break;
+                case 3: // Description
+                    tasks = ascending ?
+                        tasks.OrderBy(t => t.Description).ToList() :
+                        tasks.OrderByDescending(t => t.Description).ToList();
+                    break;
+            }
+
+            taskManager.SetTasks(tasks);
+            UpdateTaskList();
+
+            // Add sort indicator to column header
+            for (int i = 0; i < lstTasks.Columns.Count; i++)
+            {
+                string headerText = lstTasks.Columns[i].Text;
+                headerText = headerText.TrimEnd('▼', '▲', ' ');
+                if (i == e.Column)
+                {
+                    headerText += ascending ? " ▲" : " ▼";
+                }
+                lstTasks.Columns[i].Text = headerText;
+            }
+
+            // Show sorting status message with better spacing
+            string columnName = lstTasks.Columns[e.Column].Text.TrimEnd('▼', '▲', ' ');
+            string direction = ascending ? "ascending" : "descending";
+            sortInfoLabel.Text = $"✨ Tasks sorted by {columnName}  •  {direction} order  •  Click to dismiss ✕";
+            sortInfoLabel.Show();
+            sortInfoLabel.BringToFront();
         }
 
         // Menu item: New - Resets the form

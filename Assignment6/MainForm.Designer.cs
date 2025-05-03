@@ -149,10 +149,10 @@
             lstTasks.View = View.Details;
             lstTasks.FullRowSelect = true;
             lstTasks.GridLines = true;
-            lstTasks.Location = new Point(120, 390);  // Move list up to where headers were
-            lstTasks.Size = new Size(1360, 460);      // Make list slightly taller
+            lstTasks.Location = new Point(120, 390);  // Move down to make room for the info banner
+            lstTasks.Size = new Size(1360, 460);
             lstTasks.Font = new Font("Segoe UI", 12F);
-            lstTasks.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            lstTasks.HeaderStyle = ColumnHeaderStyle.Clickable;  // Make headers clickable
 
             // Add columns with specific widths and bold headers
             lstTasks.Columns.Clear();
