@@ -65,7 +65,13 @@ namespace Assignment6
         // Overridden ToString method for formatted output
         public override string ToString()
         {
-            return $"{date:yyyy-MM-dd}    {GetTimeString(), +25}    {GetPriorityString(),+50}    {description, +50}";
+            // Format with fixed column widths to prevent overlap
+            return String.Format("{0,-15} {1,-25} {2,-35} {3,-50}",
+                date.ToString("yyyy-MM-dd"),
+                GetTimeString(),
+                GetPriorityString(),
+                description
+            );
         }
     }
 }

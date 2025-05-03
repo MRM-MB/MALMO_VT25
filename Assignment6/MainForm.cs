@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Assignment6
@@ -17,8 +18,103 @@ namespace Assignment6
 
         private void InitializeGUI()
         {
-            this.Text = "ToDo Reminder by Manish Raj Moriche";
+            // Set form properties
+            this.Text = "ToDo Reminder by Alexandra";
+            this.BackColor = Color.FromArgb(245, 245, 250);  // Light blue-gray background
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
 
+            // Style the group box without title
+            grpBox1.BackColor = Color.FromArgb(240, 240, 255);  // Light blue background
+            grpBox1.Text = "";  // No title in the group box itself
+
+            // Style the list box
+            lstTasks.BackColor = Color.White;
+            lstTasks.Font = new Font("Segoe UI", 12F, FontStyle.Regular);
+            lstTasks.BorderStyle = BorderStyle.FixedSingle;
+            lstTasks.ForeColor = Color.FromArgb(40, 40, 40);
+            
+            // Style the buttons with modern look
+            StyleButton(btnAdd, Color.FromArgb(92, 184, 92));  // Green for add
+            StyleButton(btnChange, Color.FromArgb(240, 173, 78));  // Orange for change
+            StyleButton(btnDelete, Color.FromArgb(217, 83, 79));  // Red for delete
+            
+            // Style the input controls
+            StyleTextBox(txtBoxToDo);
+            StyleComboBox(cmbPriority);
+            StyleDateTimePicker(dateTimePicker1);
+            
+            // Style labels with consistent font
+            StyleLabels();
+            
+            // Clock styling
+            lblClock.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblClock.ForeColor = Color.FromArgb(60, 60, 150);
+
+            // Initialize other components
+            InitializeComponents();
+        }
+
+        private void StyleButton(Button button, Color baseColor)
+        {
+            button.BackColor = baseColor;
+            button.ForeColor = Color.White;
+            button.FlatStyle = FlatStyle.Flat;
+            button.FlatAppearance.BorderSize = 0;
+            button.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            button.Cursor = Cursors.Hand;
+            button.Padding = new Padding(5);
+            
+            // Add hover effect
+            button.MouseEnter += (s, e) => {
+                button.BackColor = ControlPaint.Light(baseColor, 0.1f);
+                button.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            };
+            button.MouseLeave += (s, e) => {
+                button.BackColor = baseColor;
+                button.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            };
+        }
+
+        private void StyleTextBox(TextBox textBox)
+        {
+            textBox.Font = new Font("Segoe UI", 12F);
+            textBox.BackColor = Color.White;
+            textBox.BorderStyle = BorderStyle.FixedSingle;
+            textBox.Padding = new Padding(5);
+        }
+
+        private void StyleComboBox(ComboBox comboBox)
+        {
+            comboBox.Font = new Font("Segoe UI", 12F);
+            comboBox.BackColor = Color.White;
+            comboBox.FlatStyle = FlatStyle.Flat;
+            comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private void StyleDateTimePicker(DateTimePicker dateTimePicker)
+        {
+            dateTimePicker.Font = new Font("Segoe UI", 12F);
+            dateTimePicker.Format = DateTimePickerFormat.Custom;
+            dateTimePicker.CustomFormat = "yyyy-MM-dd HH:mm";
+        }
+
+        private void StyleLabels()
+        {
+            // Header labels (bold)
+            foreach (var label in new[] { lbldateAndTime, lblDate, lblHour, lblPriority2, lblDescription })
+            {
+                label.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+                label.ForeColor = Color.FromArgb(60, 60, 60);
+            }
+
+            // Regular labels - only lblPriority now
+            lblPriority.Font = new Font("Segoe UI", 12F);
+            lblPriority.ForeColor = Color.FromArgb(60, 60, 60);
+        }
+
+        private void InitializeComponents()
+        {
             taskManager = new TaskManager();
 
             priorityDisplayNames = new Dictionary<PriorityType, string>
