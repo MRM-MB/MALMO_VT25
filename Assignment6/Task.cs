@@ -54,11 +54,13 @@ namespace Assignment6
         // Methods for formatting
         public string GetPriorityString()
         {
+            // Return priority with proper padding for column alignment
             return priority.ToString().Replace("_", " ");
         }
 
         public string GetTimeString()
         {
+            // Return time in consistent format for proper column alignment
             return date.ToString("HH:mm");
         }
 

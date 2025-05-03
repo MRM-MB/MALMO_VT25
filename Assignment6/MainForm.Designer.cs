@@ -37,11 +37,7 @@
             lblPriority = new Label();
             dateTimePicker1 = new DateTimePicker();
             lbldateAndTime = new Label();
-            lstTasks = new ListBox();
-            lblDate = new Label();
-            lblHour = new Label();
-            lblPriority2 = new Label();
-            lblDescription = new Label();
+            lstTasks = new ListView();
             txtBoxToDo = new TextBox();
             menuStrip1 = new MenuStrip();
             menuStrip2 = new MenuStrip();
@@ -150,54 +146,50 @@
             // 
             // lstTasks
             // 
-            lstTasks.FormattingEnabled = true;
-            lstTasks.Size = new Size(1360, 430);
+            lstTasks.View = View.Details;
+            lstTasks.FullRowSelect = true;
+            lstTasks.GridLines = true;
+            lstTasks.Location = new Point(120, 390);  // Move list up to where headers were
+            lstTasks.Size = new Size(1360, 460);      // Make list slightly taller
             lstTasks.Font = new Font("Segoe UI", 12F);
-            lstTasks.Location = new Point(120, 420);
-            lstTasks.Name = "lstTasks";
-            lstTasks.TabIndex = 8;
-            lstTasks.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
-            toolTip1.SetToolTip(lstTasks, "List of tasks. Select to edit or delete.");
+            lstTasks.HeaderStyle = ColumnHeaderStyle.Nonclickable;
 
-            // 
-            // lblDate
-            // 
-            lblDate.AutoSize = true;
-            lblDate.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            lblDate.Location = new Point(120, 390);
-            lblDate.Name = "lblDate";
-            lblDate.TabIndex = 9;
-            lblDate.Text = "Date";
+            // Add columns with specific widths and bold headers
+            lstTasks.Columns.Clear();
+            var dateCol = lstTasks.Columns.Add("Date", 180);
+            var hourCol = lstTasks.Columns.Add("Hour", 120);
+            var prioCol = lstTasks.Columns.Add("Priority", 180);
+            var descCol = lstTasks.Columns.Add("Description", 860);
 
-            // 
-            // lblHour
-            // 
-            lblHour.AutoSize = true;
-            lblHour.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            lblHour.Location = new Point(400, 390);
-            lblHour.Name = "lblHour";
-            lblHour.TabIndex = 11;
-            lblHour.Text = "Hour";
+            // Center align and style the headers
+            dateCol.TextAlign = HorizontalAlignment.Center;
+            hourCol.TextAlign = HorizontalAlignment.Center;
+            prioCol.TextAlign = HorizontalAlignment.Center;
 
-            // 
-            // lblPriority2
-            // 
-            lblPriority2.AutoSize = true;
-            lblPriority2.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            lblPriority2.Location = new Point(700, 390);
-            lblPriority2.Name = "lblPriority2";
-            lblPriority2.TabIndex = 12;
-            lblPriority2.Text = "Priority";
+            // Add custom drawing for bold headers
+            lstTasks.DrawColumnHeader += (sender, e) => {
+                e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), e.Bounds);
+                using (var boldFont = new Font("Segoe UI", 12F, FontStyle.Bold))
+                using (var brush = new SolidBrush(Color.Black))
+                {
+                    var header = lstTasks.Columns[e.ColumnIndex];
+                    var textBounds = e.Bounds;
+                    var format = new StringFormat();
 
-            // 
-            // lblDescription
-            // 
-            lblDescription.AutoSize = true;
-            lblDescription.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            lblDescription.Location = new Point(1000, 390);
-            lblDescription.Name = "lblDescription";
-            lblDescription.TabIndex = 13;
-            lblDescription.Text = "Description";
+                    if (header.TextAlign == HorizontalAlignment.Center)
+                        format.Alignment = StringAlignment.Center;
+                    else
+                        format.Alignment = StringAlignment.Near;
+
+                    format.LineAlignment = StringAlignment.Center;
+                    e.Graphics.DrawString(header.Text, boldFont, brush, textBounds, format);
+                }
+                if (e.ColumnIndex < lstTasks.Columns.Count - 1)
+                    e.Graphics.DrawLine(Pens.LightGray, e.Bounds.Right - 1, e.Bounds.Top, e.Bounds.Right - 1, e.Bounds.Bottom);
+            };
+
+            lstTasks.DrawItem += (sender, e) => e.DrawDefault = true;
+            lstTasks.OwnerDraw = true;
 
             // 
             // txtBoxToDo
@@ -321,8 +313,8 @@
             // 
             // grpBox1
             // 
-            grpBox1.Location = new Point(100, 350);
-            grpBox1.Size = new Size(1400, 520);
+            grpBox1.Location = new Point(100, 320);
+            grpBox1.Size = new Size(1400, 550);
             grpBox1.Name = "grpBox1";
             grpBox1.TabIndex = 18;
             grpBox1.TabStop = false;
@@ -339,12 +331,6 @@
             lblTitle.Padding = new Padding(10, 5, 10, 5);
             Controls.Add(lblTitle);
 
-            // Adjust list headers to be properly spaced
-            lblDate.Location = new Point(120, 390);
-            lblHour.Location = new Point(400, 390);
-            lblPriority2.Location = new Point(700, 390);
-            lblDescription.Location = new Point(1000, 390);
-
             // 
             // MainForm
             // 
@@ -355,10 +341,6 @@
             MaximumSize = new Size(1600, 1100);
             Controls.Add(lblClock);
             Controls.Add(txtBoxToDo);
-            Controls.Add(lblDescription);
-            Controls.Add(lblPriority2);
-            Controls.Add(lblHour);
-            Controls.Add(lblDate);
             Controls.Add(lstTasks);
             Controls.Add(lbldateAndTime);
             Controls.Add(dateTimePicker1);
@@ -389,11 +371,7 @@
         private Label lblPriority;
         private DateTimePicker dateTimePicker1;
         private Label lbldateAndTime;
-        private ListBox lstTasks;
-        private Label lblDate;
-        private Label lblHour;
-        private Label lblPriority2;
-        private Label lblDescription;
+        private ListView lstTasks;
         private TextBox txtBoxToDo;
         private MenuStrip menuStrip1;
         private MenuStrip menuStrip2;

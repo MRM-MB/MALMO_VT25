@@ -101,14 +101,10 @@ namespace Assignment6
 
         private void StyleLabels()
         {
-            // Header labels (bold)
-            foreach (var label in new[] { lbldateAndTime, lblDate, lblHour, lblPriority2, lblDescription })
-            {
-                label.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-                label.ForeColor = Color.FromArgb(60, 60, 60);
-            }
-
-            // Regular labels - only lblPriority now
+            // Style the date/time and priority labels
+            lbldateAndTime.Font = new Font("Segoe UI", 14F);
+            lbldateAndTime.ForeColor = Color.FromArgb(60, 60, 60);
+            
             lblPriority.Font = new Font("Segoe UI", 12F);
             lblPriority.ForeColor = Color.FromArgb(60, 60, 60);
         }
@@ -172,14 +168,43 @@ namespace Assignment6
         private void UpdateTaskList()
         {
             lstTasks.Items.Clear();
-            lstTasks.Items.AddRange(taskManager.GetInfoStringsList().ToArray()); // Use the formatted ToString output
+            var tasks = taskManager.GetTasks();
+            
+            foreach (var task in tasks)
+            {
+                // Create the item with all its subitems
+                var item = new ListViewItem(new string[] {
+                    task.TaskDate.ToString("yyyy-MM-dd"),
+                    task.GetTimeString(),
+                    task.GetPriorityString(),
+                    task.Description
+                });
+                lstTasks.Items.Add(item);
+            }
 
-            // Enable or disable the Change and Delete buttons based on whether there are items
+            // Configure column widths and alignment
+            for (int i = 0; i < lstTasks.Columns.Count; i++)
+            {
+                int minWidth = i switch
+                {
+                    0 => 180,  // Date
+                    1 => 120,  // Hour
+                    2 => 180,  // Priority
+                    _ => 860   // Description
+                };
+                lstTasks.Columns[i].Width = Math.Max(minWidth, lstTasks.Columns[i].Width);
+                
+                // Center align headers for Date, Hour, and Priority columns
+                if (i < 3) 
+                {
+                    lstTasks.Columns[i].TextAlign = HorizontalAlignment.Center;
+                }
+            }
+
             bool hasItems = lstTasks.Items.Count > 0;
             btnChange.Enabled = hasItems;
             btnDelete.Enabled = hasItems;
         }
-
 
         private void ClearInputFields()
         {
@@ -198,10 +223,9 @@ namespace Assignment6
 
         private void btnChange_Click(object sender, EventArgs e)
         {
-            int selectedIndex = lstTasks.SelectedIndex;
-
-            if (selectedIndex >= 0)
+            if (lstTasks.SelectedItems.Count > 0)
             {
+                int selectedIndex = lstTasks.SelectedIndices[0];
                 Task updatedTask = ReadInput();
                 if (taskManager.UpdateTask(selectedIndex, updatedTask))
                 {
@@ -221,15 +245,57 @@ namespace Assignment6
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int selectedIndex = lstTasks.SelectedIndex;
-
-            if (selectedIndex >= 0 && taskManager.DeleteTask(selectedIndex))
+            if (lstTasks.SelectedItems.Count > 0)
             {
-                UpdateTaskList();
+                int selectedIndex = lstTasks.SelectedIndices[0];
+                if (taskManager.DeleteTask(selectedIndex))
+                {
+                    UpdateTaskList();
+                }
+                else
+                {
+                    MessageBox.Show("Unable to delete the selected task.");
+                }
             }
             else
             {
-                MessageBox.Show("Please select a valid task to delete.");
+                MessageBox.Show("Please select a task to delete.");
+            }
+        }
+
+        private void lstTasks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstTasks.SelectedItems.Count > 0)
+            {
+                var selectedItem = lstTasks.SelectedItems[0];
+                // Combine date and time into one DateTime value
+                var date = DateTime.Parse(selectedItem.Text);
+                var time = DateTime.Parse(selectedItem.SubItems[1].Text);
+                dateTimePicker1.Value = new DateTime(
+                    date.Year, date.Month, date.Day,
+                    time.Hour, time.Minute, 0
+                );
+                
+                // Find and set the matching priority in combo box
+                string priority = selectedItem.SubItems[2].Text;
+                foreach (var kvp in priorityDisplayNames)
+                {
+                    if (kvp.Value.Equals(priority, StringComparison.OrdinalIgnoreCase))
+                    {
+                        cmbPriority.SelectedIndex = (int)kvp.Key;
+                        break;
+                    }
+                }
+                
+                txtBoxToDo.Text = selectedItem.SubItems[3].Text;
+            }
+        }
+
+        private void lstTasks_DoubleClick(object sender, EventArgs e)
+        {
+            if (lstTasks.SelectedItems.Count > 0)
+            {
+                btnChange_Click(sender, e);
             }
         }
 
