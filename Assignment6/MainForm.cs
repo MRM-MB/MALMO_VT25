@@ -12,7 +12,7 @@ namespace Assignment6
         public Dictionary<PriorityType, string>? priorityDisplayNames;
         private int lastSortedColumn = -1;
         private bool ascending = true;
-        public Label? sortInfoLabel; // Add field for the info label
+        private Label warningBanner;  // Add this field
 
         public MainForm()
         {
@@ -57,24 +57,32 @@ namespace Assignment6
             lblClock.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             lblClock.ForeColor = Color.FromArgb(60, 60, 150);
 
-            // Create and add the sort info label at the top of the form
-            sortInfoLabel = new Label
+            // Add warning banner
+            warningBanner = new Label
             {
                 Text = "✨ Click column headers to sort tasks  •  Click again to reverse sort order  •  Click to dismiss ✕",
-                AutoSize = false,
-                Size = new Size(1360, 35),
-                Location = new Point((ClientSize.Width - 1360) / 2, 550),  // Centered X: (1600-1360)/2=120, Lower Y position
-                Font = new Font("Segoe UI", 12F),
-                ForeColor = Color.FromArgb(60, 60, 150),
-                BackColor = Color.FromArgb(230, 245, 255),
+                Dock = DockStyle.Top,
+                Height = 45,           // Increased height
+                AutoSize = false,      // Disable auto-sizing
                 TextAlign = ContentAlignment.MiddleCenter,
-                Cursor = Cursors.Hand,
-                Padding = new Padding(5),
-                BorderStyle = BorderStyle.FixedSingle
+                BackColor = Color.FromArgb(230, 241, 255),
+                ForeColor = Color.FromArgb(40, 80, 120),
+                Font = new Font("Segoe UI", 12f),
+                Cursor = Cursors.Hand
             };
-            sortInfoLabel.Click += (s, e) => sortInfoLabel!.Hide();
-            Controls.Add(sortInfoLabel);
-            sortInfoLabel.BringToFront();  // Ensure it's on top of other controls
+            warningBanner.Click += (s, e) => warningBanner.Visible = false;
+            
+            // Create spacing between banner and content
+            Panel spacer = new Panel
+            {
+                Height = 10,
+                Dock = DockStyle.Top
+            };
+            
+            this.Controls.Add(spacer);
+            this.Controls.Add(warningBanner);
+            warningBanner.BringToFront();
+            spacer.BringToFront();
 
             // Initialize other components
             InitializeComponents();
@@ -377,13 +385,6 @@ namespace Assignment6
                 }
                 lstTasks.Columns[i].Text = headerText;
             }
-
-            // Show sorting status message with better spacing
-            string columnName = lstTasks.Columns[e.Column].Text.TrimEnd('▼', '▲', ' ');
-            string direction = ascending ? "ascending" : "descending";
-            sortInfoLabel!.Text = $"✨ Tasks sorted by {columnName}  •  {direction} order  •  Click to dismiss ✕";
-            sortInfoLabel!.Show();
-            sortInfoLabel!.BringToFront();
         }
 
         // Menu item: New - Resets the form
