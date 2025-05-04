@@ -128,7 +128,7 @@
             // 
             dateTimePicker1.Size = new Size(500, 35);
             dateTimePicker1.Font = new Font("Segoe UI", 12F);
-            dateTimePicker1.Location = new Point(250, 107);  // Changed Y from 97 to 107
+            dateTimePicker1.Location = new Point(270, 107);  // Changed X from 250 to 300
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.TabIndex = 5;
             toolTip1.SetToolTip(dateTimePicker1, "Click to open calendar for date, write in time here.");
