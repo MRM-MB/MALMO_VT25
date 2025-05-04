@@ -57,16 +57,16 @@ namespace Assignment6
             lblClock.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             lblClock.ForeColor = Color.FromArgb(60, 60, 150);
 
-            // Create and add the sort info label with final centered position relative to task list
+            // Create and add the sort info label at the top of the form
             sortInfoLabel = new Label
             {
                 Text = "✨ Click column headers to sort tasks  •  Click again to reverse sort order  •  Click to dismiss ✕",
                 AutoSize = false,
-                Size = new Size(800, 35),
-                Location = new Point(350, 250),  // Final centered position relative to task list
+                Size = new Size(1360, 35),
+                Location = new Point((ClientSize.Width - 1360) / 2, 550),  // Centered X: (1600-1360)/2=120, Lower Y position
                 Font = new Font("Segoe UI", 12F),
                 ForeColor = Color.FromArgb(60, 60, 150),
-                BackColor = Color.FromArgb(230, 245, 255), // Lighter blue color
+                BackColor = Color.FromArgb(230, 245, 255),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Cursor = Cursors.Hand,
                 Padding = new Padding(5),
@@ -74,7 +74,7 @@ namespace Assignment6
             };
             sortInfoLabel.Click += (s, e) => sortInfoLabel!.Hide();
             Controls.Add(sortInfoLabel);
-            sortInfoLabel.BringToFront();
+            sortInfoLabel.BringToFront();  // Ensure it's on top of other controls
 
             // Initialize other components
             InitializeComponents();

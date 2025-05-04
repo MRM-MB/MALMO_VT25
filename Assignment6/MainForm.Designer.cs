@@ -386,4 +386,4 @@
         private Label lblClock;
         private GroupBox grpBox1;
     }
-}  // Add this closing brace for the namespace
+}
