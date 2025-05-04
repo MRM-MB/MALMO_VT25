@@ -35,7 +35,7 @@ namespace Assignment6
         // Load tasks from file
         public static List<Task> LoadTasksFromFile()
         {
-            List<Task> tasks = new List<Task>();
+            List<Task> tasks = new List<Task>(); // Ensure tasks is initialized
 
             if (!File.Exists(FilePath))
                 throw new FileNotFoundException("Data file not found.");
@@ -49,11 +49,30 @@ namespace Assignment6
                     {
                         // Expect each line in the format "Date|Priority|Description"
                         string[] parts = line.Split('|');
-                        if (parts.Length == 3 &&
-                            DateTime.TryParse(parts[0], out DateTime date) &&
-                            Enum.TryParse(parts[1], out PriorityType priority))
+
+                        // Check length, date parsing, and null parts first
+                        if (parts.Length == 3 && parts[0] != null && parts[1] != null && parts[2] != null &&
+                            DateTime.TryParse(parts[0], out DateTime date))
                         {
-                            tasks.Add(new Task(date, parts[2], priority));
+                            // Assign parts[1] to a new variable after the null check
+                            string priorityString = parts[1]!; // Added null-forgiving operator
+                            
+                            // Now use the non-null local variable for TryParse
+                            if (Enum.TryParse(priorityString, out PriorityType parsedPriority))
+                            {
+                                // parts[2] is also known non-null here
+                                tasks.Add(new Task(date, parts[2], parsedPriority));
+                            }
+                            else
+                            {
+                                // Handle invalid priority string
+                                Console.WriteLine($"Invalid priority format: {priorityString} in line: {line}");
+                            }
+                        }
+                        else
+                        {
+                            // Handle invalid line structure, null parts, or invalid date format
+                            Console.WriteLine($"Invalid line format or content: {line}");
                         }
                     }
                 }
@@ -63,7 +82,7 @@ namespace Assignment6
                 throw new IOException("Failed to load tasks from file.", ex);
             }
 
-            return tasks;
+            return tasks; // Remove null-forgiving operator
         }
     }
 }

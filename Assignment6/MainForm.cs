@@ -8,12 +8,11 @@ namespace Assignment6
 {
     public partial class MainForm : Form
     {
-        private TaskManager taskManager;
-        private Dictionary<PriorityType, string> priorityDisplayNames;
+        public TaskManager? taskManager;
+        public Dictionary<PriorityType, string>? priorityDisplayNames;
         private int lastSortedColumn = -1;
         private bool ascending = true;
-        private bool hasShownSortMessage = false;  // Track if we've shown the sort message
-        private Label sortInfoLabel; // Add field for the info label
+        public Label? sortInfoLabel; // Add field for the info label
 
         public MainForm()
         {
@@ -45,7 +44,11 @@ namespace Assignment6
             StyleButton(btnAdd, Color.FromArgb(92, 184, 92));  // Green for add
             StyleButton(btnChange, Color.FromArgb(240, 173, 78));  // Orange for change
             StyleButton(btnDelete, Color.FromArgb(217, 83, 79));  // Red for delete
-            
+
+            // Set Add button size and center it horizontally
+            btnAdd.Size = new Size(300, 50);
+            btnAdd.Location = new Point((this.ClientSize.Width - btnAdd.Width) / 2, btnAdd.Location.Y);
+
             // Style the input controls
             StyleTextBox(txtBoxToDo);
             StyleComboBox(cmbPriority);
@@ -73,7 +76,7 @@ namespace Assignment6
                 Padding = new Padding(5),
                 BorderStyle = BorderStyle.FixedSingle
             };
-            sortInfoLabel.Click += (s, e) => sortInfoLabel.Hide();
+            sortInfoLabel.Click += (s, e) => sortInfoLabel!.Hide();
             Controls.Add(sortInfoLabel);
             sortInfoLabel.BringToFront();
 
@@ -87,18 +90,26 @@ namespace Assignment6
             button.ForeColor = Color.White;
             button.FlatStyle = FlatStyle.Flat;
             button.FlatAppearance.BorderSize = 0;
-            button.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            
+            // Larger font specifically for Add button
+            if (button == btnAdd)
+            {
+                button.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            }
+            else
+            {
+                button.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            }
+            
             button.Cursor = Cursors.Hand;
             button.Padding = new Padding(5);
             
             // Add hover effect
             button.MouseEnter += (s, e) => {
                 button.BackColor = ControlPaint.Light(baseColor, 0.1f);
-                button.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             };
             button.MouseLeave += (s, e) => {
                 button.BackColor = baseColor;
-                button.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             };
         }
 
@@ -171,8 +182,8 @@ namespace Assignment6
 
         private PriorityType GetSelectedPriorityType()
         {
-            string selectedDisplayName = cmbPriority.SelectedItem.ToString();
-            foreach (var kvp in priorityDisplayNames)
+            string selectedDisplayName = cmbPriority.SelectedItem?.ToString() ?? "";
+            foreach (var kvp in priorityDisplayNames!)
             {
                 if (kvp.Value == selectedDisplayName)
                 {
@@ -194,7 +205,7 @@ namespace Assignment6
         private void UpdateTaskList()
         {
             lstTasks.Items.Clear();
-            var tasks = taskManager.GetTasks();
+            var tasks = taskManager!.GetTasks();
             
             foreach (var task in tasks)
             {
@@ -242,7 +253,7 @@ namespace Assignment6
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Task task = ReadInput();
-            taskManager.AddNewTask(task);
+            taskManager!.AddNewTask(task);
             UpdateTaskList();
             ClearInputFields();
         }
@@ -253,7 +264,7 @@ namespace Assignment6
             {
                 int selectedIndex = lstTasks.SelectedIndices[0];
                 Task updatedTask = ReadInput();
-                if (taskManager.UpdateTask(selectedIndex, updatedTask))
+                if (taskManager!.UpdateTask(selectedIndex, updatedTask))
                 {
                     UpdateTaskList();
                     ClearInputFields();
@@ -274,7 +285,7 @@ namespace Assignment6
             if (lstTasks.SelectedItems.Count > 0)
             {
                 int selectedIndex = lstTasks.SelectedIndices[0];
-                if (taskManager.DeleteTask(selectedIndex))
+                if (taskManager!.DeleteTask(selectedIndex))
                 {
                     UpdateTaskList();
                 }
@@ -289,7 +300,7 @@ namespace Assignment6
             }
         }
 
-        private void lstTasks_SelectedIndexChanged(object sender, EventArgs e)
+        private void lstTasks_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (lstTasks.SelectedItems.Count > 0)
             {
@@ -304,7 +315,7 @@ namespace Assignment6
                 
                 // Find and set the matching priority in combo box
                 string priority = selectedItem.SubItems[2].Text;
-                foreach (var kvp in priorityDisplayNames)
+                foreach (var kvp in priorityDisplayNames!)
                 {
                     if (kvp.Value.Equals(priority, StringComparison.OrdinalIgnoreCase))
                     {
@@ -325,7 +336,7 @@ namespace Assignment6
             }
         }
 
-        private void lstTasks_ColumnClick(object sender, ColumnClickEventArgs e)
+        private void lstTasks_ColumnClick(object? sender, ColumnClickEventArgs e)
         {
             // If clicking the same column, reverse sort order
             if (e.Column == lastSortedColumn)
@@ -339,7 +350,7 @@ namespace Assignment6
                 lastSortedColumn = e.Column;
             }
 
-            var tasks = taskManager.GetTasks().ToList();
+            var tasks = taskManager!.GetTasks().ToList();
             
             // Sort based on column
             switch (e.Column)
@@ -366,7 +377,7 @@ namespace Assignment6
                     break;
             }
 
-            taskManager.SetTasks(tasks);
+            taskManager!.SetTasks(tasks);
             UpdateTaskList();
 
             // Add sort indicator to column header
@@ -384,9 +395,9 @@ namespace Assignment6
             // Show sorting status message with better spacing
             string columnName = lstTasks.Columns[e.Column].Text.TrimEnd('▼', '▲', ' ');
             string direction = ascending ? "ascending" : "descending";
-            sortInfoLabel.Text = $"✨ Tasks sorted by {columnName}  •  {direction} order  •  Click to dismiss ✕";
-            sortInfoLabel.Show();
-            sortInfoLabel.BringToFront();
+            sortInfoLabel!.Text = $"✨ Tasks sorted by {columnName}  •  {direction} order  •  Click to dismiss ✕";
+            sortInfoLabel!.Show();
+            sortInfoLabel!.BringToFront();
         }
 
         // Menu item: New - Resets the form
@@ -401,7 +412,7 @@ namespace Assignment6
             try
             {
                 var loadedTasks = FileManager.LoadTasksFromFile();
-                taskManager.SetTasks(loadedTasks);
+                taskManager!.SetTasks(loadedTasks);
                 UpdateTaskList();
                 MessageBox.Show("Data loaded successfully!");
             }
@@ -420,7 +431,7 @@ namespace Assignment6
         {
             try
             {
-                FileManager.SaveTasksToFile(taskManager.GetTasks());
+                FileManager.SaveTasksToFile(taskManager!.GetTasks());
                 MessageBox.Show("Data saved successfully!");
             }
             catch (Exception ex)
