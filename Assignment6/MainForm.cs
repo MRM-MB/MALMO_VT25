@@ -45,10 +45,6 @@ namespace Assignment6
             StyleButton(btnChange, Color.FromArgb(240, 173, 78));  // Orange for change
             StyleButton(btnDelete, Color.FromArgb(217, 83, 79));  // Red for delete
 
-            // Set Add button size and center it horizontally
-            btnAdd.Size = new Size(300, 50);
-            btnAdd.Location = new Point((this.ClientSize.Width - btnAdd.Width) / 2, btnAdd.Location.Y);
-
             // Style the input controls
             StyleTextBox(txtBoxToDo);
             StyleComboBox(cmbPriority);
@@ -90,17 +86,7 @@ namespace Assignment6
             button.ForeColor = Color.White;
             button.FlatStyle = FlatStyle.Flat;
             button.FlatAppearance.BorderSize = 0;
-            
-            // Larger font specifically for Add button
-            if (button == btnAdd)
-            {
-                button.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            }
-            else
-            {
-                button.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            }
-            
+            button.Font = new Font("Segoe UI", 12F, FontStyle.Bold);  // Same font for all buttons
             button.Cursor = Cursors.Hand;
             button.Padding = new Padding(5);
             

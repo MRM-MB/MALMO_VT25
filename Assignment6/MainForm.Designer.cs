@@ -86,8 +86,8 @@
             // 
             btnAdd.BackColor = SystemColors.ControlDark;
             btnAdd.FlatStyle = FlatStyle.Popup;
-            btnAdd.Size = new Size(150, 50);
-            btnAdd.Location = new Point(725, 220);
+            btnAdd.Size = new Size(250, 60);  // Make same width as other buttons
+            btnAdd.Location = new Point(675, 220);  // Centered: (1600 - 250) / 2 = 675
             btnAdd.Name = "btnAdd";
             btnAdd.TabIndex = 2;
             btnAdd.Text = "Add";
@@ -195,7 +195,7 @@
             // txtBoxToDo
             // 
             txtBoxToDo.BorderStyle = BorderStyle.FixedSingle;
-            txtBoxToDo.Size = new Size(1200, 35);
+            txtBoxToDo.Size = new Size(1200, 35);  // Back to full width
             txtBoxToDo.Font = new Font("Segoe UI", 12F);
             txtBoxToDo.Location = new Point(250, 157);
             txtBoxToDo.Name = "txtBoxToDo";
@@ -386,4 +386,4 @@
         private Label lblClock;
         private GroupBox grpBox1;
     }
-}
+}  // Add this closing brace for the namespace
