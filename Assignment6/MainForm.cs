@@ -109,35 +109,47 @@ namespace Assignment6
 
         private void StyleTextBox(TextBox textBox)
         {
-            textBox.Font = new Font("Segoe UI", 12F);
+            textBox.Font = new Font("Segoe UI", 14F, FontStyle.Bold);  // Match font size and style
             textBox.BackColor = Color.White;
             textBox.BorderStyle = BorderStyle.FixedSingle;
-            textBox.Padding = new Padding(5);
+            textBox.Height = 35;  // Match height
         }
 
         private void StyleComboBox(ComboBox comboBox)
         {
-            comboBox.Font = new Font("Segoe UI", 12F);
+            comboBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular);  // Smaller font size and regular weight
             comboBox.BackColor = Color.White;
             comboBox.FlatStyle = FlatStyle.Flat;
             comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox.Height = 35;  // Match height
         }
 
         private void StyleDateTimePicker(DateTimePicker dateTimePicker)
         {
-            dateTimePicker.Font = new Font("Segoe UI", 12F);
+            dateTimePicker.Font = new Font("Segoe UI", 11F, FontStyle.Regular);  // Smaller font size and regular weight
             dateTimePicker.Format = DateTimePickerFormat.Custom;
             dateTimePicker.CustomFormat = "yyyy-MM-dd HH:mm";
+            dateTimePicker.Height = 35;  // Match height
         }
 
         private void StyleLabels()
         {
-            // Style the date/time and priority labels
-            lbldateAndTime.Font = new Font("Segoe UI", 14F);
+            // Style all labels consistently
+            lbldateAndTime.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lbldateAndTime.ForeColor = Color.FromArgb(60, 60, 60);
             
-            lblPriority.Font = new Font("Segoe UI", 12F);
+            lblPriority.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblPriority.ForeColor = Color.FromArgb(60, 60, 60);
+
+            // Style the task label to match
+            foreach (Control control in Controls)
+            {
+                if (control is Label label && label.Text == "Task:")
+                {
+                    label.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+                    label.ForeColor = Color.FromArgb(60, 60, 60);
+                }
+            }
         }
 
         private void InitializeComponents()
