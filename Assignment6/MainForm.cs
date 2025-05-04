@@ -62,7 +62,7 @@ namespace Assignment6
             {
                 Text = "✨ Click column headers to sort tasks  •  Click again to reverse sort order  •  Click to dismiss ✕",
                 Dock = DockStyle.Top,
-                Height = 45,           // Increased height
+                Height = 70,           // Increased height
                 AutoSize = false,      // Disable auto-sizing
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = Color.FromArgb(230, 241, 255),

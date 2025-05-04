@@ -108,7 +108,7 @@
             cmbPriority.FormattingEnabled = true;
             cmbPriority.Size = new Size(300, 35);
             cmbPriority.Font = new Font("Segoe UI", 12F);
-            cmbPriority.Location = new Point(900, 77);
+            cmbPriority.Location = new Point(900, 107);      // Changed Y from 97 to 107
             cmbPriority.Name = "cmbPriority";
             cmbPriority.TabIndex = 3;
             toolTip1.SetToolTip(cmbPriority, "Select the priority level.");
@@ -118,7 +118,7 @@
             // 
             lblPriority.AutoSize = true;
             lblPriority.Font = new Font("Segoe UI", 12F);
-            lblPriority.Location = new Point(800, 80);
+            lblPriority.Location = new Point(800, 110);     // Changed Y from 100 to 110
             lblPriority.Name = "lblPriority";
             lblPriority.TabIndex = 4;
             lblPriority.Text = "Priority";
@@ -128,7 +128,7 @@
             // 
             dateTimePicker1.Size = new Size(500, 35);
             dateTimePicker1.Font = new Font("Segoe UI", 12F);
-            dateTimePicker1.Location = new Point(250, 77);
+            dateTimePicker1.Location = new Point(250, 107);  // Changed Y from 97 to 107
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.TabIndex = 5;
             toolTip1.SetToolTip(dateTimePicker1, "Click to open calendar for date, write in time here.");
@@ -138,7 +138,7 @@
             // 
             lbldateAndTime.AutoSize = true;
             lbldateAndTime.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lbldateAndTime.Location = new Point(100, 80);
+            lbldateAndTime.Location = new Point(100, 110);   // Changed Y from 100 to 110
             lbldateAndTime.Name = "lbldateAndTime";
             lbldateAndTime.TabIndex = 6;
             lbldateAndTime.Text = "Date and time";
@@ -195,9 +195,9 @@
             // txtBoxToDo
             // 
             txtBoxToDo.BorderStyle = BorderStyle.FixedSingle;
-            txtBoxToDo.Size = new Size(1200, 35);  // Back to full width
+            txtBoxToDo.Size = new Size(1200, 35);
             txtBoxToDo.Font = new Font("Segoe UI", 12F);
-            txtBoxToDo.Location = new Point(250, 157);
+            txtBoxToDo.Location = new Point(250, 167);      // Changed Y from 157 to 167
             txtBoxToDo.Name = "txtBoxToDo";
             txtBoxToDo.TabIndex = 14;
             toolTip1.SetToolTip(txtBoxToDo, "Enter the description of your task here");
@@ -206,7 +206,7 @@
             Label lblTaskDescription = new Label();
             lblTaskDescription.AutoSize = true;
             lblTaskDescription.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblTaskDescription.Location = new Point(100, 160);
+            lblTaskDescription.Location = new Point(100, 170);  // Changed Y from 160 to 170
             lblTaskDescription.Text = "Task:";
             Controls.Add(lblTaskDescription);
 
