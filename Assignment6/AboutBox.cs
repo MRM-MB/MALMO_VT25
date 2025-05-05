@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,48 +13,78 @@ namespace Assignment6
 {
     public partial class AboutBox : Form
     {
+        private bool isDragging = false;
+        private Point dragStartPoint;
+
         public AboutBox()
         {
             InitializeComponent();
-            StyleForm();
+            this.Paint += AboutBox_Paint;
+            this.MouseDown += AboutBox_MouseDown;
+            this.MouseMove += AboutBox_MouseMove;
+            this.MouseUp += AboutBox_MouseUp;
+            this.KeyPreview = true;
+            this.KeyDown += AboutBox_KeyDown;
+
+            // Make all labels clickable to close
+            foreach (Control control in Controls)
+            {
+                if (control is Label || control is PictureBox)
+                {
+                    control.Cursor = Cursors.Hand;
+                    control.Click += (s, e) => this.Close();
+                }
+            }
         }
 
-        private void StyleForm()
+        private void AboutBox_Paint(object sender, PaintEventArgs e)
         {
-            this.BackColor = Color.FromArgb(245, 245, 250);
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            // Create gradient background
+            using (LinearGradientBrush brush = new LinearGradientBrush(
+                this.ClientRectangle,
+                Color.FromArgb(40, 50, 90),    // Dark blue start
+                Color.FromArgb(80, 90, 120),    // Lighter blue end
+                45F))                           // 45-degree angle
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
 
-            // Style title
-            label1.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
-            label1.ForeColor = Color.FromArgb(60, 60, 150);
-
-            // Style version
-            label2.Font = new Font("Segoe UI", 14F);
-            label2.ForeColor = Color.FromArgb(60, 60, 60);
-
-            // Style copyright
-            label3.Font = new Font("Segoe UI", 12F);
-            label3.ForeColor = Color.FromArgb(80, 80, 80);
-
-            // Style description
-            label4.Font = new Font("Segoe UI", 12F);
-            label4.ForeColor = Color.FromArgb(80, 80, 80);
-
-            // Add a border to the picture box
-            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.BackColor = Color.White;
+            // Add subtle pattern overlay
+            using (HatchBrush hatchBrush = new HatchBrush(
+                HatchStyle.LightDownwardDiagonal,
+                Color.FromArgb(10, Color.White),
+                Color.Transparent))
+            {
+                e.Graphics.FillRectangle(hatchBrush, this.ClientRectangle);
+            }
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void AboutBox_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void AboutBox_MouseDown(object sender, MouseEventArgs e)
         {
+            isDragging = true;
+            dragStartPoint = new Point(e.X, e.Y);
+        }
 
+        private void AboutBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDragging)
+            {
+                Point difference = new Point(e.X - dragStartPoint.X, e.Y - dragStartPoint.Y);
+                this.Location = new Point(this.Location.X + difference.X, this.Location.Y + difference.Y);
+            }
+        }
+
+        private void AboutBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            isDragging = false;
         }
     }
 }

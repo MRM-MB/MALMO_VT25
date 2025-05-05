@@ -34,67 +34,72 @@
             pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
+            
             // 
-            // label1
+            // label1 - Title
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(80, 60);
+            label1.Location = new Point(40, 40);
             label1.Name = "label1";
             label1.Size = new Size(400, 50);
-            label1.TabIndex = 0;
-            label1.Text = "The ToDo list";
-            label1.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
+            label1.Text = "ToDo Reminder";
+            label1.BackColor = Color.Transparent;
+            label1.ForeColor = Color.White;
+            label1.Font = new Font("Segoe UI", 28F, FontStyle.Bold);
+            
             // 
-            // label2
+            // label2 - Version
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(80, 130);
+            label2.Location = new Point(40, 110);
             label2.Name = "label2";
             label2.Size = new Size(400, 30);
-            label2.TabIndex = 1;
             label2.Text = "Version 1.0";
-            label2.Font = new Font("Segoe UI", 14F);
-            label2.Click += label2_Click;
+            label2.BackColor = Color.Transparent;
+            label2.ForeColor = Color.FromArgb(220, 220, 220);
+            label2.Font = new Font("Segoe UI Light", 16F);
+            
             // 
-            // label3
+            // label3 - Copyright
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(80, 180);
+            label3.Location = new Point(40, 160);
             label3.Name = "label3";
             label3.Size = new Size(400, 30);
-            label3.TabIndex = 2;
-            label3.Text = "Copyright: Manish Raj Moriche";
-            label3.Font = new Font("Segoe UI", 12F);
+            label3.Text = "© 2025 Manish Raj Moriche";
+            label3.BackColor = Color.Transparent;
+            label3.ForeColor = Color.FromArgb(220, 220, 220);
+            label3.Font = new Font("Segoe UI Light", 14F);
+            
             // 
-            // label4
+            // label4 - Description
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(80, 230);
+            label4.Location = new Point(40, 210);
             label4.Name = "label4";
-            label4.Size = new Size(450, 60);
-            label4.TabIndex = 3;
-            label4.Text = "A form to keep track of your ToDo list.";
-            label4.Font = new Font("Segoe UI", 12F);
-            label4.Click += label4_Click;
+            label4.Size = new Size(400, 60);
+            label4.Text = "A beautiful and efficient way to manage\nyour daily tasks and reminders.";
+            label4.BackColor = Color.Transparent;
+            label4.ForeColor = Color.FromArgb(200, 200, 200);
+            label4.Font = new Font("Segoe UI Light", 14F);
+            
             // 
             // pictureBox1
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.todo;
-            pictureBox1.Location = new Point(80, 320);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(450, 200);
+            pictureBox1.Location = new Point(40, 290);
+            pictureBox1.Size = new Size(600, 300);  // Made image bigger
+            pictureBox1.Image = Image.FromFile(Path.Combine(Application.StartupPath, "Assets", "img.png"));
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.BackColor = Color.Transparent;
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
+            
             // 
             // AboutBox
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.AppWorkspace;
-            ClientSize = new Size(600, 600);
-            MinimumSize = new Size(600, 600);
+            ClientSize = new Size(680, 620);  // Adjusted form size to fit bigger image
             Controls.Add(pictureBox1);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -107,7 +112,7 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterParent;
-            Text = "AboutBox";
+            Text = "About ToDo Reminder";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
