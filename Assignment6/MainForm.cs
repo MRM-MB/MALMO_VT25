@@ -38,6 +38,7 @@ namespace Assignment6
             lstTasks.BorderStyle = BorderStyle.FixedSingle;
             lstTasks.ForeColor = Color.FromArgb(40, 40, 40);
             lstTasks.ColumnClick += lstTasks_ColumnClick; // Add column click handler for sorting
+            lstTasks.SelectedIndexChanged += lstTasks_SelectedIndexChanged; // Add selection change handler
             lstTasks.HeaderStyle = ColumnHeaderStyle.Clickable; // Make headers clickable
 
             // Style the buttons with modern look
@@ -60,7 +61,7 @@ namespace Assignment6
             // Add warning banner
             warningBanner = new Label
             {
-                Text = "✨ Click column headers to sort tasks  •  Click again to reverse sort order  •  Click to dismiss ✕",
+                Text = "✨ Click column headers to sort tasks • 📌 Drag headers to resize columns • ❌ to dismiss",
                 Dock = DockStyle.Top,
                 Height = 70,           // Increased height
                 AutoSize = false,      // Disable auto-sizing
@@ -94,7 +95,7 @@ namespace Assignment6
             button.ForeColor = Color.White;
             button.FlatStyle = FlatStyle.Flat;
             button.FlatAppearance.BorderSize = 0;
-            button.Font = new Font("Segoe UI", 12F, FontStyle.Bold);  // Same font for all buttons
+            button.Font = new Font("Segoe UI", 13F, FontStyle.Bold);  // Updated from 12F to 13F
             button.Cursor = Cursors.Hand;
             button.Padding = new Padding(5);
             
@@ -109,7 +110,7 @@ namespace Assignment6
 
         private void StyleTextBox(TextBox textBox)
         {
-            textBox.Font = new Font("Segoe UI", 14F, FontStyle.Bold);  // Match font size and style
+            textBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular);  // Changed from Bold to Regular
             textBox.BackColor = Color.White;
             textBox.BorderStyle = BorderStyle.FixedSingle;
             textBox.Height = 35;  // Match height
@@ -117,7 +118,7 @@ namespace Assignment6
 
         private void StyleComboBox(ComboBox comboBox)
         {
-            comboBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular);  // Smaller font size and regular weight
+            comboBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular);  // Updated to match task input
             comboBox.BackColor = Color.White;
             comboBox.FlatStyle = FlatStyle.Flat;
             comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -126,7 +127,7 @@ namespace Assignment6
 
         private void StyleDateTimePicker(DateTimePicker dateTimePicker)
         {
-            dateTimePicker.Font = new Font("Segoe UI", 11F, FontStyle.Regular);  // Smaller font size and regular weight
+            dateTimePicker.Font = new Font("Segoe UI", 14F, FontStyle.Regular);  // Updated to match task input
             dateTimePicker.Format = DateTimePickerFormat.Custom;
             dateTimePicker.CustomFormat = "yyyy-MM-dd HH:mm";
             dateTimePicker.Height = 35;  // Match height
@@ -135,10 +136,10 @@ namespace Assignment6
         private void StyleLabels()
         {
             // Style all labels consistently
-            lbldateAndTime.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lbldateAndTime.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             lbldateAndTime.ForeColor = Color.FromArgb(60, 60, 60);
             
-            lblPriority.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblPriority.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             lblPriority.ForeColor = Color.FromArgb(60, 60, 60);
 
             // Style the task label to match
@@ -146,7 +147,7 @@ namespace Assignment6
             {
                 if (control is Label label && label.Text == "Task:")
                 {
-                    label.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+                    label.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
                     label.ForeColor = Color.FromArgb(60, 60, 60);
                 }
             }
@@ -294,6 +295,7 @@ namespace Assignment6
                 if (taskManager!.DeleteTask(selectedIndex))
                 {
                     UpdateTaskList();
+                    ClearInputFields(); // Clear the input fields after successful deletion
                 }
                 else
                 {

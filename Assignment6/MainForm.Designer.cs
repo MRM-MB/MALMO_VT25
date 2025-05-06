@@ -63,6 +63,7 @@
             btnChange.Name = "btnChange";
             btnChange.TabIndex = 0;
             btnChange.Text = "Change";
+            btnChange.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             btnChange.UseVisualStyleBackColor = false;
             btnChange.Click += btnChange_Click;
             toolTip1.SetToolTip(btnChange, "Select a task to change it.");
@@ -77,6 +78,7 @@
             btnDelete.Name = "btnDelete";
             btnDelete.TabIndex = 1;
             btnDelete.Text = "Delete";
+            btnDelete.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             btnDelete.UseVisualStyleBackColor = false;
             btnDelete.Click += btnDelete_Click;
             toolTip1.SetToolTip(btnDelete, "Select a task to delete it.");
@@ -91,6 +93,7 @@
             btnAdd.Name = "btnAdd";
             btnAdd.TabIndex = 2;
             btnAdd.Text = "Add";
+            btnAdd.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             btnAdd.UseVisualStyleBackColor = false;
             btnAdd.Click += btnAdd_Click;
             toolTip1.SetToolTip(btnAdd, "Add a new task with the specified details.");
@@ -107,7 +110,7 @@
             // 
             cmbPriority.FormattingEnabled = true;
             cmbPriority.Size = new Size(300, 35);
-            cmbPriority.Font = new Font("Segoe UI", 11F, FontStyle.Regular);  // Updated to smaller size
+            cmbPriority.Font = new Font("Segoe UI", 14F, FontStyle.Regular);  // Updated to match task input
             cmbPriority.Location = new Point(900, 107);
             cmbPriority.Name = "cmbPriority";
             cmbPriority.TabIndex = 3;
@@ -117,7 +120,7 @@
             // lblPriority
             // 
             lblPriority.AutoSize = true;
-            lblPriority.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblPriority.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             lblPriority.Location = new Point(800, 110);
             lblPriority.Name = "lblPriority";
             lblPriority.TabIndex = 4;
@@ -127,7 +130,7 @@
             // dateTimePicker1
             // 
             dateTimePicker1.Size = new Size(500, 35);
-            dateTimePicker1.Font = new Font("Segoe UI", 11F, FontStyle.Regular);  // Updated to smaller size
+            dateTimePicker1.Font = new Font("Segoe UI", 14F, FontStyle.Regular);  // Updated to match task input
             dateTimePicker1.Location = new Point(270, 107);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.TabIndex = 5;
@@ -137,7 +140,7 @@
             // lbldateAndTime
             // 
             lbldateAndTime.AutoSize = true;
-            lbldateAndTime.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lbldateAndTime.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             lbldateAndTime.Location = new Point(100, 110);
             lbldateAndTime.Name = "lbldateAndTime";
             lbldateAndTime.TabIndex = 6;
@@ -169,7 +172,7 @@
             // Add custom drawing for bold headers
             lstTasks.DrawColumnHeader += (sender, e) => {
                 e.Graphics.FillRectangle(new SolidBrush(SystemColors.Control), e.Bounds);
-                using (var boldFont = new Font("Segoe UI", 12F, FontStyle.Bold))
+                using (var boldFont = new Font("Segoe UI", 13F, FontStyle.Bold))  // Updated from 12F to 13F
                 using (var brush = new SolidBrush(Color.Black))
                 {
                     var header = lstTasks.Columns[e.ColumnIndex];
@@ -196,7 +199,7 @@
             // 
             txtBoxToDo.BorderStyle = BorderStyle.FixedSingle;
             txtBoxToDo.Size = new Size(1200, 35);
-            txtBoxToDo.Font = new Font("Segoe UI", 14F, FontStyle.Bold);  // Updated to match
+            txtBoxToDo.Font = new Font("Segoe UI", 14F, FontStyle.Regular);  // Changed from Bold to Regular
             txtBoxToDo.Location = new Point(250, 167);
             txtBoxToDo.Name = "txtBoxToDo";
             txtBoxToDo.TabIndex = 14;
@@ -205,7 +208,7 @@
             // Add a description label instead of the redundant ToDo label
             Label lblTaskDescription = new Label();
             lblTaskDescription.AutoSize = true;
-            lblTaskDescription.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblTaskDescription.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
             lblTaskDescription.Location = new Point(100, 170);
             lblTaskDescription.Text = "Task:";
             Controls.Add(lblTaskDescription);
