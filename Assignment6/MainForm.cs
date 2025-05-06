@@ -10,9 +10,9 @@ namespace Assignment6
     {
         public TaskManager? taskManager;
         public Dictionary<PriorityType, string>? priorityDisplayNames;
-        private int lastSortedColumn = -1;
+        private int? currentSortColumn = null;  // Track the currently sorted column
         private bool ascending = true;
-        private Label warningBanner;  // Add this field
+        private Label warningBanner;
 
         public MainForm()
         {
@@ -346,8 +346,8 @@ namespace Assignment6
 
         private void lstTasks_ColumnClick(object? sender, ColumnClickEventArgs e)
         {
-            // If clicking the same column, reverse sort order
-            if (e.Column == lastSortedColumn)
+            // If clicking the same column, just reverse the sort order
+            if (currentSortColumn == e.Column)
             {
                 ascending = !ascending;
             }
@@ -355,45 +355,39 @@ namespace Assignment6
             {
                 // New column, sort ascending by default
                 ascending = true;
-                lastSortedColumn = e.Column;
+                currentSortColumn = e.Column;
             }
 
             var tasks = taskManager!.GetTasks().ToList();
             
-            // Sort based on column
-            switch (e.Column)
+            // Apply sorting based on the clicked column
+            tasks = currentSortColumn switch
             {
-                case 0: // Date
-                    tasks = ascending ? 
-                        tasks.OrderBy(t => t.TaskDate.Date).ToList() :
-                        tasks.OrderByDescending(t => t.TaskDate.Date).ToList();
-                    break;
-                case 1: // Hour
-                    tasks = ascending ?
-                        tasks.OrderBy(t => t.TaskDate.TimeOfDay).ToList() :
-                        tasks.OrderByDescending(t => t.TaskDate.TimeOfDay).ToList();
-                    break;
-                case 2: // Priority
-                    tasks = ascending ?
-                        tasks.OrderBy(t => t.Priority).ToList() :
-                        tasks.OrderByDescending(t => t.Priority).ToList();
-                    break;
-                case 3: // Description
-                    tasks = ascending ?
-                        tasks.OrderBy(t => t.Description).ToList() :
-                        tasks.OrderByDescending(t => t.Description).ToList();
-                    break;
-            }
+                0 => ascending ? 
+                    tasks.OrderBy(t => t.TaskDate.Date).ToList() :
+                    tasks.OrderByDescending(t => t.TaskDate.Date).ToList(),
+                1 => ascending ?
+                    tasks.OrderBy(t => t.TaskDate.TimeOfDay).ToList() :
+                    tasks.OrderByDescending(t => t.TaskDate.TimeOfDay).ToList(),
+                2 => ascending ?
+                    tasks.OrderBy(t => t.Priority).ToList() :
+                    tasks.OrderByDescending(t => t.Priority).ToList(),
+                3 => ascending ?
+                    tasks.OrderBy(t => t.Description).ToList() :
+                    tasks.OrderByDescending(t => t.Description).ToList(),
+                _ => tasks
+            };
 
-            taskManager!.SetTasks(tasks);
+            taskManager.SetTasks(tasks);
             UpdateTaskList();
 
-            // Add sort indicator to column header
+            // Update column headers to show sort direction
             for (int i = 0; i < lstTasks.Columns.Count; i++)
             {
                 string headerText = lstTasks.Columns[i].Text;
                 headerText = headerText.TrimEnd('▼', '▲', ' ');
-                if (i == e.Column)
+                
+                if (i == currentSortColumn)
                 {
                     headerText += ascending ? " ▲" : " ▼";
                 }
