@@ -37,7 +37,7 @@ namespace Assignment6
             }
         }
 
-        private void AboutBox_Paint(object sender, PaintEventArgs e)
+        private void AboutBox_Paint(object? sender, PaintEventArgs e)
         {
             // Create gradient background
             using (LinearGradientBrush brush = new LinearGradientBrush(
@@ -59,7 +59,7 @@ namespace Assignment6
             }
         }
 
-        private void AboutBox_KeyDown(object sender, KeyEventArgs e)
+        private void AboutBox_KeyDown(object? sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
@@ -67,13 +67,13 @@ namespace Assignment6
             }
         }
 
-        private void AboutBox_MouseDown(object sender, MouseEventArgs e)
+        private void AboutBox_MouseDown(object? sender, MouseEventArgs e)
         {
             isDragging = true;
             dragStartPoint = new Point(e.X, e.Y);
         }
 
-        private void AboutBox_MouseMove(object sender, MouseEventArgs e)
+        private void AboutBox_MouseMove(object? sender, MouseEventArgs e)
         {
             if (isDragging)
             {
@@ -82,7 +82,7 @@ namespace Assignment6
             }
         }
 
-        private void AboutBox_MouseUp(object sender, MouseEventArgs e)
+        private void AboutBox_MouseUp(object? sender, MouseEventArgs e)
         {
             isDragging = false;
         }

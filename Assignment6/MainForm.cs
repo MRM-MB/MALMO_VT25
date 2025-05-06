@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
+// Made by Manish Raj Moriche and finished on the 6th of May 2025
 namespace Assignment6
 {
     public partial class MainForm : Form
@@ -12,7 +13,7 @@ namespace Assignment6
         public Dictionary<PriorityType, string>? priorityDisplayNames;
         private int? currentSortColumn = null;  // Track the currently sorted column
         private bool ascending = true;
-        private Label warningBanner;
+        private Label warningBanner = null!;
 
         public MainForm()
         {
