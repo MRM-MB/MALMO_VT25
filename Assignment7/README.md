@@ -1,5 +1,10 @@
 # Danfoss Heating App - Assignment 7 Malmo University
 
+**📋 Quick Test Instructions:**
+You'll find the .exe here:
+`DanfossHeating/bin\Release\net9.0\win-x64\publish\DanfossHeating.exe`
+Click the file to run the program and test it without a code editor.
+
 **⚠️ Note for the User:**
 This application uses CSV and JSON files in the `/Data` folder. You can test the optimization with sample data for heat demand and electricity prices.
 
