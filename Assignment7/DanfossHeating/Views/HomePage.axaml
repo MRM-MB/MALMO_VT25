@@ -1,0 +1,709 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:DanfossHeating.ViewModels"
+             xmlns:converters="using:DanfossHeating.Converters"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="DanfossHeating.Views.HomePage"
+             x:DataType="vm:HomePageViewModel">
+
+    <UserControl.Resources>
+        <converters:BoolToColorConverter x:Key="BoolToColorConverter" 
+                                        TrueValue="White" 
+                                        FalseValue="Black"/>
+        
+        <!-- Converter for the dark theme class -->
+        <converters:BoolToStringConverter x:Key="ThemeClassConverter"
+                                        TrueValue="dark"
+                                        FalseValue="" />
+    </UserControl.Resources>
+    
+    <!-- Background based on theme (light/dark) -->
+    <UserControl.Background>
+        <SolidColorBrush Color="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#1E1E1E:#F0F0F0'}" />
+    </UserControl.Background>
+    
+    <UserControl.Styles>
+        <!-- Navigation Link Button -->
+        <Style Selector="Button.navLink">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="#D40000"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        
+        <!-- Background color based on theme -->
+        <Style Selector="UserControl">
+            <Style.Animations>
+                <Animation Duration="0:0:0.3" FillMode="Both">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Background" Value="#F0F0F0"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Background" Value="#F0F0F0"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        
+        <Style Selector="UserControl.dark">
+            <Style.Animations>
+                <Animation Duration="0:0:0.3" FillMode="Both">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="Background" Value="#1E1E1E"/>
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="Background" Value="#1E1E1E"/>
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+        
+        <!-- Theme Toggle Button -->
+        <Style Selector="Button.themeToggle">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"/>
+                </Transitions>
+            </Setter>
+            <Setter Property="Background" Value="#20000000"/>
+            <Setter Property="BorderBrush" Value="#40000000"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="ToolTip.Tip" Value="Toggle between light and dark theme"/>
+        </Style>
+        <Style Selector="Button.themeToggle:pointerover">
+            <Setter Property="Background" Value="#40000000"/>
+            <Setter Property="RenderTransform" Value="scale(1.1)"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" 
+                                    Color="#40000000" 
+                                    OffsetX="0" 
+                                    OffsetY="0"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Avatar Profile Circle -->
+        <Style Selector="Border.profileCircle">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="#D40000"/>
+            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="#FFFFFF"/>
+            <Setter Property="Effect">
+                <DropShadowEffect BlurRadius="8" 
+                                Color="#40000000" 
+                                OffsetX="0" 
+                                OffsetY="2"/>
+            </Setter>
+        </Style>
+        
+        <!-- User Name Text -->
+        <Style Selector="TextBlock.userName">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Setter Property="Foreground" Value="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}"/>
+        </Style>
+        
+        <!-- Content Card -->
+        <Style Selector="Border.contentCard">
+            <Setter Property="Background" Value="#15FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#30FFFFFF"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="20,80,20,20"/>
+            <Setter Property="Effect">
+                <DropShadowEffect BlurRadius="10" 
+                                 Color="#40000000" 
+                                 OffsetX="0" 
+                                 OffsetY="3"/>
+            </Setter>
+        </Style>
+        
+        <!-- Navigation Sidebar -->
+        <Style Selector="Border.navSidebar">
+            <Setter Property="Width" Value="240"/>
+            <Setter Property="Background" Value="#F8F8F8"/>
+            <Setter Property="BorderBrush" Value="#20000000"/>
+            <Setter Property="BorderThickness" Value="0,0,1,0"/>
+            <Setter Property="CornerRadius" Value="0,12,12,0"/>
+            <Setter Property="Margin" Value="0,10,0,10"/>
+            <Setter Property="Opacity" Value="0.95"/>
+        </Style>
+        
+        <Style Selector="Border.navSidebar.dark">
+            <Setter Property="Background" Value="#252525"/>
+            <Setter Property="BorderBrush" Value="#40FFFFFF"/>
+        </Style>
+        
+        <Style Selector="Button.navItem">
+            <Setter Property="Height" Value="54"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,5"/>
+            <Setter Property="Margin" Value="8,3"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2"/>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        
+        <Style Selector="Button.navItem:pointerover">
+            <Setter Property="Background" Value="#15000000"/>
+            <Setter Property="RenderTransform" Value="scale(1.02)"/>
+            <Setter Property="Effect">
+                <DropShadowEffect BlurRadius="4" Color="#20000000" OffsetX="0" OffsetY="1"/>
+            </Setter>
+        </Style>
+        
+        <Style Selector="Button.navItem.dark:pointerover">
+            <Setter Property="Background" Value="#30FFFFFF"/>
+            <Setter Property="Effect">
+                <DropShadowEffect BlurRadius="8" Color="#40000000" OffsetX="0" OffsetY="2"/>
+            </Setter>
+        </Style>
+        
+        <Style Selector="Button.navItem.active">
+            <Setter Property="Background" Value="#D40000"/>
+            <Setter Property="Effect">
+                <DropShadowEffect BlurRadius="10" Color="#40D40000" OffsetX="0" OffsetY="2"/>
+            </Setter>
+        </Style>
+        
+        <Style Selector="Button.navItem.active:pointerover">
+            <Setter Property="Background" Value="#C00000"/>
+            <Setter Property="RenderTransform" Value="scale(1.03)"/>
+        </Style>
+        
+        <Style Selector="TextBlock.navText">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="15,0,0,0"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        
+        <Style Selector="TextBlock.navText.dark">
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+        </Style>
+        
+        <Style Selector="TextBlock.navText.active">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        
+        <Style Selector="PathIcon.navIcon">
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Width" Value="22"/>
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
+        
+        <Style Selector="PathIcon.navIcon.dark">
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+        </Style>
+        
+        <Style Selector="PathIcon.navIcon.active">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!-- Map Image Hover Effect -->
+        <Style Selector="Border.mapImage">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.3" Easing="CircularEaseOut"/>
+                    <ThicknessTransition Property="Margin" Duration="0:0:0.3" Easing="CircularEaseOut"/>
+                </Transitions>
+            </Setter>
+            <Setter Property="RenderTransform" Value="none"/>
+            <Setter Property="ZIndex" Value="0"/>
+        </Style>
+        
+        <Style Selector="Border.mapImage:pointerover">
+            <Setter Property="RenderTransform" Value="scale(1.25)"/>
+            <Setter Property="ZIndex" Value="10"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Grid>
+        <!-- Home Image -->
+        <Image 
+            Source="/Assets/Danffy/home.png"
+            Width="250"
+            Height="800"
+            Margin="0,0,0,20"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Left"
+            ZIndex="99" />
+
+        <!-- Header Panel with Accent Background -->
+        <Border Height="70" 
+                VerticalAlignment="Top"
+                Background="#D40000"
+                BoxShadow="0 2 10 0 #40000000"
+                ZIndex="10">
+            <Grid>
+                <!-- User Profile (Left) -->
+                <StackPanel Orientation="Horizontal" 
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Left"
+                            Margin="20,0,0,0">
+                    <!-- Profile Circle -->
+                    <Border Classes="profileCircle">
+                        <TextBlock Text="{Binding UserInitial}" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center"
+                                   FontSize="24" 
+                                   FontWeight="Bold" 
+                                   Foreground="White"/>
+                    </Border>
+                    
+                    <!-- User Name -->
+                    <TextBlock Text="{Binding UserName}" 
+                               Foreground="White"
+                               FontWeight="SemiBold"
+                               FontSize="20"
+                               Margin="10,0,0,0"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+                
+                <!-- Theme Toggle (Right) -->
+                <Button Command="{Binding ToggleThemeCommand}"
+                        Classes="themeToggle"
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Center"
+                        Margin="0,0,20,0"
+                        Padding="6">
+                    <Panel>
+                        <!-- Light Theme Icon (Sun) - shown when in dark mode -->
+                        <PathIcon Data="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41.39.39 1.03.39 1.41 0l1.06-1.06z"
+                               IsVisible="{Binding IsDarkTheme}" 
+                               Foreground="#FFFF00"
+                               Width="30" Height="30"/>
+                        
+                        <!-- Dark Theme Icon (Moon) - shown when in light mode -->
+                        <PathIcon Data="M9.37 5.51c-.18.64-.27 1.31-.27 1.99 0 4.08 3.32 7.4 7.4 7.4.68 0 1.35-.09 1.99-.27C17.45 17.19 14.93 19 12 19c-3.86 0-7-3.14-7-7 0-2.93 1.81-5.45 4.37-6.49zM12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"
+                               IsVisible="{Binding !IsDarkTheme}" 
+                               Foreground="#004080"
+                               Width="30" Height="30"/>
+                    </Panel>
+                </Button>
+            </Grid>
+        </Border>
+        
+        <!-- Date Display with Calendar Icon -->
+        <Border Background="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#252525:#F8F8F8'}" 
+                BorderBrush="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#40FFFFFF:#20000000'}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Padding="12,8"
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Top"
+                Margin="0,100,30,0"
+                BoxShadow="0 2 6 0 #30000000"
+                ZIndex="5">
+            <StackPanel Orientation="Horizontal">
+                <PathIcon Data="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z" 
+                         Foreground="#D40000"
+                         Width="24" Height="24" 
+                         Margin="0,0,10,0"
+                         VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding CurrentDate}" 
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           FontFamily="Segoe UI, Arial"
+                           Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- Main Content Area with Navigation and Content -->
+        <Grid Margin="0,70,0,0">
+            <!-- Navigation Sidebar -->
+            <Border Classes="navSidebar" Classes.dark="{Binding IsDarkTheme}"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Left">
+                <StackPanel Spacing="2" Margin="0,15,0,0">
+                    <!-- Navigation Items -->
+                    
+                    <!-- Home (Current Page) -->
+                    <Button Classes="navItem active" Command="{Binding NavigateToHomeCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <PathIcon Classes="navIcon active" 
+                                     Data="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                            <TextBlock Classes="navText active" Text="Home"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <!-- Optimizer -->
+                    <Button Classes="navItem" Classes.dark="{Binding IsDarkTheme}" Command="{Binding NavigateToOptimizerCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <PathIcon Classes="navIcon" Classes.dark="{Binding IsDarkTheme}" 
+                                     Data="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/>
+                            <TextBlock Classes="navText" Classes.dark="{Binding IsDarkTheme}" Text="Optimizer"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <!-- Machinery -->
+                    <Button Classes="navItem" Classes.dark="{Binding IsDarkTheme}" Command="{Binding NavigateToMachineryCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <PathIcon Classes="navIcon" Classes.dark="{Binding IsDarkTheme}" 
+                                     Data="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+                            <TextBlock Classes="navText" Classes.dark="{Binding IsDarkTheme}" Text="Machinery"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    <!-- About -->
+                    <Button Classes="navItem" Classes.dark="{Binding IsDarkTheme}" Command="{Binding NavigateToAboutCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <PathIcon Classes="navIcon" Classes.dark="{Binding IsDarkTheme}" 
+                                     Data="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"/>
+                            <TextBlock Classes="navText" Classes.dark="{Binding IsDarkTheme}" Text="About"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Border>
+            
+            <!-- Main Content Area with Card -->
+            <Border Classes="contentCard" Margin="260,20,20,20">
+                <Grid RowDefinitions="Auto,Auto,*">
+                    <!-- "HELLO, Username!" Message with Exclamation in Red -->
+                    <StackPanel Grid.Row="0" 
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal"
+                                Margin="0,10,0,20">
+                        <TextBlock Text="Hello, " 
+                                   FontSize="44" 
+                                   FontWeight="ExtraBold"
+                                   VerticalAlignment="Center"
+                                   Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}"
+                                   Margin="0,0,8,0"/>
+                        <TextBlock Text="{Binding UserName}" 
+                                   FontSize="48" 
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   Foreground="#D40000"
+                                   Margin="0,0,2,0">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="4" 
+                                                Color="#40000000" 
+                                                OffsetX="1" 
+                                                OffsetY="1"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <TextBlock Text="!" 
+                                   FontSize="48" 
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"
+                                   Foreground="#D40000">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="4" 
+                                                Color="#40000000" 
+                                                OffsetX="1" 
+                                                OffsetY="1"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </StackPanel>
+                    
+                    <!-- Introduction Text -->
+                    <TextBlock Text="This is your personal heating optimization dashboard" 
+                               Grid.Row="1"
+                               FontSize="18" 
+                               HorizontalAlignment="Center"
+                               Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}"
+                               Margin="0,0,0,30"/>
+                    
+                    <!-- Information Sections -->
+                    <ScrollViewer Grid.Row="2" 
+                                 HorizontalScrollBarVisibility="Disabled"
+                                 VerticalScrollBarVisibility="Auto">
+                        <!-- Project Information Section -->
+                        <Border Background="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#252525:#FFFFFF'}"
+                                BorderBrush="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#40FFFFFF:#10000000'}"
+                                BorderThickness="1"
+                                CornerRadius="16"
+                                BoxShadow="0 4 20 0 #20000000"
+                                Padding="0">
+                            <!-- Top Banner with Title -->
+                            <Grid RowDefinitions="Auto,*">
+                                <!-- Header Banner -->
+                                <Border Background="#D40000" 
+                                        CornerRadius="16,16,0,0"
+                                        Height="80"
+                                        BoxShadow="0 4 8 0 #30000000">
+                                    <Grid Margin="30,0">
+                                        <StackPanel Orientation="Horizontal" 
+                                                  VerticalAlignment="Center">
+                                            <TextBlock Text="🏠" 
+                                                       FontSize="28" 
+                                                       VerticalAlignment="Center" 
+                                                       Margin="0,0,14,0"/>
+                                            <TextBlock Text="Welcome to Danfoss Heatington!" 
+                                                       FontSize="28" 
+                                                       FontWeight="Bold" 
+                                                       Foreground="White"
+                                                       VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <!-- Content Area -->
+                                <Grid Grid.Row="1" Margin="40,30,40,30" RowDefinitions="Auto,Auto,Auto,Auto">                                    <!-- Main Description with Images -->
+                                    <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto" Margin="0,0,0,60">
+                                        <!-- Combined Main Text -->
+                                        <TextBlock Grid.Column="0" 
+                                                   TextWrapping="Wrap" 
+                                                   LineHeight="30"
+                                                   FontSize="18"
+                                                   Margin="0,0,30,0"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}">
+                                            <Run Text="This Optimizer helps the city of Heatington optimize heat production for over 1600 buildings. Instead of manually planning heat schedules, our app automatically finds the most cost-efficient way to produce heat using a mix of boilers and "/>
+                                            <Run Text="Combined Heat and Power (CHP)" FontWeight="Bold" Foreground="#D40000"/>
+                                            <Run Text=" units. These CHP systems capture and utilize the heat that would otherwise be wasted during electricity generation, making the entire process more efficient and environmentally friendly."/>
+                                        </TextBlock>
+                                        
+                                        <!-- Image 1 - City Map -->
+                                        <Border Grid.Column="1"
+                                                Classes="mapImage"
+                                                Width="280"
+                                                Height="200"
+                                                CornerRadius="12"
+                                                BoxShadow="0 8 20 0 #40000000"
+                                                ClipToBounds="True"
+                                                Margin="0,0,15,0">
+                                            <Panel>
+                                                <Image Source="/Assets/map1.png" 
+                                                       Stretch="UniformToFill"/>
+                                                <Border Background="#10000000" CornerRadius="12"/>
+                                            </Panel>
+                                        </Border>
+
+                                        <!-- Image 2 - System Map -->
+                                        <Border Grid.Column="2"
+                                                Classes="mapImage"
+                                                Width="280"
+                                                Height="200"
+                                                CornerRadius="12"
+                                                BoxShadow="0 8 20 0 #40000000"
+                                                ClipToBounds="True">
+                                            <Panel>
+                                                <Image Source="/Assets/map2.png" 
+                                                       Stretch="UniformToFill"/>
+                                                <Border Background="#10000000" CornerRadius="12"/>
+                                            </Panel>
+                                        </Border>
+                                    </Grid>
+
+                                    <!-- Focus Points and System Diagram -->
+                                    <Grid Grid.Row="1" ColumnDefinitions="Auto,*" Margin="0,0,0,40">
+                                        <!-- Focus Points Section -->
+                                        <StackPanel Grid.Column="0" Width="300" Margin="0,0,30,0">
+                                            <TextBlock Text="This project is focused on" 
+                                                       FontWeight="Bold" 
+                                                       FontSize="24" 
+                                                       Margin="0,0,0,20"
+                                                       Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}"/>
+                                            
+                                            <!-- Focus Points Cards -->
+                                            <StackPanel Spacing="15">
+                                                <!-- Cost Reduction -->
+                                                <Border Background="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#252525:#F8F8F8'}}"
+                                                        BorderBrush="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#40FFFFFF:#20000000'}}"
+                                                        BoxShadow="0 4 12 0 #30000000"
+                                                        BorderThickness="1"
+                                                        CornerRadius="12"
+                                                        Padding="15">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="💰" FontSize="24" VerticalAlignment="Center" Margin="0,0,15,0"/>
+                                                        <TextBlock Text="Reducing heat production costs" 
+                                                                   FontSize="14"
+                                                                   TextWrapping="Wrap"
+                                                                   VerticalAlignment="Center"
+                                                                   FontWeight="SemiBold"
+                                                                   Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                
+                                                <!-- Profit Increase -->
+                                                <Border Background="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#252525:#F8F8F8'}}"
+                                                        BorderBrush="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#40FFFFFF:#20000000'}}"
+                                                        BoxShadow="0 4 12 0 #30000000"
+                                                        BorderThickness="1"
+                                                        CornerRadius="12"
+                                                        Padding="15">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="⚡" FontSize="24" VerticalAlignment="Center" Margin="0,0,15,0"/>
+                                                        <TextBlock Text="Increasing profit from electricity" 
+                                                                   FontSize="14"
+                                                                   TextWrapping="Wrap"
+                                                                   VerticalAlignment="Center"
+                                                                   FontWeight="SemiBold"
+                                                                   Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}"/>
+                                                    </StackPanel>
+                                                </Border>
+                                                
+                                                <!-- Sustainability -->
+                                                <Border Background="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#252525:#F8F8F8'}}"
+                                                        BorderBrush="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#40FFFFFF:#20000000'}}"
+                                                        BoxShadow="0 4 12 0 #30000000"
+                                                        BorderThickness="1"
+                                                        CornerRadius="12"
+                                                        Padding="15">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="🌱" FontSize="24" VerticalAlignment="Center" Margin="0,0,15,0"/>
+                                                        <TextBlock Text="Integrating sustainable energy" 
+                                                                   FontSize="14"
+                                                                   TextWrapping="Wrap"
+                                                                   VerticalAlignment="Center"
+                                                                   FontWeight="SemiBold"
+                                                                   Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}"/>
+                                                    </StackPanel>
+                                                </Border>
+                                            </StackPanel>
+                                        </StackPanel>                                        <!-- System Diagram Section -->
+                                        <Grid Grid.Column="1" RowDefinitions="Auto,Auto">                                            <!-- Main System Diagram Image -->
+                                            <Border BorderBrush="#D40000"
+                                                    BorderThickness="3"
+                                                    CornerRadius="16"                                                    BoxShadow="0 8 20 0 #40000000"
+                                                    ClipToBounds="False"
+                                                    Background="Transparent"
+                                                    Padding="0,0,0,3">
+                                                <Panel>
+                                                    <Image Source="/Assets/map3.png"
+                                                           IsVisible="{Binding !IsDarkTheme}"
+                                                           Stretch="Uniform"
+                                                           Height="265"
+                                                           Margin="3,3,3,0"/>
+                                                    <Image Source="/Assets/map4.png"
+                                                           IsVisible="{Binding IsDarkTheme}"
+                                                           Stretch="Uniform"
+                                                           Height="265"
+                                                           Margin="3,3,3,0"/>
+                                                </Panel>
+                                            </Border>
+                                            
+                                            <!-- System Description -->
+                                            <Border Grid.Row="1"
+                                                    Background="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#252525:#F8F8F8'}}"
+                                                    BorderBrush="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#40FFFFFF:#20000000'}}"
+                                                    BorderThickness="1"
+                                                    CornerRadius="12"
+                                                    Padding="20"
+                                                    BoxShadow="0 4 12 0 #30000000"
+                                                    Margin="-330,20,0,0">                                                <TextBlock TextWrapping="Wrap"
+                                                           LineHeight="24"
+                                                           FontSize="16"
+                                                           Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}">
+                                                    🔥 Head to the <Button Classes="navLink" Command="{Binding NavigateToOptimizerCommand}"><TextBlock Text="Optimizer" FontWeight="Bold" Foreground="#D40000" VerticalAlignment="Center"/></Button> section to run a 2-week heat production plan for the city of Heatington! Choose your <Run Text="season" FontWeight="Bold"/>, pick a scenario based on machinery usage (set in the <Button Classes="navLink" Command="{Binding NavigateToMachineryCommand}"><TextBlock Text="Machinery" FontWeight="Bold" Foreground="#D40000" VerticalAlignment="Center"/></Button> 🛠️), and optimize based on <Run Text="cost" FontWeight="Bold"/> or <Run Text="CO₂" FontWeight="Bold"/> 🌍. When you're done, <Run Text="zoom" FontWeight="Bold"/> into specific parts of the graph 📈 and <Run Text="export" FontWeight="Bold"/> your results for future viewing! Click the icons for <Run Text="additional insights" FontWeight="Bold"/> to receive complementary data about your chosen scenario and season, such as electricity prices and production costs❗
+                                                </TextBlock>
+                                            </Border>
+                                        </Grid>
+                                    </Grid>                                    <!-- Bottom Section with Danffy and What We're Solving -->
+                                    <Grid Grid.Row="2" ColumnDefinitions="Auto,*" Margin="0,0,0,0">                                        <!-- Danffy Image Section -->
+                                        <Border Grid.Column="0"
+                                                Background="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#252525:#F8F8F8'}}"
+                                                BorderBrush="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#40FFFFFF:#20000000'}}"
+                                                BorderThickness="1"
+                                                CornerRadius="16"
+                                                Margin="0,0,20,0"
+                                                BoxShadow="0 4 12 0 #30000000">
+                                            <StackPanel Width="240" Margin="16">
+                                                <Border CornerRadius="12"
+                                                        BoxShadow="0 4 12 0 #30000000"
+                                                        ClipToBounds="True"
+                                                        Margin="0,0,0,12">
+                                                    <Image Source="/Assets/Danffy/main.png"
+                                                           Stretch="UniformToFill"
+                                                           Height="240"/>
+                                                </Border>                                                <TextBlock TextAlignment="Center"
+                                                           TextWrapping="Wrap"
+                                                           FontSize="14"
+                                                           Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}"
+                                                           Opacity="0.8">
+                                                    <Run Text="I'm "/><Run Text="Danffy" FontWeight="Bold"/><Run Text=" — I'll guide you through the app with tips and reminders along the way!"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </Border>                                        <!-- What We're Solving Section -->
+                                        <StackPanel Grid.Column="1" Margin="30,0,0,0">
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                                <TextBlock Text="🔍" 
+                                                           FontSize="26"
+                                                           VerticalAlignment="Center"
+                                                           Margin="0,0,15,0"/>
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="4"/>
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock Text="What We're Solving"
+                                                              FontWeight="Bold"
+                                                              FontSize="24"
+                                                              Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}"/>
+                                                    <Border Grid.Row="1" 
+                                                            Height="3" 
+                                                            Background="#D40000" 
+                                                            CornerRadius="1"
+                                                            Width="90"
+                                                            HorizontalAlignment="Left"
+                                                            Margin="2,0,0,0">
+                                                        <Border.Effect>
+                                                            <DropShadowEffect BlurRadius="4" 
+                                                                            Color="#40D40000" 
+                                                                            OffsetX="0" 
+                                                                            OffsetY="1"/>
+                                                        </Border.Effect>
+                                                    </Border>                                                </Grid>
+                                            </StackPanel>                                            <StackPanel Spacing="20" Margin="0,25,0,0">                                                <TextBlock TextWrapping="Wrap"
+                                                           LineHeight="30"
+                                                           FontSize="17"
+                                                           Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}">
+                                                    🏭 <Run Text="In Heatington" FontWeight="Bold"/>, heat is delivered via a district heating system—hot water sent from plants to buildings. The goal is to schedule heat production in a way that's both efficient and profitable, using smart optimization techniques.
+                                                </TextBlock>                                                <TextBlock TextWrapping="Wrap"
+                                                           LineHeight="30"
+                                                           FontSize="17"
+                                                           Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}">
+                                                    📊 <Run Text="Explore optimized heat results" FontWeight="Bold"/> and filter specific data on our Optimizer page. On the Machinery page, view your available machines, check their details, edit values, and disable them to simulate downtimes or compare graphs based on cost or environmental impact. 🌿
+                                                </TextBlock>                                                <TextBlock TextWrapping="Wrap"
+                                                           LineHeight="30"
+                                                           FontSize="17"
+                                                           Foreground="{Binding IsDarkTheme, Converter={StaticResource BoolToColorConverter}}">
+                                                    👀 <Run Text="Keep an eye out for Danffy!" FontWeight="Bold"/> He'll be around the app to share helpful reminders and interesting facts about different aspects of our optimization. Watch for his red and blue banners on the Optimizer and Machinery pages. 🎯 Thanks for using our app!
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
