@@ -288,9 +288,9 @@ namespace Assignment4
                 
                 string categoryName = parts[0];
                 
-                // Direct path to the assets folder in the project directory
-                string projectDirectory = @"c:\Users\manis\Desktop\MALMO\Assignment4";
-                string assetsPath = Path.Combine(projectDirectory, "assets");
+                // Use relative path from the executable
+                string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string assetsPath = Path.Combine(baseDirectory, "Assets");
                 string imagePath = Path.Combine(assetsPath, $"{categoryName}.png");
                 
                 // Check if file exists
