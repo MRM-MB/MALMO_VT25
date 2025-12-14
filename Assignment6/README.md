@@ -19,5 +19,11 @@ A Windows Forms application for managing tasks with file persistence.
 
 ## How to Run
 
-1.  Open `Assignment6.sln` or `Assignment6.csproj` in Visual Studio.
-2.  Build and Run (`F5`).
+1.  Navigate to the project folder:
+    ```bash
+    cd Assignment6
+    ```
+2.  Run the application:
+    ```bash
+    dotnet run
+    ```

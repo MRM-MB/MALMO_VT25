@@ -32,6 +32,8 @@ To run these projects, you need to have the following installed:
     ```
 
 ### GUI Applications (Assignment 3, 4, 5, 6)
-1.  Open the `.sln` or `.csproj` file in Visual Studio.
-2.  Build the solution (`Ctrl + Shift + B`).
-3.  Run the application (`F5`).
+1.  Navigate to the project folder in your terminal (e.g., `cd Assignment3`).
+2.  Run the command:
+    ```bash
+    dotnet run
+    ```

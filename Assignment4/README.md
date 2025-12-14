@@ -26,5 +26,11 @@ This project includes various icons representing food categories:
 
 ## How to Run
 
-1.  Open `Assignment4.csproj` in Visual Studio.
-2.  Build and Run (`F5`).
+1.  Navigate to the project folder:
+    ```bash
+    cd Assignment4
+    ```
+2.  Run the application:
+    ```bash
+    dotnet run
+    ```

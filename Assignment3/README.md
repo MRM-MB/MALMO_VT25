@@ -12,5 +12,11 @@ A Windows Forms application designed to perform various personal calculations.
 
 ## How to Run
 
-1.  Open `Assignment3.csproj` in Visual Studio.
-2.  Build and Run (`F5`).
+1.  Navigate to the project folder:
+    ```bash
+    cd Assignment3
+    ```
+2.  Run the application:
+    ```bash
+    dotnet run
+    ```
