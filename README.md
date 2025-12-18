@@ -26,15 +26,9 @@ To run these projects, you need to have the following installed:
 
 ## How to Run
 
-### Console Applications (Assignment 1 & 2)
 1.  Navigate to the project folder in your terminal.
-2.  Run the command:
-    ```bash
-    dotnet run
-    ```
-
-### GUI Applications (Assignment 3, 4, 5, 6)
-1.  Navigate to the project folder in your terminal (e.g., `cd Assignment3`).
+    *   For **Assignments 1 & 2**, navigate to the specific part (e.g., `cd Assignment1/Assignment1Part1`).
+    *   For **Assignments 3-6**, navigate to the assignment folder (e.g., `cd Assignment3`).
 2.  Run the command:
     ```bash
     dotnet run
