@@ -1,4 +1,4 @@
-# MALMO_VT25
+# Programming in C# - VT25 Malmö University 😎
 
 ![MALMO Logo](./images/malmo.png)
 
